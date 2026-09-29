@@ -77,7 +77,7 @@ mnav.addEventListener('click', e => {
   else if (e.target.closest('a')) closeMenu({ restoreFocus: false });
 });
 mnav.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); trapTab($('.cr-mnav-panel', mnav), e); });
-addEventListener('resize', () => { if (innerWidth > 1099) closeMenu({ restoreFocus: false }); });
+addEventListener('resize', () => { if (innerWidth > 1139) closeMenu({ restoreFocus: false }); });
 
 // Active top-level nav item follows the section in view
 const SPY = [['roles', 'roles'], ['direction', 'life'], ['the-role', 'life'], ['pay', 'pay'], ['profile', 'life'], ['hr-role', 'roles'], ['how-we-hire', 'hire'], ['apply', null]];

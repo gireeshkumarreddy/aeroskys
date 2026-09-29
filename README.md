@@ -76,7 +76,15 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
 - **Open it:** `http://localhost:3000/careers` with `npm start`, or `public/careers.html` on any static host.
 - **From the main site:** "Careers" in the top navigation (with a "Hiring" badge on wide screens), in the phone menu, and in the footer.
 - **Back to the main site:** "← Back to Aeroskys.com" above the header, the logo, and the footer links.
-- **Sections:** header, landing, role introduction, Building the Direction, What the Job Actually Is, Performance Pay (with a pay calculator and the six-month ladder), Candidate Profile (a tick-list self-check), HR & Recruitment Specialist, How We Hire (four steps), then the application (About You → the role's questions → final details and CV).
+- **Sections:** header, a full-screen landing, role introduction, Building the Direction, What the Job Actually Is, Performance Pay (with a pay calculator and the six-month ladder), Candidate Profile (a tick-list self-check), HR & Recruitment Specialist, How We Hire (four steps), then the application (About You → the role's questions → final details and CV).
+
+**Full-screen layout**
+- **Landing:** on laptops, desktops and landscape tablets (1024px and wider), the landing fills the first screen from edge to edge.
+- **Photo crop:** the photo takes the room the headline leaves and is cropped so both faces stay between the header and the white wave.
+- **Short screens:** in browser windows under about 780px tall, the "People Planes Possibilities" lettering steps aside to make room.
+- **Page edge:** every section shares one edge, 6.5% of the screen width (the margin in the reference screens), with content at most 1,600px wide.
+- **Photo sections:** these scale with the screen up to 1,920px.
+- **Phones and portrait tablets:** they keep the stacked layout.
 
 **Applications**
 - **Endpoint:** the form posts to `POST /api/careers/applications` (in `server.mjs`).
@@ -92,9 +100,13 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
 - Every image comes from the reference document's own screens, cropped at their original resolution.
 - Where the design had a card or caption drawn over a photo, that patch was retouched so the live card can sit on top.
 - No stock or generated photos are used.
-- `tools/careers_images.py` rebuilds all 27 files from the unzipped document (optional; needs Python with Pillow and OpenCV).
-- **Resolution limit:** the reference screens are only 1,023–1,536 px wide, so the photos are 1× images. For example, the landing photo is 1,294 px wide. They look soft on high-density (Retina) screens.
-- **To sharpen them:** send the original photographs. Replace the files in `public/careers/img/`, keeping the same names and crops, and raise the `?v=` number on their URLs in `careers.html` (currently `?v=4`) so browsers fetch the new versions.
+- **Desktop landing photo:** `hero-desktop.webp` is the same landing photo with its lettering lifted off the sky, so the page can place it at any screen size. The script is `hero-script.webp`; "A bigger tomorrow together" is live text.
+- `tools/careers_images.py` rebuilds every file in `public/careers/img/` from the unzipped document (optional; needs Python with Pillow and OpenCV).
+- **Resolution limit:** the reference screens are only 1,023–1,536 px wide, so the photos are 1× images.
+  - The landing photo is 1,294 px wide.
+  - On a 1,920px screen it is shown about 1.5× larger, and the section photos about 1.25× larger.
+  - The photos look soft on those screens and on high-density (Retina) screens.
+- **To sharpen them:** send the original photographs. Replace the files in `public/careers/img/`, keeping the same names and crops, and raise the `?v=` number on their URLs in `careers.html` (currently `?v=4`, or `?v=5` for the two desktop landing files) so browsers fetch the new versions.
 
 **Careers content to confirm before launch**
 1. **TASA and HR questions.** The reference shows only the TAG Manager questions (used word for word). The TASA (7) and HR (9) questions were written for the prototype and need approval.
@@ -118,13 +130,20 @@ Audited in Chrome with Lighthouse 13, axe-core (WCAG 2.2 AA) and html-validate. 
 
 | Page | Performance | Accessibility | Best practices | SEO |
 |---|---|---|---|---|
-| Careers, desktop | 100 | 100 | 100 | 100 |
-| Careers, phone | 92 | 100 | 100 | 100 |
+| Careers, desktop | 99–100 | 100 | 100 | 100 |
+| Careers, phone | 90 (median of 3 runs, 83–92) | 100 | 100 | 100 |
 | Home, desktop | 88 | 100 | 100 | 100 |
 | Home, phone | 72 | 100 | 100 | 100 |
 
 - **Accessibility:** no axe violations on the 33 main-site routes at desktop and phone widths. That includes the pickers, the login dialog and the filter sheets. The Careers page is also clean in every state: menus, story dialog, form errors, failed and successful submission.
-- **Layout:** no sideways scrolling and no covered or undersized controls (24px minimum) from 320px to 1920px wide.
+- **Layout:** no sideways scrolling and no covered or undersized controls (24px minimum) from 320px to 2,560px wide. Short laptop windows (620px tall) were also checked, because the landing sizes itself to the screen height.
+- **Full-screen landing (re-audited after the change):**
+  - Clean at every size tested: 22 widths, plus the short-window pass.
+  - Clean in all 12 interactive states.
+  - 87 keyboard stops, each with a visible focus ring.
+  - The markup is valid.
+  - The landing photo's preload now carries `fetchpriority="high"`, so Lighthouse's check that the browser finds the landing photo early now passes.
+  - Phone performance varies from run to run on the test machine, so the table gives the median.
 - **Markup:** the page sources and the pages as rendered by the scripts are valid HTML.
 - **Keyboard:** every control is reachable with a visible focus ring, dialogs and menus trap and return focus, and reduced-motion settings switch the animation off.
 

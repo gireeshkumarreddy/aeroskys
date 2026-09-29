@@ -13,8 +13,9 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/brand/icon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="careers/img/hero.webp?v=4" as="image" media="(min-width: 768px)">
-<link rel="preload" as="image" media="(max-width: 767px)" imagesrcset="careers/img/hero-mobile-640.webp?v=4 640w, careers/img/hero-mobile.webp?v=4 939w" imagesizes="calc(100vw - 20px)">
+<link rel="preload" href="careers/img/hero-desktop.webp?v=5" as="image" media="(min-width: 1024px)" fetchpriority="high">
+<link rel="preload" href="careers/img/hero.webp?v=4" as="image" media="(min-width: 768px) and (max-width: 1023px)" fetchpriority="high">
+<link rel="preload" as="image" fetchpriority="high" media="(max-width: 767px)" imagesrcset="careers/img/hero-mobile-640.webp?v=4 640w, careers/img/hero-mobile.webp?v=4 939w" imagesizes="calc(100vw - 20px)">
 <link rel="stylesheet" href="careers/careers.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -110,9 +111,13 @@
     <div class="cr-hero-media">
       <picture>
         <source media="(max-width: 767px)" srcset="careers/img/hero-mobile-640.webp?v=4 640w, careers/img/hero-mobile.webp?v=4 939w" sizes="calc(100vw - 20px)" width="939" height="510">
+        <source media="(min-width: 1024px)" srcset="careers/img/hero-desktop.webp?v=5" width="1294" height="606">
         <img src="careers/img/hero.webp?v=4" width="1294" height="606" alt="Two smiling young professionals under a blue sky, with an aircraft and its contrail overhead" fetchpriority="high" decoding="async">
       </picture>
-      <svg class="cr-hero-wave" viewBox="0 0 1294 606" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 471 C173 446 253 431 355 438 C483 446 623 536 866 626 C1000 676 1180 660 1294 526 L1294 606 L0 606 Z"/></svg>
+      <svg class="cr-hero-wave" viewBox="0 0 1294 200" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 65 C173 40 253 25 355 32 C483 40 623 130 866 220 C1000 270 1180 254 1294 120 L1294 200 L0 200 Z"/></svg>
+      <p class="cr-hero-tag" aria-hidden="true"><span>A</span> <span>Bigger</span> <span>Tomorrow</span> <span>Together</span></p>
+      <div class="cr-hero-left">
+      <img class="cr-hero-script" src="careers/img/hero-script.webp?v=5" width="202" height="174" alt="" loading="lazy" decoding="async">
       <div class="cr-hero-float">
         <span class="cr-hero-float-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span>
         <span class="cr-hero-float-copy"><b>A Great Place to Grow</b><small>Join a team that moves opportunities forward.</small></span>
@@ -126,6 +131,7 @@
           </ul>
           <a class="cr-link" href="#pay">See how you’re paid <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
         </div>
+      </div>
       </div>
       <a class="cr-hero-team" href="#roles">
         <img src="careers/img/avatars.webp?v=4" width="184" height="56" alt="">

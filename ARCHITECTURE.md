@@ -87,7 +87,8 @@ A separate static page, not part of the hash-routed app. The main site links to 
 public/careers.html        the page: header, 9 sections, application host, footer, "Our story" dialog
 public/careers/careers.css one stylesheet (Inter, self-hosted in assets/fonts); prefix cr-
 public/careers/icons.svg   its own icon sprite; icon('name') in careers/js/ui.js points here
-public/careers/img/        27 WebP crops of the reference screens (rebuilt by tools/careers_images.py)
+public/careers/img/        WebP crops of the reference screens (rebuilt by tools/careers_images.py); hero-desktop
+                           is the landing photo with its lettering lifted off, hero-script that lettering
 public/careers/js/app.js   header menus, reveals, section navigators, pay calculator, ladder tabs, fit check,
                            HR carousel, hiring steps; starts the application
 public/careers/js/apply.js the application (role choice, steps, validation, drafts, history, CV, submission)
@@ -97,6 +98,12 @@ data/careers/              applications/<ref>.json, cv/<ref>.<ext>, index.json (
 - **Stages.** Sections copied from a reference screen use `.cr-stage` with `--W/--H` (the screen's size). Children use `.cr-abs` with `--x/--y/--w/--h` (the reference's own pixels) and `.cr-fs` with `--fs` (font size in reference pixels), so the composition scales with the page. Stage text stays at 11px or larger; only small uppercase labels, and the role-intro cards on phones, go down to 9px.
   - Below 1200px the stages switch to stacked layouts designed per section.
   - The role-introduction composition is the exception: it keeps its layout at every width.
+- **Page edge.** `--edge` is the inset shared by the header, the landing and `.cr-wrap`: 6.5% of the width (the reference screens' margin), with content no wider than `--wrap` (1600px). Below 1024px it is the gutter. Stages scale with the page up to 1920px.
+- **Landing.** Full width at every size. From 1024px wide on landscape screens it is `100svh` minus the utility bar, and the photo takes the height the headline leaves.
+  - `--hero-top` lifts the photo so the two faces sit between the header and the wave.
+  - `--wave-h` flattens the wave as the crop tightens, so it never reaches a chin. Both are in `careers.css`, in hero-photo pixels / 1294.
+  - The script and the "A Great Place to Grow" card stack upwards from the wave in `.cr-hero-left`. That element is a size container, and the script hides when there isn't room for it.
+  - Below 1024px the photo returns to the flow at its own proportions, with its lettering baked in.
 - **Motion.**
   - `[data-reveal]` elements animate in once, at about 85% of the viewport (`data-reveal="left|right|scale|fade"`, stagger with `--d`).
   - `.cr-draw` paths draw in, and floating cards use the `translate` property, so they never fight the reveal transform.
@@ -123,7 +130,7 @@ data/careers/              applications/<ref>.json, cv/<ref>.<ext>, index.json (
   400 { ok: false, error, fields: { name|email|…|q07|cv|confirm: 'message' } }   // shown next to each field
   405 / 413 / 415 / 500 { ok: false, error }
   ```
-- **Caching.** Fonts and versioned URLs (`?v=…`) are cached for a year as immutable; everything else is sent `no-cache` with an ETag, so edits show up at once. Careers images, the icon sprite and the logo carry `?v=4`: raise it whenever one of them changes.
+- **Caching.** Fonts and versioned URLs (`?v=…`) are cached for a year as immutable; everything else is sent `no-cache` with an ETag, so edits show up at once. Careers images, the icon sprite and the logo carry `?v=4` (`?v=5` for the two desktop landing files): raise it whenever one of them changes.
 
 ## CSS conventions
 - Tokens in `css/base.css` (`--navy`, `--blue`, `--ink`, `--muted`, `--line`, `--wash`, `--r`, `--r-lg`, `--shadow-*`, `--serif`, `--ease`).
