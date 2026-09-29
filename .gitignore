@@ -1,4 +1,8 @@
+# Runtime and environment
 .sites-runtime/
 .env
 .env.*
 node_modules/
+
+# Submitted careers applications and CVs (personal data): never commit
+data/
