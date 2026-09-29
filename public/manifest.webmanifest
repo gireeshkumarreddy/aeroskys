@@ -1,0 +1,11 @@
+{
+  "name": "AeroSkys — Flights, Hotels, Holidays & Bus",
+  "short_name": "AeroSkys",
+  "start_url": "./#/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#071c31",
+  "icons": [
+    { "src": "assets/brand/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
