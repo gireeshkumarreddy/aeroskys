@@ -1,0 +1,4 @@
+# Vercel serves public/ only. Upload nothing else: never applicant data (data/), keys (.env), tools or scripts.
+/*
+!/public
+!/vercel.json

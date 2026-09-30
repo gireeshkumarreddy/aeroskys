@@ -13,6 +13,32 @@ npm run check        # health check: routes, icons, engines, Careers assets and 
 
 Node 18+ and nothing to install. `public/` is a static site: any static host works, because routing is hash-based (`#/flights/search?...`).
 
+## Deploying to Vercel
+
+The review copy is live at **https://aeroskys.vercel.app**, with the Careers page at **https://aeroskys.vercel.app/careers**. It is the Vercel project `aeroskys` in the `gireesh3` team.
+
+```bash
+npm run vercel:config        # only after editing an inline <script> in index.html or careers.html
+npx vercel deploy --prod     # from this folder (it is linked to the project)
+```
+
+- **What is uploaded:** only `public/` and `vercel.json` (see `.vercelignore`), so applicant data, `.env` files and tools never leave this machine.
+- **Same behaviour as `server.mjs`:**
+  - `/careers` serves the Careers page, and `/careers/` redirects there.
+  - Other extension-less paths open the app; missing files return a real 404.
+  - The security headers, including the Content-Security-Policy, come from the shared `security.mjs`, and `npm run check` fails if `vercel.json` falls out of step with the pages.
+  - Fonts and `?v=` assets are cached for a year.
+- **Not indexed:** the copy is sent with `X-Robots-Tag: noindex`. Set `NOINDEX = false` in `scripts/vercel-config.mjs` when it becomes the live site.
+- **Applications:** Vercel runs no `server.mjs`, so `POST /api/careers/applications` returns 404 there. The form then shows "Online submission isn't available on this version of the site", with **Download my answers**, **Email us instead** and **Try again**, and the answers stay saved on the applicant's device.
+  - To accept applications on Vercel, add a serverless function backed by storage (for example Vercel Blob or a database), or post to your ATS.
+  - That is also where the data-handling decision below applies.
+- **Deploys are manual:** the project is not connected to the GitHub repository. Connect it with `npx vercel git connect` if every push to `main` should deploy.
+- **Checked on the live copy (29 Sep 2026):**
+  - The site crawl covered 66 page loads at desktop and phone widths, with no accessibility, security-policy, console, network or layout problems.
+  - Every Careers interaction state is clean, including 87 keyboard stops.
+  - Lighthouse for Careers scored 100 / 100 / 100 on desktop, and a median of 91 / 100 / 100 on phones (performance, accessibility, best practices).
+  - SEO scores 66 only because this copy is marked no-index.
+
 ## What works
 
 | Area | Flow |
@@ -108,6 +134,23 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
   - The photos look soft on those screens and on high-density (Retina) screens.
 - **To sharpen them:** send the original photographs. Replace the files in `public/careers/img/`, keeping the same names and crops, and raise the `?v=` number on their URLs in `careers.html` (currently `?v=4`, or `?v=5` for the two desktop landing files) so browsers fetch the new versions.
 
+**Member ID generator (added 30 Sep 2026)**
+- **Where:** the page is `/member-id` (`public/member-id.html`), built from the Careers page components. It contains everything in the supplied design:
+  - traveller details (full name, passport nationality, passport number, expiry date, ₹499 fee reference);
+  - the Member ID card (status, nationality, the ID, member, masked passport, issue time, fee reference, plan);
+  - the register of issued IDs, with search, CSV export and revoke;
+  - the privacy and legal note.
+- **Rules:** one Member ID per passport. The ID comes from a one-way fingerprint of nationality and passport number, so the same passport always returns the same ID (`ASK-XXXX-XXXX-X`), and a second request shows "Already a member".
+  - Passport numbers are never stored; only the fingerprint and the last four characters are kept.
+  - The rules and messages match the file, and the IDs are identical to the ones it produces.
+- **On the Careers page (kept subtle):**
+  - a "Member ID" link in the top bar;
+  - a slim Membership band before the footer;
+  - a footer link;
+  - a "Membership" group in the phone menu.
+  The main navigation is unchanged.
+- **Brand casing:** the file writes "AeroSkys"; the new text follows the Careers page, which writes "Aeroskys".
+
 **Careers content to confirm before launch**
 1. **TASA and HR questions.** The reference shows only the TAG Manager questions (used word for word). The TASA (7) and HR (9) questions were written for the prototype and need approval.
 2. **TASA career ladder.** It is marked "indicative" on the page; confirm the milestones.
@@ -124,6 +167,10 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
    - The HR photo carousel is captioned with hiring stages (Sourcing, Screening and so on), not staff names.
 8. **Language menu** offers English only.
 9. **Data handling.** Applications are plain files on the server. Decide who can read them, how long they are kept, and add that to the privacy policy.
+10. **Member ID generator:**
+    - **Who can use it.** It issues and revokes memberships but is currently a public page, linked from the Careers page, and marked no-index. For real use, put it behind a staff login.
+    - **Where the register lives.** It is stored in each browser, so every device has its own list. A shared register needs a server and database.
+    - **Fee structure.** The supplied file notes that the membership fee structure is still subject to legal review.
 
 ## Quality checks (29 Sep 2026)
 Audited in Chrome with Lighthouse 13, axe-core (WCAG 2.2 AA) and html-validate. The audit scripts ran outside the project, so nothing is installed here.

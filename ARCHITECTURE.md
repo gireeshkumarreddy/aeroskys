@@ -13,6 +13,7 @@ Zero-dependency single-page app. `node server.mjs` serves `public/`. Hash routin
   - Inline event-handler attributes are blocked.
 - **Caching:** fonts and `?v=` URLs are cached for a year; everything else is revalidated with an ETag.
 - **Methods:** only GET and HEAD, plus `POST /api/careers/applications`.
+- **Shared with Vercel:** the headers and the CSP builder live in `security.mjs`. `scripts/vercel-config.mjs` uses them to write `vercel.json`, which gives the static Vercel deployment the same routes, headers and caching. `npm run check` fails if `vercel.json` is stale.
 
 ## Folders
 ```
@@ -89,12 +90,19 @@ public/careers/careers.css one stylesheet (Inter, self-hosted in assets/fonts); 
 public/careers/icons.svg   its own icon sprite; icon('name') in careers/js/ui.js points here
 public/careers/img/        WebP crops of the reference screens (rebuilt by tools/careers_images.py); hero-desktop
                            is the landing photo with its lettering lifted off, hero-script that lettering
-public/careers/js/app.js   header menus, reveals, section navigators, pay calculator, ladder tabs, fit check,
-                           HR carousel, hiring steps; starts the application
+public/careers/js/shell.js page shell shared with member-id.html: sticky header, dropdowns, phone menu, reveals
+public/careers/js/app.js   section navigators, pay calculator, ladder tabs, fit check, HR carousel, hiring
+                           steps; starts the application
 public/careers/js/apply.js the application (role choice, steps, validation, drafts, history, CV, submission)
 public/careers/js/roles.js roles, sections and questions (shared with server.mjs); nationalDigits(cc, phone)
 data/careers/              applications/<ref>.json, cv/<ref>.<ext>, index.json (clientId → ref); never served
+public/member-id.html      the Member ID generator, served at /member-id (Careers header, fields and footer)
+public/careers/js/member-id.js  its logic: validation, SHA-256 fingerprint → ASK-XXXX-XXXX-C, register
 ```
+- **Member ID generator.** The ID is derived from `SHA-256('AEROSKYS-MEMBER-V1|' + nationality + '|' + passport)`, so the same passport always gives the same ID and cannot be registered twice.
+  - The ID is eight base-32 characters plus a weighted check character.
+  - The register (`localStorage` key `aeroskys-member-register`) keeps the fingerprint, the last four characters, name, nationality, fee reference, expiry and issue time.
+  - Full passport numbers are never stored. The algorithm is the one in the supplied design file, so IDs match it exactly.
 - **Stages.** Sections copied from a reference screen use `.cr-stage` with `--W/--H` (the screen's size). Children use `.cr-abs` with `--x/--y/--w/--h` (the reference's own pixels) and `.cr-fs` with `--fs` (font size in reference pixels), so the composition scales with the page. Stage text stays at 11px or larger; only small uppercase labels, and the role-intro cards on phones, go down to 9px.
   - Below 1200px the stages switch to stacked layouts designed per section.
   - The role-introduction composition is the exception: it keeps its layout at every width.
