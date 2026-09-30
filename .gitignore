@@ -4,8 +4,9 @@
 .env.*
 node_modules/
 
-# Submitted careers applications and CVs (personal data): never commit
-data/
+# Submitted careers applications and CVs (personal data): never commit.
+# Anchored to the project root, so the site's own public/js/data/ scripts are not caught by it.
+/data/
 
 # Vercel CLI link (local)
 .vercel
