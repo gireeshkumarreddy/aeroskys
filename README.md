@@ -19,7 +19,7 @@ The review copy is live at **https://aeroskys.vercel.app**, with the Careers pag
 
 ```bash
 npm run vercel:config        # only after editing an inline <script> in index.html or careers.html
-npx vercel deploy --prod     # from this folder (it is linked to the project)
+npx vercel deploy --prod     # a manual deploy from this folder (pushes to main deploy on their own)
 ```
 
 - **What is uploaded:** only `public/` and `vercel.json` (see `.vercelignore`), so applicant data, `.env` files and tools never leave this machine.
@@ -32,7 +32,11 @@ npx vercel deploy --prod     # from this folder (it is linked to the project)
 - **Applications:** Vercel runs no `server.mjs`, so `POST /api/careers/applications` returns 404 there. The form then shows "Online submission isn't available on this version of the site", with **Download my answers**, **Email us instead** and **Try again**, and the answers stay saved on the applicant's device.
   - To accept applications on Vercel, add a serverless function backed by storage (for example Vercel Blob or a database), or post to your ATS.
   - That is also where the data-handling decision below applies.
-- **Deploys are manual:** the project is not connected to the GitHub repository. Connect it with `npx vercel git connect` if every push to `main` should deploy.
+- **Automatic deploys (connected 30 Sep 2026):** the project is connected to `gireeshkumarreddy/aeroskys`.
+  - Every push to `main` deploys to production.
+  - Other branches and pull requests get preview deployments, which need a Vercel login to view.
+  - GitHub builds serve only `public/`, exactly like the manual deploys.
+  - Disconnect with `npx vercel git disconnect`.
 - **Checked on the live copy (29 Sep 2026):**
   - The site crawl covered 66 page loads at desktop and phone widths, with no accessibility, security-policy, console, network or layout problems.
   - Every Careers interaction state is clean, including 87 keyboard stops.
