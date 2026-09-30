@@ -59,9 +59,11 @@ broken.length ? fail(`holiday city links broken: ${broken.join(', ')}`) : ok(`${
 
 console.log('Careers');
 const careersHtml = await readFile(join(root, 'careers.html'), 'utf8');
+// The Member ID generator (member-id.html) is built from the Careers components and shares their icons and images.
+const memberHtml = await readFile(join(root, 'member-id.html'), 'utf8');
 const careersSprite = await readFile(join(root, 'careers/icons.svg'), 'utf8');
 const careersSymbols = new Set([...careersSprite.matchAll(/<symbol id="i-([\w-]+)"/g)].map(m => m[1]));
-const careersUsed = new Set([...careersHtml.matchAll(/icons\.svg(?:\?v=\d+)?#i-([\w-]+)/g)].map(m => m[1]));
+const careersUsed = new Set([...(careersHtml + memberHtml).matchAll(/icons\.svg(?:\?v=\d+)?#i-([\w-]+)/g)].map(m => m[1]));
 for (const f of await readdir(join(root, 'careers/js'))) {
   const src = await readFile(join(root, 'careers/js', f), 'utf8');
   for (const m of src.matchAll(/icon\('([\w-]+)'/g)) careersUsed.add(m[1]);
@@ -69,7 +71,7 @@ for (const f of await readdir(join(root, 'careers/js'))) {
 const careersMissing = [...careersUsed].filter(n => !careersSymbols.has(n));
 careersMissing.length ? fail(`careers icons missing from careers/icons.svg: ${careersMissing.join(', ')}`) : ok(`${careersUsed.size} careers icons used, all defined`);
 const careersImgs = new Set();
-for (const src of [careersHtml, ...await Promise.all((await readdir(join(root, 'careers/js'))).map(f => readFile(join(root, 'careers/js', f), 'utf8')))]) {
+for (const src of [careersHtml, memberHtml, ...await Promise.all((await readdir(join(root, 'careers/js'))).map(f => readFile(join(root, 'careers/js', f), 'utf8')))]) {
   for (const m of src.matchAll(/careers\/img\/([\w-]+\.webp)/g)) careersImgs.add(m[1]);
 }
 const imgMissing = [];
@@ -104,6 +106,14 @@ async function scanInline(dir) {
 }
 await scanInline(root);
 inline.length ? fail(`inline event handlers (blocked by the CSP): ${inline.join(' | ')}`) : ok('no inline event handlers');
+
+console.log('Deploy config');
+// vercel.json carries the pages' security policy (inline-script hashes); it must match the pages as they are now.
+const { vercelJson } = await import(pathToFileURL(join(root, '..', 'scripts', 'vercel-config.mjs')).href);
+try {
+  const have = (await readFile(join(root, '..', 'vercel.json'), 'utf8')).replace(/\r\n/g, '\n');
+  have === await vercelJson() ? ok('vercel.json matches the pages') : fail('vercel.json is out of date: run npm run vercel:config');
+} catch (e) { fail(`vercel.json: ${e.message}`); }
 
 console.log(errors.length ? `\n${errors.length} problem(s) found.` : '\nAll checks passed.');
 process.exit(errors.length ? 1 : 0);

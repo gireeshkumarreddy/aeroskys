@@ -163,6 +163,39 @@ hero = fill_columns(hero, 124 - 77, 1324 - 77, 94 - 74, 178 - 74)          # hea
 hero = inpaint(hero, [local((122, 470, 440, 606), HB)], radius=9)            # "A Great Place to Grow" card
 hero = whiten_below(hero, HERO_WAVE)                                          # the white wave (hides baked headline)
 save(hero, 'hero')
+
+
+def lift_lettering(a, box, lift=10):
+    """Inpaint light lettering off the sky inside box. Returns the clean image and the stroke mask."""
+    x0, y0, x1, y1 = box
+    region = a[y0:y1, x0:x1]
+    sky = cv2.medianBlur(region, 21)                                          # strokes are thin, so this is the sky
+    strokes = (region[..., 0].astype(np.int16) - sky[..., 0].astype(np.int16) > lift).astype(np.uint8) * 255
+    mask = np.zeros(a.shape[:2], np.uint8)
+    mask[y0:y1, x0:x1] = cv2.dilate(strokes, np.ones((3, 3), np.uint8), iterations=2)
+    clean = cv2.inpaint(cv2.cvtColor(a, cv2.COLOR_RGB2BGR), mask, 5, cv2.INPAINT_TELEA)
+    return cv2.cvtColor(clean, cv2.COLOR_BGR2RGB), mask
+
+
+# Full-screen desktop hero: the same photo with the script and the tagline lifted off the sky and the card's
+# rounded top corners filled, so the page can crop it to any screen and set the script and tagline itself.
+SCRIPT_BOX = (88, 170, 290, 344)                                              # "People Planes Possibilities"
+hero_desk, script_mask = lift_lettering(hero, SCRIPT_BOX)
+hero_desk, _ = lift_lettering(hero_desk, (1078, 150, 1212, 264))             # "A bigger tomorrow together"
+corners = np.zeros(hero.shape[:2], np.uint8)
+for cx0, cx1 in ((0, 12), (1274, 1294)):
+    zone = hero_desk[0:20, cx0:cx1].astype(np.int16)
+    corners[0:20, cx0:cx1] = ((zone[..., 0] > 150) & (zone[..., 2] - zone[..., 0] < 40)) * 255
+corners = cv2.dilate(corners, np.ones((3, 3), np.uint8), iterations=2)
+hero_desk = cv2.cvtColor(cv2.inpaint(cv2.cvtColor(hero_desk, cv2.COLOR_RGB2BGR), corners, 5, cv2.INPAINT_TELEA), cv2.COLOR_BGR2RGB)
+save(hero_desk, 'hero-desktop')
+# The script as white ink on transparency, keyed against the cleaned sky (red and green carry the contrast).
+x0, y0, x1, y1 = SCRIPT_BOX
+ink_in, sky_in = hero[y0:y1, x0:x1].astype(np.float32), hero_desk[y0:y1, x0:x1].astype(np.float32)
+alpha = ((ink_in[..., :2] - sky_in[..., :2]) / np.maximum(255 - sky_in[..., :2], 1)).mean(axis=2)
+alpha = np.clip((alpha - .04) / .8, 0, 1) * (cv2.dilate(script_mask, np.ones((3, 3), np.uint8))[y0:y1, x0:x1] > 0)
+alpha[305 - y0:, 250 - x0:] = 0                                               # loose hair strands, not lettering
+save(np.dstack([np.full(alpha.shape + (3,), 255, np.uint8), (alpha * 255).astype(np.uint8)]), 'hero-script')
 save(hero[96:, 355:], 'hero-mobile')                                          # people-centred crop for phones
 hero_m = Image.fromarray(hero[96:, 355:])                                   # a lighter copy for smaller phones
 save(np.array(hero_m.resize((640, round(hero_m.height * 640 / hero_m.width)), Image.LANCZOS)), 'hero-mobile-640')

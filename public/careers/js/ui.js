@@ -6,7 +6,7 @@ export const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const ENT = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ENT[c]);
 
-export const icon = (name, cls = '') => `<svg class="i ${cls}" aria-hidden="true"><use href="careers/icons.svg?v=4#i-${name}"/></svg>`;
+export const icon = (name, cls = '') => `<svg class="i ${cls}" aria-hidden="true"><use href="careers/icons.svg?v=5#i-${name}"/></svg>`;
 
 export const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 

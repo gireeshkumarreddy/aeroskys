@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server.mjs",
     "dev": "node server.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "vercel:config": "node scripts/vercel-config.mjs"
   },
   "engines": {
     "node": ">=18"

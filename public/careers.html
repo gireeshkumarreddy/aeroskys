@@ -13,8 +13,9 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/brand/icon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="careers/img/hero.webp?v=4" as="image" media="(min-width: 768px)">
-<link rel="preload" as="image" media="(max-width: 767px)" imagesrcset="careers/img/hero-mobile-640.webp?v=4 640w, careers/img/hero-mobile.webp?v=4 939w" imagesizes="calc(100vw - 20px)">
+<link rel="preload" href="careers/img/hero-desktop.webp?v=5" as="image" media="(min-width: 1024px)" fetchpriority="high">
+<link rel="preload" href="careers/img/hero.webp?v=4" as="image" media="(min-width: 768px) and (max-width: 1023px)" fetchpriority="high">
+<link rel="preload" as="image" fetchpriority="high" media="(max-width: 767px)" imagesrcset="careers/img/hero-mobile-640.webp?v=4 640w, careers/img/hero-mobile.webp?v=4 939w" imagesizes="calc(100vw - 20px)">
 <link rel="stylesheet" href="careers/careers.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -24,8 +25,8 @@
 <!-- 01 — Header / navigation -->
 <nav class="cr-util" aria-label="Aeroskys.com">
   <div class="cr-wrap cr-util-row">
-    <a class="cr-util-back" href="./#/"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-left"/></svg> Back to Aeroskys.com</a>
-    <span class="cr-util-note">Careers at Aeroskys · 3 open roles</span>
+    <a class="cr-util-back" href="./#/"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-left"/></svg> Back to Aeroskys.com</a>
+    <span class="cr-util-end"><span class="cr-util-note">Careers at Aeroskys · 3 open roles</span><a class="cr-util-link" href="member-id.html"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-id-card"/></svg> Member ID</a></span>
   </div>
 </nav>
 <header class="cr-header" data-header>
@@ -33,42 +34,42 @@
     <a class="cr-logo" href="./#/" aria-label="Aeroskys — go to the main website"><img src="assets/brand/aeroskys-logo-480.webp?v=4" alt="Aeroskys" width="480" height="95"></a>
     <nav class="cr-nav" aria-label="Careers page">
       <div class="cr-dd" data-dd>
-        <button class="cr-nav-link" type="button" aria-expanded="false" aria-controls="dd-roles" data-nav="roles">Our Roles <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-chevron-down"/></svg></button>
+        <button class="cr-nav-link" type="button" aria-expanded="false" aria-controls="dd-roles" data-nav="roles">Our Roles <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-chevron-down"/></svg></button>
         <div class="cr-dd-panel" id="dd-roles" hidden>
-          <a class="cr-dd-item" href="#roles"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span><span><b>AeroForce TAG Manager</b><small>Build and lead a partner pod</small></span></a>
-          <a class="cr-dd-item" href="#apply" data-apply-role="tasa"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-plane"/></svg></span><span><b>TASA – Travel Sales Associate</b><small>Apply as a TASA</small></span></a>
-          <a class="cr-dd-item" href="#hr-role"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-user-plus"/></svg></span><span><b>HR &amp; Recruitment Specialist</b><small>Build the sales-talent pipeline</small></span></a>
+          <a class="cr-dd-item" href="#roles"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg></span><span><b>AeroForce TAG Manager</b><small>Build and lead a partner pod</small></span></a>
+          <a class="cr-dd-item" href="#apply" data-apply-role="tasa"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plane"/></svg></span><span><b>TASA – Travel Sales Associate</b><small>Apply as a TASA</small></span></a>
+          <a class="cr-dd-item" href="#hr-role"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user-plus"/></svg></span><span><b>HR &amp; Recruitment Specialist</b><small>Build the sales-talent pipeline</small></span></a>
         </div>
       </div>
       <div class="cr-dd" data-dd>
-        <button class="cr-nav-link" type="button" aria-expanded="false" aria-controls="dd-pay" data-nav="pay">Compensation <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-chevron-down"/></svg></button>
+        <button class="cr-nav-link" type="button" aria-expanded="false" aria-controls="dd-pay" data-nav="pay">Compensation <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-chevron-down"/></svg></button>
         <div class="cr-dd-panel" id="dd-pay" hidden>
-          <a class="cr-dd-item" href="#pay"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-bars"/></svg></span><span><b>Performance pay</b><small>TAG Manager salary and bonus</small></span></a>
-          <a class="cr-dd-item" href="#ladder"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-trend"/></svg></span><span><b>Six-month career ladder</b><small>TAG Manager and TASA tracks</small></span></a>
-          <a class="cr-dd-item" href="#hr-details"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-award"/></svg></span><span><b>HR &amp; Recruitment pay</b><small>Salary and quarterly bonus</small></span></a>
+          <a class="cr-dd-item" href="#pay"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-bars"/></svg></span><span><b>Performance pay</b><small>TAG Manager salary and bonus</small></span></a>
+          <a class="cr-dd-item" href="#ladder"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-trend"/></svg></span><span><b>Six-month career ladder</b><small>TAG Manager and TASA tracks</small></span></a>
+          <a class="cr-dd-item" href="#hr-details"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-award"/></svg></span><span><b>HR &amp; Recruitment pay</b><small>Salary and quarterly bonus</small></span></a>
         </div>
       </div>
       <div class="cr-dd" data-dd>
-        <button class="cr-nav-link" type="button" aria-expanded="false" aria-controls="dd-life" data-nav="life">Life at Aeroskys <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-chevron-down"/></svg></button>
+        <button class="cr-nav-link" type="button" aria-expanded="false" aria-controls="dd-life" data-nav="life">Life at Aeroskys <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-chevron-down"/></svg></button>
         <div class="cr-dd-panel" id="dd-life" hidden>
-          <a class="cr-dd-item" href="#direction"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-compass"/></svg></span><span><b>Building the direction</b><small>Where we are heading</small></span></a>
-          <a class="cr-dd-item" href="#the-role"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-briefcase"/></svg></span><span><b>What the job actually is</b><small>Day-to-day responsibilities</small></span></a>
-          <a class="cr-dd-item" href="#profile"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-user-check"/></svg></span><span><b>Are you the right fit?</b><small>The candidate profile</small></span></a>
+          <a class="cr-dd-item" href="#direction"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-compass"/></svg></span><span><b>Building the direction</b><small>Where we are heading</small></span></a>
+          <a class="cr-dd-item" href="#the-role"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-briefcase"/></svg></span><span><b>What the job actually is</b><small>Day-to-day responsibilities</small></span></a>
+          <a class="cr-dd-item" href="#profile"><span class="cr-dd-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user-check"/></svg></span><span><b>Are you the right fit?</b><small>The candidate profile</small></span></a>
         </div>
       </div>
       <a class="cr-nav-link" href="#how-we-hire" data-nav="hire">How We Hire</a>
       <a class="cr-nav-link" href="./#/about">About Us</a>
     </nav>
     <span class="cr-bar-sep" aria-hidden="true"></span>
-    <a class="cr-btn cr-btn-primary cr-header-cta" href="#apply"><span>Apply<span class="cr-hide-xs"> Now</span></span> <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+    <a class="cr-btn cr-btn-primary cr-header-cta" href="#apply"><span>Apply<span class="cr-hide-xs"> Now</span></span> <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
     <div class="cr-dd cr-lang" data-dd>
-      <button class="cr-lang-btn" type="button" aria-expanded="false" aria-controls="dd-lang" aria-label="Language: English"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-globe"/></svg> EN <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-chevron-down"/></svg></button>
+      <button class="cr-lang-btn" type="button" aria-expanded="false" aria-controls="dd-lang" aria-label="Language: English"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-globe"/></svg> EN <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-chevron-down"/></svg></button>
       <div class="cr-dd-panel cr-dd-right" id="dd-lang" hidden>
         <p class="cr-dd-head">Language</p>
-        <button class="cr-dd-item is-current" type="button" aria-pressed="true" data-close-dd><span><b>English (India)</b><small>This careers site is currently available in English.</small></span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-check"/></svg></button>
+        <button class="cr-dd-item is-current" type="button" aria-pressed="true" data-close-dd><span><b>English (India)</b><small>This careers site is currently available in English.</small></span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-check"/></svg></button>
       </div>
     </div>
-    <button class="cr-menu-btn" type="button" aria-expanded="false" aria-controls="cr-mnav" aria-label="Open menu" data-menu-open><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-menu"/></svg></button>
+    <button class="cr-menu-btn" type="button" aria-expanded="false" aria-controls="cr-mnav" aria-label="Open menu" data-menu-open><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-menu"/></svg></button>
   </div>
 </header>
 
@@ -78,7 +79,7 @@
   <div class="cr-mnav-panel">
     <div class="cr-mnav-head">
       <img src="assets/brand/aeroskys-logo-480.webp?v=4" alt="Aeroskys" width="480" height="95">
-      <button class="cr-icon-btn" type="button" aria-label="Close menu" data-menu-close><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-x"/></svg></button>
+      <button class="cr-icon-btn" type="button" aria-label="Close menu" data-menu-close><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-x"/></svg></button>
     </div>
     <nav class="cr-mnav-links" aria-label="Careers page menu">
       <p class="cr-mnav-label">Our roles</p>
@@ -94,10 +95,12 @@
       <a href="#profile">Are you the right fit?</a>
       <a href="#how-we-hire">How we hire</a>
       <a href="./#/about">About Aeroskys</a>
+      <p class="cr-mnav-label">Membership</p>
+      <a href="member-id.html">Member ID generator</a>
     </nav>
     <div class="cr-mnav-foot">
-      <a class="cr-btn cr-btn-primary cr-btn-block" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
-      <a class="cr-btn cr-btn-outline cr-btn-block" href="./#/"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-left"/></svg> Back to Aeroskys.com</a>
+      <a class="cr-btn cr-btn-primary cr-btn-block" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
+      <a class="cr-btn cr-btn-outline cr-btn-block" href="./#/"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-left"/></svg> Back to Aeroskys.com</a>
     </div>
   </div>
 </div>
@@ -110,27 +113,32 @@
     <div class="cr-hero-media">
       <picture>
         <source media="(max-width: 767px)" srcset="careers/img/hero-mobile-640.webp?v=4 640w, careers/img/hero-mobile.webp?v=4 939w" sizes="calc(100vw - 20px)" width="939" height="510">
+        <source media="(min-width: 1024px)" srcset="careers/img/hero-desktop.webp?v=5" width="1294" height="606">
         <img src="careers/img/hero.webp?v=4" width="1294" height="606" alt="Two smiling young professionals under a blue sky, with an aircraft and its contrail overhead" fetchpriority="high" decoding="async">
       </picture>
-      <svg class="cr-hero-wave" viewBox="0 0 1294 606" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 471 C173 446 253 431 355 438 C483 446 623 536 866 626 C1000 676 1180 660 1294 526 L1294 606 L0 606 Z"/></svg>
+      <svg class="cr-hero-wave" viewBox="0 0 1294 200" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 65 C173 40 253 25 355 32 C483 40 623 130 866 220 C1000 270 1180 254 1294 120 L1294 200 L0 200 Z"/></svg>
+      <p class="cr-hero-tag" aria-hidden="true"><span>A</span> <span>Bigger</span> <span>Tomorrow</span> <span>Together</span></p>
+      <div class="cr-hero-left">
+      <img class="cr-hero-script" src="careers/img/hero-script.webp?v=5" width="202" height="174" alt="" loading="lazy" decoding="async">
       <div class="cr-hero-float">
-        <span class="cr-hero-float-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span>
+        <span class="cr-hero-float-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg></span>
         <span class="cr-hero-float-copy"><b>A Great Place to Grow</b><small>Join a team that moves opportunities forward.</small></span>
-        <button class="cr-hero-plus" type="button" aria-expanded="false" aria-controls="hero-more" aria-label="Why people join Aeroskys"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-plus"/></svg></button>
+        <button class="cr-hero-plus" type="button" aria-expanded="false" aria-controls="hero-more" aria-label="Why people join Aeroskys"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plus"/></svg></button>
         <div class="cr-hero-more" id="hero-more" hidden>
           <p class="cr-hero-more-title">Why people join</p>
           <ul>
-            <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-check"/></svg> A fixed monthly salary plus a performance bonus</li>
-            <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-check"/></svg> A structured six-month career ladder</li>
-            <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-check"/></svg> Four hiring steps, roughly two weeks</li>
+            <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-check"/></svg> A fixed monthly salary plus a performance bonus</li>
+            <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-check"/></svg> A structured six-month career ladder</li>
+            <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-check"/></svg> Four hiring steps, roughly two weeks</li>
           </ul>
-          <a class="cr-link" href="#pay">See how you’re paid <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+          <a class="cr-link" href="#pay">See how you’re paid <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
         </div>
+      </div>
       </div>
       <a class="cr-hero-team" href="#roles">
         <img src="careers/img/avatars.webp?v=4" width="184" height="56" alt="">
         <span><b>3 open roles</b><small>Join the team building what’s next</small></span>
-        <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg>
+        <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg>
       </a>
     </div>
     <div class="cr-hero-content">
@@ -138,7 +146,7 @@
         <h1 id="hero-title" class="cr-hero-title"><span class="cr-line"><span>Go further.</span></span><span class="cr-line is-blue"><span>Grow further.</span></span></h1>
         <p class="cr-hero-lead">Build a career with purpose. Join Aeroskys and be part of a team that’s shaping the future of talent, travel and technology.</p>
         <div class="cr-cta-row">
-          <a class="cr-btn cr-btn-primary cr-btn-lg cr-enter-left" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+          <a class="cr-btn cr-btn-primary cr-btn-lg cr-enter-left" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
           <a class="cr-btn cr-btn-outline cr-btn-lg cr-enter-left cr-enter-2" href="#direction">Explore Our Culture</a>
         </div>
       </div>
@@ -165,7 +173,7 @@
         <li>Recruit partners</li><li>Engage performers</li><li>Boost pod productivity</li><li>Plan for long-term growth</li>
       </ul>
       <div class="cr-cta-row" data-reveal="left" style="--d:.26s">
-        <a class="cr-btn cr-btn-primary cr-btn-lg" href="#apply" data-apply-role="tag">Start your application <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+        <a class="cr-btn cr-btn-primary cr-btn-lg" href="#apply" data-apply-role="tag">Start your application <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
         <a class="cr-btn cr-btn-outline cr-btn-lg" href="#the-role">Explore the role</a>
       </div>
     </div>
@@ -182,28 +190,28 @@
         <figure class="cr-abs cr-portrait cr-portrait-pop" style="--x:329;--y:308;--w:339;--h:220"><img src="careers/img/role-woman.webp?v=4" width="334" height="251" alt="Smiling professional with long dark hair" loading="lazy" decoding="async"></figure>
       </div>
       <div class="cr-abs cr-metric cr-float-a" style="--x:356;--y:93;--w:282">
-        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-bars"/></svg></span>
+        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-bars"/></svg></span>
         <span><b>₹42,000</b><small>Fixed monthly salary</small></span>
       </div>
       <div class="cr-abs cr-metric cr-metric-sm cr-float-b" style="--x:22;--y:246;--w:238">
-        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-user"/></svg></span>
+        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user"/></svg></span>
         <span><b>Your pod</b><small>You own its results</small></span>
         <span class="cr-pill-green">KPI-led</span>
       </div>
       <div class="cr-abs cr-metric cr-float-c" style="--x:53;--y:480;--w:299">
-        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span>
+        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg></span>
         <span><b>₹1,02,000</b><small>On-target monthly pay</small></span>
       </div>
       <div class="cr-abs cr-metric cr-float-a" style="--x:397;--y:477;--w:270">
-        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-trend"/></svg></span>
+        <span class="cr-metric-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-trend"/></svg></span>
         <span><b>₹1,42,000</b><small>Monthly pay at stretch</small></span>
       </div>
     </div>
   </div>
   <div class="cr-wrap cr-also" data-reveal>
     <p class="cr-also-label">Also hiring</p>
-    <a class="cr-also-card" href="#apply" data-apply-role="tasa"><span class="cr-also-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-plane"/></svg></span><span><b>TASA – Travel Sales Associate</b><small>Seven-question application</small></span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
-    <a class="cr-also-card" href="#hr-role"><span class="cr-also-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-user-plus"/></svg></span><span><b>HR &amp; Recruitment Specialist</b><small>₹15,000 a month plus a quarterly bonus</small></span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+    <a class="cr-also-card" href="#apply" data-apply-role="tasa"><span class="cr-also-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plane"/></svg></span><span><b>TASA – Travel Sales Associate</b><small>Seven-question application</small></span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
+    <a class="cr-also-card" href="#hr-role"><span class="cr-also-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user-plus"/></svg></span><span><b>HR &amp; Recruitment Specialist</b><small>₹15,000 a month plus a quarterly bonus</small></span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
   </div>
 </section>
 
@@ -221,25 +229,25 @@
     <figure class="cr-abs cr-dir-photo" style="--x:95;--y:249;--w:267;--h:306" data-reveal="scale"><img src="careers/img/dir-airport.webp?v=4" width="267" height="306" alt="Aircraft wing at an airport stand at sunset" loading="lazy" decoding="async"></figure>
     <figure class="cr-abs cr-dir-cloud" style="--x:292;--y:557;--w:156;--h:85" data-reveal="scale"><img src="careers/img/dir-cloud.webp?v=4" width="156" height="85" alt="" loading="lazy" decoding="async"></figure>
     <div class="cr-abs cr-card cr-dir-card cr-dir-partner cr-float-b" data-reveal style="--x:68;--y:495;--w:189;--d:.1s">
-      <span class="cr-card-ic cr-fs" style="--fs:22"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-trend"/></svg></span>
+      <span class="cr-card-ic cr-fs" style="--fs:22"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-trend"/></svg></span>
       <b class="cr-fs" style="--fs:19">Partner-led</b><small class="cr-fs" style="--fs:12.5">Growth through a network of partners</small>
     </div>
     <a class="cr-abs cr-card cr-dir-card cr-dir-link" href="#the-role" data-reveal style="--x:68;--y:640;--w:374;--d:.16s">
-      <span class="cr-card-ic cr-fs" style="--fs:24"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-layers"/></svg></span>
+      <span class="cr-card-ic cr-fs" style="--fs:24"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-layers"/></svg></span>
       <span><b class="cr-fs" style="--fs:18">Stronger Partnerships</b><small class="cr-fs" style="--fs:14">Built for growth</small></span>
-      <span class="cr-round-arrow"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></span>
+      <span class="cr-round-arrow"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></span>
     </a>
     <div class="cr-abs cr-dir-center" style="--x:440;--y:236;--w:600">
       <h2 id="direction-title" class="cr-dir-title cr-fs" style="--fs:74" data-reveal>Build a network that moves as fast as travel.</h2>
       <p class="cr-dir-sub cr-fs" data-reveal style="--fs:50;--d:.1s">People first. Technology behind them.</p>
       <div class="cr-cta-row cr-center" data-reveal="left" style="--d:.2s">
-        <a class="cr-btn cr-btn-primary" href="./#/" target="_blank" rel="noopener">Visit Aeroskys.com <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-up-right"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
-        <button class="cr-btn cr-btn-outline" type="button" data-open-dialog="story"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-book"/></svg> Read our story</button>
+        <a class="cr-btn cr-btn-primary" href="./#/" target="_blank" rel="noopener">Visit Aeroskys.com <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-up-right"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
+        <button class="cr-btn cr-btn-outline" type="button" data-open-dialog="story"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-book"/></svg> Read our story</button>
       </div>
     </div>
     <figure class="cr-abs cr-dir-plane" style="--x:1005;--y:115;--w:531;--h:685" data-reveal="scale"><img src="careers/img/dir-plane.webp?v=4" width="531" height="685" alt="A white airliner above soft clouds" loading="lazy" decoding="async"></figure>
     <div class="cr-abs cr-card cr-dir-card cr-dir-card-row cr-dir-services cr-float-a" data-reveal style="--x:1190;--y:133;--w:213;--d:.1s">
-      <span class="cr-card-ic cr-fs" style="--fs:22"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-bars"/></svg></span>
+      <span class="cr-card-ic cr-fs" style="--fs:22"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-bars"/></svg></span>
       <span><b class="cr-fs" style="--fs:28">4</b><small class="cr-fs" style="--fs:14">Travel services to sell</small></span>
     </div>
     <figure class="cr-abs cr-dir-aviation" style="--x:1273;--y:447;--w:217;--h:313" data-reveal="scale">
@@ -247,7 +255,7 @@
       <figcaption class="cr-fs" style="--fs:15">A smarter way to sell travel<span aria-hidden="true"></span></figcaption>
     </figure>
     <div class="cr-abs cr-card cr-dir-card cr-dir-card-row cr-dir-higher cr-float-c" data-reveal style="--x:1048;--y:652;--w:227;--d:.18s">
-      <span class="cr-card-ic cr-fs" style="--fs:22"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-plane"/></svg></span>
+      <span class="cr-card-ic cr-fs" style="--fs:22"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plane"/></svg></span>
       <span><b class="cr-fs" style="--fs:15">Higher Productivity</b><small class="cr-fs" style="--fs:10.5">Across your network</small></span>
     </div>
     <div class="cr-abs cr-secnav-slot" style="--x:66;--y:840;--w:1404"><div class="cr-secnav" data-secnav="direction"></div></div>
@@ -273,26 +281,26 @@
       <svg class="cr-swoosh" viewBox="0 0 320 24" aria-hidden="true" focusable="false"><path class="cr-draw" d="M4 20 C 90 4, 220 2, 316 14"/></svg>
       <p class="cr-job-lead cr-fs" data-reveal style="--fs:20.5;--d:.12s">The role combines partner acquisition, relationship management, activation, performance management and commercial development. You are measured on the productivity of the pod you build.</p>
       <div class="cr-cta-row" data-reveal="left" style="--d:.2s">
-        <a class="cr-btn cr-btn-primary cr-btn-lg" href="#pay">See how you’re paid <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+        <a class="cr-btn cr-btn-primary cr-btn-lg" href="#pay">See how you’re paid <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
         <a class="cr-btn cr-btn-outline cr-btn-lg" href="#apply" data-apply-role="tag">Join Our Team</a>
       </div>
     </div>
     <img class="cr-abs cr-job-script" src="careers/img/script-build-grow-perform.webp?v=4" width="87" height="95" alt="" style="--x:1435;--y:55;--w:87" loading="lazy">
     <ol class="cr-job-duties" aria-label="Responsibilities">
-      <li class="cr-abs cr-duty cr-duty-lg" data-reveal style="--x:740;--y:73;--w:218;--h:238;--d:.02s"><span class="cr-duty-n">01</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span><p class="cr-fs" style="--fs:17">Source and onboard suitable TASA partners.</p></li>
-      <li class="cr-abs cr-duty cr-duty-lg" data-reveal style="--x:969;--y:73;--w:219;--h:206;--d:.08s"><span class="cr-duty-n">02</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-handshake"/></svg></span><p class="cr-fs" style="--fs:17">Build and maintain strong partner relationships.</p></li>
-      <li class="cr-abs cr-duty cr-duty-lg" data-reveal style="--x:1199;--y:73;--w:218;--h:238;--d:.14s"><span class="cr-duty-n">03</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-bars"/></svg></span><p class="cr-fs" style="--fs:17">Drive registration-to-activation conversion and partner productivity.</p></li>
-      <li class="cr-abs cr-duty" data-reveal style="--x:622;--y:563;--w:148;--h:205;--d:.2s"><span class="cr-duty-n">04</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-presentation"/></svg></span><p class="cr-fs" style="--fs:12">Monitor pod performance against assigned benchmarks.</p></li>
-      <li class="cr-abs cr-duty" data-reveal style="--x:772;--y:563;--w:146;--h:205;--d:.25s"><span class="cr-duty-n">05</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-calendar-grid"/></svg></span><p class="cr-fs" style="--fs:12">Track booking activity and cancellation, refund and quality indicators.</p></li>
-      <li class="cr-abs cr-duty" data-reveal style="--x:921;--y:563;--w:146;--h:205;--d:.3s"><span class="cr-duty-n">06</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-user"/></svg></span><p class="cr-fs" style="--fs:12">Identify underperforming partners and create improvement actions.</p></li>
-      <li class="cr-abs cr-duty" data-reveal style="--x:1071;--y:563;--w:145;--h:205;--d:.35s"><span class="cr-duty-n">07</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-trophy"/></svg></span><p class="cr-fs" style="--fs:12">Support high performers in developing greater business potential.</p></li>
-      <li class="cr-abs cr-duty" data-reveal style="--x:1218;--y:563;--w:143;--h:227;--d:.4s"><span class="cr-duty-n">08</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-plane"/></svg></span><p class="cr-fs" style="--fs:12">Where applicable, support airline commercial discussions, route opportunities and block-seat negotiations.</p></li>
-      <li class="cr-abs cr-duty" data-reveal style="--x:1366;--y:563;--w:142;--h:205;--d:.45s"><span class="cr-duty-n">09</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-file-text"/></svg></span><p class="cr-fs" style="--fs:12">Maintain accurate performance reporting and escalate quality issues.</p></li>
+      <li class="cr-abs cr-duty cr-duty-lg" data-reveal style="--x:740;--y:73;--w:218;--h:238;--d:.02s"><span class="cr-duty-n">01</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg></span><p class="cr-fs" style="--fs:17">Source and onboard suitable TASA partners.</p></li>
+      <li class="cr-abs cr-duty cr-duty-lg" data-reveal style="--x:969;--y:73;--w:219;--h:206;--d:.08s"><span class="cr-duty-n">02</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-handshake"/></svg></span><p class="cr-fs" style="--fs:17">Build and maintain strong partner relationships.</p></li>
+      <li class="cr-abs cr-duty cr-duty-lg" data-reveal style="--x:1199;--y:73;--w:218;--h:238;--d:.14s"><span class="cr-duty-n">03</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-bars"/></svg></span><p class="cr-fs" style="--fs:17">Drive registration-to-activation conversion and partner productivity.</p></li>
+      <li class="cr-abs cr-duty" data-reveal style="--x:622;--y:563;--w:148;--h:205;--d:.2s"><span class="cr-duty-n">04</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-presentation"/></svg></span><p class="cr-fs" style="--fs:12">Monitor pod performance against assigned benchmarks.</p></li>
+      <li class="cr-abs cr-duty" data-reveal style="--x:772;--y:563;--w:146;--h:205;--d:.25s"><span class="cr-duty-n">05</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-calendar-grid"/></svg></span><p class="cr-fs" style="--fs:12">Track booking activity and cancellation, refund and quality indicators.</p></li>
+      <li class="cr-abs cr-duty" data-reveal style="--x:921;--y:563;--w:146;--h:205;--d:.3s"><span class="cr-duty-n">06</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user"/></svg></span><p class="cr-fs" style="--fs:12">Identify underperforming partners and create improvement actions.</p></li>
+      <li class="cr-abs cr-duty" data-reveal style="--x:1071;--y:563;--w:145;--h:205;--d:.35s"><span class="cr-duty-n">07</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-trophy"/></svg></span><p class="cr-fs" style="--fs:12">Support high performers in developing greater business potential.</p></li>
+      <li class="cr-abs cr-duty" data-reveal style="--x:1218;--y:563;--w:143;--h:227;--d:.4s"><span class="cr-duty-n">08</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plane"/></svg></span><p class="cr-fs" style="--fs:12">Where applicable, support airline commercial discussions, route opportunities and block-seat negotiations.</p></li>
+      <li class="cr-abs cr-duty" data-reveal style="--x:1366;--y:563;--w:142;--h:205;--d:.45s"><span class="cr-duty-n">09</span><span class="cr-duty-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-file-text"/></svg></span><p class="cr-fs" style="--fs:12">Maintain accurate performance reporting and escalate quality issues.</p></li>
     </ol>
     <div class="cr-job-media">
       <figure class="cr-abs cr-job-photo" style="--x:822;--y:281;--w:526;--h:281" data-reveal="scale"><img src="careers/img/role-wing.webp?v=4" width="526" height="281" alt="Aircraft wing above the clouds, with the words People, Partnerships, Performance and Higher Together" loading="lazy" decoding="async"></figure>
       <div class="cr-abs cr-card cr-job-float cr-float-b" data-reveal="left" style="--x:705;--y:441;--w:262;--d:.2s">
-        <span class="cr-card-ic cr-fs" style="--fs:19"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-up-right"/></svg></span>
+        <span class="cr-card-ic cr-fs" style="--fs:19"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-up-right"/></svg></span>
         <b class="cr-fs" style="--fs:17">Grow a stronger partner network</b>
       </div>
     </div>
@@ -303,27 +311,27 @@
 <!-- 06 — Performance pay -->
 <section class="cr-section cr-pay" id="pay" aria-labelledby="pay-title">
   <svg class="cr-pay-path" viewBox="0 0 220 260" aria-hidden="true" focusable="false"><path class="cr-dash cr-draw" d="M205 30 C 170 70, 150 90, 120 110 C 90 130, 80 170, 20 250"/></svg>
-  <svg class="cr-pay-plane i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-plane"/></svg>
+  <svg class="cr-pay-plane i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plane"/></svg>
   <p class="cr-ppp" aria-hidden="true">People<br>Planes<br>Possibilities</p>
   <div class="cr-wrap cr-wrap-narrow">
     <header class="cr-pay-head">
       <img class="cr-pay-wing" src="careers/img/pay-wing.webp?v=4" width="291" height="183" alt="" loading="lazy">
       <ul class="cr-pay-tiles" aria-label="Highlights">
-        <li class="cr-tile cr-tile-blue cr-float-a" data-reveal><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-bars"/></svg></span>Performance-driven growth</li>
-        <li class="cr-tile cr-tile-peach cr-float-b" data-reveal style="--d:.08s"><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-trophy"/></svg></span>Higher earnings potential</li>
-        <li class="cr-tile cr-tile-mint cr-float-c" data-reveal style="--d:.12s"><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span>Build a rewarding career</li>
-        <li class="cr-tile cr-tile-lav cr-float-a" data-reveal style="--d:.16s"><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-up-right"/></svg></span>Your success moves the industry</li>
+        <li class="cr-tile cr-tile-blue cr-float-a" data-reveal><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-bars"/></svg></span>Performance-driven growth</li>
+        <li class="cr-tile cr-tile-peach cr-float-b" data-reveal style="--d:.08s"><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-trophy"/></svg></span>Higher earnings potential</li>
+        <li class="cr-tile cr-tile-mint cr-float-c" data-reveal style="--d:.12s"><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg></span>Build a rewarding career</li>
+        <li class="cr-tile cr-tile-lav cr-float-a" data-reveal style="--d:.16s"><span class="cr-tile-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-up-right"/></svg></span>Your success moves the industry</li>
       </ul>
       <p class="cr-eyebrow" data-reveal>03 — Performance pay</p>
       <h2 id="pay-title" class="cr-h1 cr-center" data-reveal style="--d:.05s"><span class="cr-pay-brand">Aeroskys</span> Go further. <span class="is-blue">Grow further.</span></h2>
       <p class="cr-lead cr-center" data-reveal style="--d:.1s">Your performance drives real rewards. We believe in recognising impact — with a transparent, milestone-based compensation structure designed to help you grow.</p>
-      <div class="cr-cta-row cr-center" data-reveal style="--d:.15s"><a class="cr-btn cr-btn-dark" href="#apply" data-apply-role="tag">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a></div>
+      <div class="cr-cta-row cr-center" data-reveal style="--d:.15s"><a class="cr-btn cr-btn-dark" href="#apply" data-apply-role="tag">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a></div>
     </header>
 
     <div class="cr-paycard" data-reveal>
       <div class="cr-paycard-top">
         <p class="cr-paycard-lead">The <b>₹42,000</b> base salary does not move. The bonus is additional and is earned against achievement of your assigned pod performance benchmark.</p>
-        <p class="cr-paycard-note"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-info"/></svg> The performance component is variable and is not guaranteed.</p>
+        <p class="cr-paycard-note"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-info"/></svg> The performance component is variable and is not guaranteed.</p>
       </div>
       <div class="cr-table-wrap">
         <table class="cr-paytable">
@@ -349,9 +357,9 @@
     </div>
 
     <ul class="cr-benefits">
-      <li class="cr-benefit cr-benefit-blue" data-reveal><span class="cr-benefit-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-trend"/></svg></span><span><b>Clear benchmarks</b><small>Know exactly how you earn more.</small></span></li>
-      <li class="cr-benefit cr-benefit-peach" data-reveal style="--d:.08s"><span class="cr-benefit-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-award"/></svg></span><span><b>Performance rewards</b><small>Your impact drives your income.</small></span></li>
-      <li class="cr-benefit cr-benefit-mint" data-reveal style="--d:.16s"><span class="cr-benefit-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-user-growth"/></svg></span><span><b>Long-term career growth</b><small>Build a future with Aeroskys.</small></span></li>
+      <li class="cr-benefit cr-benefit-blue" data-reveal><span class="cr-benefit-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-trend"/></svg></span><span><b>Clear benchmarks</b><small>Know exactly how you earn more.</small></span></li>
+      <li class="cr-benefit cr-benefit-peach" data-reveal style="--d:.08s"><span class="cr-benefit-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-award"/></svg></span><span><b>Performance rewards</b><small>Your impact drives your income.</small></span></li>
+      <li class="cr-benefit cr-benefit-mint" data-reveal style="--d:.16s"><span class="cr-benefit-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user-growth"/></svg></span><span><b>Long-term career growth</b><small>Build a future with Aeroskys.</small></span></li>
     </ul>
 
     <div class="cr-ladder" id="ladder">
@@ -360,7 +368,7 @@
           <h3 class="cr-h2 cr-ladder-title">Six-Month Career Ladder</h3>
           <p class="cr-muted">A structured path to help you grow, perform and take on bigger opportunities.</p>
         </div>
-        <a class="cr-team-pill" href="#apply"><img src="careers/img/avatars.webp?v=4" width="184" height="56" alt=""><span>Join a high-performing team</span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+        <a class="cr-team-pill" href="#apply"><img src="careers/img/avatars.webp?v=4" width="184" height="56" alt=""><span>Join a high-performing team</span><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
       </div>
       <div class="cr-ladder-card" data-reveal>
         <div class="cr-ladder-main">
@@ -398,7 +406,7 @@
           </div>
         </div>
         <div class="cr-ladder-side">
-          <span class="cr-ladder-flag"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-flag"/></svg></span>
+          <span class="cr-ladder-flag"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-flag"/></svg></span>
           <p class="cr-ladder-side-title">From potential to leadership.</p>
           <p class="cr-muted">A clear 6-month journey designed to fast-track your growth at Aeroskys.</p>
           <img src="careers/img/ladder-wing.webp?v=4" width="232" height="140" alt="" loading="lazy">
@@ -409,7 +417,7 @@
     <div class="cr-next" data-reveal>
       <h3 class="cr-h2">Ready to take the next step?</h3>
       <p class="cr-muted">Join Aeroskys and be part of a team that’s moving the world forward.</p>
-      <div class="cr-cta-row cr-center"><a class="cr-btn cr-btn-primary" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a><a class="cr-btn cr-btn-outline" href="#how-we-hire">See how we hire</a></div>
+      <div class="cr-cta-row cr-center"><a class="cr-btn cr-btn-primary" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a><a class="cr-btn cr-btn-outline" href="#how-we-hire">See how we hire</a></div>
     </div>
   </div>
 </section>
@@ -434,34 +442,34 @@
     <fieldset class="cr-fit-list">
       <legend class="sr-only">Tick what applies to you</legend>
       <label class="cr-abs cr-trait" data-kind="essential" data-reveal style="--x:72;--y:366;--w:368;--d:.04s">
-        <input type="checkbox" value="kpi"><span class="cr-trait-ic cr-tint-blue"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-bars"/></svg></span>
-        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Commercially minded and comfortable being measured on KPIs.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=4#i-check"/></svg></span>
+        <input type="checkbox" value="kpi"><span class="cr-trait-ic cr-tint-blue"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-bars"/></svg></span>
+        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Commercially minded and comfortable being measured on KPIs.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=5#i-check"/></svg></span>
       </label>
       <label class="cr-abs cr-trait" data-kind="essential" data-reveal style="--x:72;--y:497;--w:368;--d:.1s">
-        <input type="checkbox" value="relationships"><span class="cr-trait-ic cr-tint-peach"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span>
-        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Strong relationship-building and partner-management skills.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=4#i-check"/></svg></span>
+        <input type="checkbox" value="relationships"><span class="cr-trait-ic cr-tint-peach"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg></span>
+        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Strong relationship-building and partner-management skills.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=5#i-check"/></svg></span>
       </label>
       <label class="cr-abs cr-trait" data-kind="essential" data-reveal style="--x:72;--y:629;--w:368;--d:.16s">
-        <input type="checkbox" value="prospecting"><span class="cr-trait-ic cr-tint-mint"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-chat"/></svg></span>
-        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Confident in prospecting, negotiation and follow-up.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=4#i-check"/></svg></span>
+        <input type="checkbox" value="prospecting"><span class="cr-trait-ic cr-tint-mint"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-chat"/></svg></span>
+        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Confident in prospecting, negotiation and follow-up.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=5#i-check"/></svg></span>
       </label>
       <label class="cr-abs cr-trait" data-kind="preferred" data-reveal="right" style="--x:1098;--y:155;--w:368;--d:.04s">
-        <input type="checkbox" value="travel-trade"><span class="cr-trait-ic cr-tint-blue"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-briefcase"/></svg></span>
-        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Travel trade, B2B sales, agency or business-development background preferred.<em>Preferred</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=4#i-check"/></svg></span>
+        <input type="checkbox" value="travel-trade"><span class="cr-trait-ic cr-tint-blue"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-briefcase"/></svg></span>
+        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Travel trade, B2B sales, agency or business-development background preferred.<em>Preferred</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=5#i-check"/></svg></span>
       </label>
       <label class="cr-abs cr-trait" data-kind="preferred" data-reveal="right" style="--x:1098;--y:333;--w:368;--d:.1s">
-        <input type="checkbox" value="distribution"><span class="cr-trait-ic cr-tint-peach"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-plane"/></svg></span>
-        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Airline contract, GDS or travel-distribution experience is a strong advantage.<em>Preferred</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=4#i-check"/></svg></span>
+        <input type="checkbox" value="distribution"><span class="cr-trait-ic cr-tint-peach"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plane"/></svg></span>
+        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Airline contract, GDS or travel-distribution experience is a strong advantage.<em>Preferred</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=5#i-check"/></svg></span>
       </label>
       <label class="cr-abs cr-trait" data-kind="essential" data-reveal="right" style="--x:1098;--y:497;--w:368;--d:.16s">
-        <input type="checkbox" value="ownership"><span class="cr-trait-ic cr-tint-mint"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-user-check"/></svg></span>
-        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Self-motivated, organised and accountable for outcomes.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=4#i-check"/></svg></span>
+        <input type="checkbox" value="ownership"><span class="cr-trait-ic cr-tint-mint"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user-check"/></svg></span>
+        <span class="cr-trait-copy cr-fs" style="--fs:17.5">Self-motivated, organised and accountable for outcomes.<em>Essential</em></span><span class="cr-check" aria-hidden="true"><svg class="i"><use href="careers/icons.svg?v=5#i-check"/></svg></span>
       </label>
     </fieldset>
     <div class="cr-abs cr-fit-bar" style="--x:450;--y:697;--w:652" data-reveal>
-      <span class="cr-fit-bar-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-users"/></svg></span>
+      <span class="cr-fit-bar-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg></span>
       <span class="cr-fit-bar-copy"><small>Join a high-performing team</small><b data-fit-result>Build a rewarding career</b></span>
-      <a class="cr-btn cr-btn-primary" href="#apply" data-apply-role="tag">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
+      <a class="cr-btn cr-btn-primary" href="#apply" data-apply-role="tag">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
     </div>
     <p class="cr-abs cr-fit-note cr-fs" style="--x:450;--y:846;--w:652;--fs:12.5">Tick what applies to you. This quick check stays on your screen — nothing is saved or sent.</p>
     <p class="cr-abs cr-ppp cr-ppp-inline" style="--x:1318;--y:712;--w:170" aria-hidden="true">People<br>Planes<br>Possibilities</p>
@@ -478,8 +486,8 @@
       <p class="cr-lead cr-center" data-reveal style="--d:.1s">Build and manage the sales-talent pipeline behind Aeroskys — TASA recruitment and TAG Manager hiring. Suited to someone who enjoys high-volume recruitment, candidate engagement and KPI-based HR operations.</p>
       <ul class="cr-tags cr-center" aria-label="Role type" data-reveal style="--d:.14s"><li class="is-blue">Full-time</li><li>High-volume recruitment</li><li>KPI-based HR operations</li></ul>
       <div class="cr-cta-row cr-center" data-reveal style="--d:.18s">
-        <a class="cr-btn cr-btn-dark" href="#apply" data-apply-role="hr">Apply for this role <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a>
-        <a class="cr-btn cr-btn-ghost" href="#hr-details"><span class="cr-circle-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-file-text"/></svg></span> View role details</a>
+        <a class="cr-btn cr-btn-dark" href="#apply" data-apply-role="hr">Apply for this role <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
+        <a class="cr-btn cr-btn-ghost" href="#hr-details"><span class="cr-circle-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-file-text"/></svg></span> View role details</a>
       </div>
       <img class="cr-hr-script" src="careers/img/script-people-planes.webp?v=4" width="148" height="134" alt="" loading="lazy">
       <div class="cr-hr-side cr-hr-side-left" data-reveal><img src="careers/img/avatars.webp?v=4" width="184" height="56" alt=""><p>Join a team that moves the world forward.</p></div>
@@ -488,7 +496,7 @@
   <div class="cr-car-wrap">
     <div class="cr-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="The hiring pipeline you will manage">
       <div class="cr-car-row">
-      <button class="cr-car-btn cr-car-prev" type="button" aria-label="Previous stage" data-car-prev><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-chevron-left"/></svg></button>
+      <button class="cr-car-btn cr-car-prev" type="button" aria-label="Previous stage" data-car-prev><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-chevron-left"/></svg></button>
       <div class="cr-car-track">
         <div class="cr-car-item" role="group" aria-roledescription="slide" data-caption="Sourcing" data-detail="Find and engage candidates for TASA and TAG Manager roles."><img src="careers/img/hr-1.webp?v=4" width="159" height="169" alt="" loading="lazy"></div>
         <div class="cr-car-item" role="group" aria-roledescription="slide" data-caption="Screening" data-detail="First calls: explain role structures, commission models and KPIs clearly."><img src="careers/img/hr-2.webp?v=4" width="205" height="184" alt="" loading="lazy"></div>
@@ -496,7 +504,7 @@
         <div class="cr-car-item" role="group" aria-roledescription="slide" data-caption="Onboarding" data-detail="Support onboarding, induction and initial KPI communication for new hires."><img src="careers/img/hr-4.webp?v=4" width="207" height="184" alt="" loading="lazy"></div>
         <div class="cr-car-item" role="group" aria-roledescription="slide" data-caption="30 · 60 · 90 days" data-detail="Track early-stage performance at 30, 60 and 90 days with management."><img src="careers/img/hr-5.webp?v=4" width="159" height="171" alt="" loading="lazy"></div>
       </div>
-      <button class="cr-car-btn cr-car-next" type="button" aria-label="Next stage" data-car-next><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-chevron-right"/></svg></button>
+      <button class="cr-car-btn cr-car-next" type="button" aria-label="Next stage" data-car-next><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-chevron-right"/></svg></button>
       </div>
       <p class="cr-hr-side cr-hr-side-right" data-reveal>Great people build great opportunities.</p>
       <p class="sr-only" aria-live="polite" data-car-live></p>
@@ -553,10 +561,10 @@
       <path class="cr-dash cr-draw" d="M357 288 V 306"/><path class="cr-dash cr-draw" d="M625 288 V 306"/><path class="cr-dash cr-draw" d="M909 288 V 306"/><path class="cr-dash cr-draw" d="M1171 288 V 306"/>
     </svg>
     <div class="cr-hire-steps" role="tablist" aria-label="Hiring steps">
-      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:247;--y:75;--w:226;--h:213" aria-selected="true" aria-controls="hire-panel" id="hstep-0" data-step="0"><span class="cr-hstep-n" aria-hidden="true">01</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-file-text"/></svg></span><b class="cr-fs" style="--fs:17.5">Written Application</b><small class="cr-fs" style="--fs:13.5">The form below. Written answers carry real weight — the KPI and execution questions are read first.</small></button>
-      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:513;--y:75;--w:227;--h:213" aria-selected="false" aria-controls="hire-panel" id="hstep-1" data-step="1" tabindex="-1"><span class="cr-hstep-n" aria-hidden="true">02</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-phone"/></svg></span><b class="cr-fs" style="--fs:17.5">Commercial Review</b><small class="cr-fs" style="--fs:13.5">A 30-minute call on your track record and the numbers you have personally owned.</small></button>
-      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:795;--y:75;--w:228;--h:213" aria-selected="false" aria-controls="hire-panel" id="hstep-2" data-step="2" tabindex="-1"><span class="cr-hstep-n" aria-hidden="true">03</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-bars"/></svg></span><b class="cr-fs" style="--fs:17.5">POD Plan</b><small class="cr-fs" style="--fs:13.5">You present your KPI system and first 30-days plan, and we work through it together.</small></button>
-      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:1060;--y:75;--w:228;--h:213" aria-selected="false" aria-controls="hire-panel" id="hstep-3" data-step="3" tabindex="-1"><span class="cr-hstep-n" aria-hidden="true">04</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-check"/></svg></span><b class="cr-fs" style="--fs:17.5">Offer &amp; Benchmark</b><small class="cr-fs" style="--fs:13.5">Offer, assigned pod benchmark and onboarding date confirmed in writing.</small></button>
+      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:247;--y:75;--w:226;--h:213" aria-selected="true" aria-controls="hire-panel" id="hstep-0" data-step="0"><span class="cr-hstep-n" aria-hidden="true">01</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-file-text"/></svg></span><b class="cr-fs" style="--fs:17.5">Written Application</b><small class="cr-fs" style="--fs:13.5">The form below. Written answers carry real weight — the KPI and execution questions are read first.</small></button>
+      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:513;--y:75;--w:227;--h:213" aria-selected="false" aria-controls="hire-panel" id="hstep-1" data-step="1" tabindex="-1"><span class="cr-hstep-n" aria-hidden="true">02</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-phone"/></svg></span><b class="cr-fs" style="--fs:17.5">Commercial Review</b><small class="cr-fs" style="--fs:13.5">A 30-minute call on your track record and the numbers you have personally owned.</small></button>
+      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:795;--y:75;--w:228;--h:213" aria-selected="false" aria-controls="hire-panel" id="hstep-2" data-step="2" tabindex="-1"><span class="cr-hstep-n" aria-hidden="true">03</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-bars"/></svg></span><b class="cr-fs" style="--fs:17.5">POD Plan</b><small class="cr-fs" style="--fs:13.5">You present your KPI system and first 30-days plan, and we work through it together.</small></button>
+      <button class="cr-abs cr-hstep" role="tab" type="button" style="--x:1060;--y:75;--w:228;--h:213" aria-selected="false" aria-controls="hire-panel" id="hstep-3" data-step="3" tabindex="-1"><span class="cr-hstep-n" aria-hidden="true">04</span><span class="cr-hstep-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-check"/></svg></span><b class="cr-fs" style="--fs:17.5">Offer &amp; Benchmark</b><small class="cr-fs" style="--fs:13.5">Offer, assigned pod benchmark and onboarding date confirmed in writing.</small></button>
     </div>
     <div class="cr-abs cr-hire-center" style="--x:470;--y:356;--w:596">
       <div class="cr-hire-panel" id="hire-panel" role="tabpanel" aria-labelledby="hstep-0" aria-live="polite">
@@ -564,7 +572,7 @@
         <p class="cr-hire-panel-t cr-fs" style="--fs:15.5" data-hire-t>Complete the application below. We read your KPI and execution answers first.</p>
       </div>
       <p class="cr-hire-bring cr-fs" style="--fs:15.5">Bring your latest CV and a short career &amp; commercial plan: customer acquisition, business generation, network-building, proposed daily and monthly KPIs, and a 3/6/9/12-month roadmap.</p>
-      <div class="cr-cta-row cr-center"><a class="cr-btn cr-btn-dark" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a></div>
+      <div class="cr-cta-row cr-center"><a class="cr-btn cr-btn-dark" href="#apply">Apply Now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a></div>
     </div>
     <div class="cr-abs cr-secnav-slot" style="--x:52;--y:580;--w:1430"><div class="cr-secnav cr-secnav-on-rock" data-secnav="how-we-hire" data-hire-nav></div></div>
   </div>
@@ -589,6 +597,21 @@
   </div>
 </section>
 
+<!-- Membership: Member ID (the generator is member-id.html) -->
+<section class="cr-member" aria-labelledby="member-title">
+  <div class="cr-wrap">
+    <div class="cr-member-card" data-reveal>
+      <span class="cr-member-ic"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-id-card"/></svg></span>
+      <div>
+        <p class="cr-eyebrow">Membership · Member ID</p>
+        <h2 id="member-title" class="cr-member-title">One Aeroskys Member ID per passport</h2>
+        <p class="cr-member-text">A ₹499 lifetime membership covers every passenger on a booking, up to nine. Passport numbers are never stored — only a one-way fingerprint and the last four characters.</p>
+      </div>
+      <a class="cr-btn cr-btn-outline" href="member-id.html">Open the Member ID generator <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer class="cr-footer">
@@ -599,7 +622,7 @@
     </div>
     <nav class="cr-footer-col" aria-label="Careers links">
       <p>Careers</p>
-      <a href="#roles">Open roles</a><a href="#pay">Compensation</a><a href="#how-we-hire">How we hire</a><a href="#apply">Apply</a>
+      <a href="#roles">Open roles</a><a href="#pay">Compensation</a><a href="#how-we-hire">How we hire</a><a href="#apply">Apply</a><a href="member-id.html">Member ID</a>
     </nav>
     <nav class="cr-footer-col" aria-label="Aeroskys links">
       <p>Aeroskys</p>
@@ -614,18 +637,18 @@
   </div>
   <div class="cr-wrap cr-footer-bottom">
     <span>© <span data-year>2026</span> Jackpot Travels Private Limited · 22A, Asif Ali Road, New Delhi - 110002</span>
-    <a href="#top">Back to top <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-up"/></svg></a>
+    <a href="#top">Back to top <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-up"/></svg></a>
   </div>
 </footer>
 
 <dialog class="cr-dialog" id="dialog-story" aria-labelledby="story-title">
   <form method="dialog" class="cr-dialog-inner">
-    <button type="submit" class="cr-icon-btn cr-dialog-close" value="close" aria-label="Close"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-x"/></svg></button>
+    <button type="submit" class="cr-icon-btn cr-dialog-close" value="close" aria-label="Close"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-x"/></svg></button>
     <p class="cr-eyebrow">Our story</p>
     <h2 id="story-title" class="cr-h2">Making the world accessible to everyone.</h2>
     <p>Jackpot Travels Private Limited was established with a clear vision: to make the world accessible to everyone. As a comprehensive online travel agency, we proudly offer a variety of travel services and resources designed to simplify your entire journey. Our commitment is to leverage technology and expertise to deliver value, ensuring the most affordable rates for your trips without ever compromising on service quality.</p>
     <p class="cr-muted">Aeroskys is operated by Jackpot Travels Private Limited, 22A, Asif Ali Road, New Delhi - 110002.</p>
-    <div class="cr-cta-row"><a class="cr-btn cr-btn-primary" href="./#/about">Read more about us <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=4#i-arrow-right"/></svg></a><button type="submit" class="cr-btn cr-btn-outline" value="close">Close</button></div>
+    <div class="cr-cta-row"><a class="cr-btn cr-btn-primary" href="./#/about">Read more about us <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a><button type="submit" class="cr-btn cr-btn-outline" value="close">Close</button></div>
   </form>
 </dialog>
 

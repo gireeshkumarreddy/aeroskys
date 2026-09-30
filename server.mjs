@@ -1,14 +1,16 @@
 // Zero-dependency static server. Serves /public; extension-less paths fall back to index.html (the app
-// uses hash routes). Also serves the Careers page at /careers and accepts applications at
-// POST /api/careers/applications. Text files are compressed, and every response carries security headers.
+// uses hash routes). Also serves the Careers page at /careers and the Member ID generator at /member-id,
+// and accepts applications at POST /api/careers/applications. Text files are compressed, and every
+// response carries security headers.
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
-import { createHash, randomBytes } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
 import { brotliCompressSync, gzipSync, constants as zlib } from 'node:zlib';
 import { extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROLES, nationalDigits } from './public/careers/js/roles.js';
+import { SECURITY_HEADERS, contentSecurityPolicy } from './security.mjs';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
 const root = join(here, 'public');
@@ -33,35 +35,8 @@ const types = {
   '.xml': 'application/xml; charset=utf-8'
 };
 const COMPRESSIBLE = new Set(['.html', '.css', '.js', '.mjs', '.json', '.webmanifest', '.svg', '.txt', '.xml']);
-
-// Sent with every response.
-const SECURITY_HEADERS = {
-  'X-Content-Type-Options': 'nosniff',
-  'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'X-Frame-Options': 'SAMEORIGIN',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
-  'Cross-Origin-Opener-Policy': 'same-origin'
-};
-
-// Content-Security-Policy for pages. Inline <script> blocks are allowed by their hash, computed from the
-// file itself, so editing them never needs a manual update here. Images may come from the live site's CDN.
-function contentSecurityPolicy(htmlText) {
-  const hashes = [...htmlText.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)]
-    .map(m => `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
-  return [
-    "default-src 'self'",
-    `script-src 'self' ${hashes.join(' ')}`.trim(),
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob: https:",
-    "font-src 'self'",
-    "connect-src 'self'",
-    'frame-src https://www.openstreetmap.org',
-    "frame-ancestors 'self'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "object-src 'none'"
-  ].join('; ');
-}
+// Standalone pages served at clean URLs (the rest of the site is the hash-routed app).
+const CLEAN_PAGES = { '/careers': 'careers.html', '/member-id': 'member-id.html' };
 
 // Text files are kept in memory with compressed copies, rebuilt when the file changes. Images, fonts and
 // other binaries stream from disk.
@@ -197,10 +172,12 @@ createServer(async (req, res) => {
     catch (e) { console.error(e); return sendJson(res, 500, { ok: false, error: 'The application could not be saved. Please try again' }); }
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') { res.setHeader('Allow', 'GET, HEAD'); return plain(res, 405, 'Method not allowed'); }
-  // Clean URL for the Careers page (careers.html also works on any static host).
-  if (pathname === '/careers/') { res.writeHead(301, { ...SECURITY_HEADERS, Location: '/careers' }); return res.end(); }
+  // Clean URLs for the standalone pages (careers.html and member-id.html also work on any static host).
+  if (pathname.length > 1 && pathname.endsWith('/') && CLEAN_PAGES[pathname.slice(0, -1)]) {
+    res.writeHead(301, { ...SECURITY_HEADERS, Location: pathname.slice(0, -1) }); return res.end();
+  }
 
-  let file = pathname === '/careers' ? join(root, 'careers.html') : join(root, normalize(pathname).replace(/^([/\\])+/, ''));
+  let file = CLEAN_PAGES[pathname] ? join(root, CLEAN_PAGES[pathname]) : join(root, normalize(pathname).replace(/^([/\\])+/, ''));
   if (file !== root && !file.startsWith(root + sep)) return plain(res, 403, 'Forbidden');
   try {
     if ((await stat(file)).isDirectory()) file = join(file, 'index.html');

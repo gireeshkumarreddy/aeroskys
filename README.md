@@ -13,6 +13,32 @@ npm run check        # health check: routes, icons, engines, Careers assets and 
 
 Node 18+ and nothing to install. `public/` is a static site: any static host works, because routing is hash-based (`#/flights/search?...`).
 
+## Deploying to Vercel
+
+The review copy is live at **https://aeroskys.vercel.app**, with the Careers page at **https://aeroskys.vercel.app/careers**. It is the Vercel project `aeroskys` in the `gireesh3` team.
+
+```bash
+npm run vercel:config        # only after editing an inline <script> in index.html or careers.html
+npx vercel deploy --prod     # from this folder (it is linked to the project)
+```
+
+- **What is uploaded:** only `public/` and `vercel.json` (see `.vercelignore`), so applicant data, `.env` files and tools never leave this machine.
+- **Same behaviour as `server.mjs`:**
+  - `/careers` serves the Careers page, and `/careers/` redirects there.
+  - Other extension-less paths open the app; missing files return a real 404.
+  - The security headers, including the Content-Security-Policy, come from the shared `security.mjs`, and `npm run check` fails if `vercel.json` falls out of step with the pages.
+  - Fonts and `?v=` assets are cached for a year.
+- **Not indexed:** the copy is sent with `X-Robots-Tag: noindex`. Set `NOINDEX = false` in `scripts/vercel-config.mjs` when it becomes the live site.
+- **Applications:** Vercel runs no `server.mjs`, so `POST /api/careers/applications` returns 404 there. The form then shows "Online submission isn't available on this version of the site", with **Download my answers**, **Email us instead** and **Try again**, and the answers stay saved on the applicant's device.
+  - To accept applications on Vercel, add a serverless function backed by storage (for example Vercel Blob or a database), or post to your ATS.
+  - That is also where the data-handling decision below applies.
+- **Deploys are manual:** the project is not connected to the GitHub repository. Connect it with `npx vercel git connect` if every push to `main` should deploy.
+- **Checked on the live copy (29 Sep 2026):**
+  - The site crawl covered 66 page loads at desktop and phone widths, with no accessibility, security-policy, console, network or layout problems.
+  - Every Careers interaction state is clean, including 87 keyboard stops.
+  - Lighthouse for Careers scored 100 / 100 / 100 on desktop, and a median of 91 / 100 / 100 on phones (performance, accessibility, best practices).
+  - SEO scores 66 only because this copy is marked no-index.
+
 ## What works
 
 | Area | Flow |
@@ -76,7 +102,15 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
 - **Open it:** `http://localhost:3000/careers` with `npm start`, or `public/careers.html` on any static host.
 - **From the main site:** "Careers" in the top navigation (with a "Hiring" badge on wide screens), in the phone menu, and in the footer.
 - **Back to the main site:** "← Back to Aeroskys.com" above the header, the logo, and the footer links.
-- **Sections:** header, landing, role introduction, Building the Direction, What the Job Actually Is, Performance Pay (with a pay calculator and the six-month ladder), Candidate Profile (a tick-list self-check), HR & Recruitment Specialist, How We Hire (four steps), then the application (About You → the role's questions → final details and CV).
+- **Sections:** header, a full-screen landing, role introduction, Building the Direction, What the Job Actually Is, Performance Pay (with a pay calculator and the six-month ladder), Candidate Profile (a tick-list self-check), HR & Recruitment Specialist, How We Hire (four steps), then the application (About You → the role's questions → final details and CV).
+
+**Full-screen layout**
+- **Landing:** on laptops, desktops and landscape tablets (1024px and wider), the landing fills the first screen from edge to edge.
+- **Photo crop:** the photo takes the room the headline leaves and is cropped so both faces stay between the header and the white wave.
+- **Short screens:** in browser windows under about 780px tall, the "People Planes Possibilities" lettering steps aside to make room.
+- **Page edge:** every section shares one edge, 6.5% of the screen width (the margin in the reference screens), with content at most 1,600px wide.
+- **Photo sections:** these scale with the screen up to 1,920px.
+- **Phones and portrait tablets:** they keep the stacked layout.
 
 **Applications**
 - **Endpoint:** the form posts to `POST /api/careers/applications` (in `server.mjs`).
@@ -92,9 +126,30 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
 - Every image comes from the reference document's own screens, cropped at their original resolution.
 - Where the design had a card or caption drawn over a photo, that patch was retouched so the live card can sit on top.
 - No stock or generated photos are used.
-- `tools/careers_images.py` rebuilds all 27 files from the unzipped document (optional; needs Python with Pillow and OpenCV).
-- **Resolution limit:** the reference screens are only 1,023–1,536 px wide, so the photos are 1× images. For example, the landing photo is 1,294 px wide. They look soft on high-density (Retina) screens.
-- **To sharpen them:** send the original photographs. Replace the files in `public/careers/img/`, keeping the same names and crops, and raise the `?v=` number on their URLs in `careers.html` (currently `?v=4`) so browsers fetch the new versions.
+- **Desktop landing photo:** `hero-desktop.webp` is the same landing photo with its lettering lifted off the sky, so the page can place it at any screen size. The script is `hero-script.webp`; "A bigger tomorrow together" is live text.
+- `tools/careers_images.py` rebuilds every file in `public/careers/img/` from the unzipped document (optional; needs Python with Pillow and OpenCV).
+- **Resolution limit:** the reference screens are only 1,023–1,536 px wide, so the photos are 1× images.
+  - The landing photo is 1,294 px wide.
+  - On a 1,920px screen it is shown about 1.5× larger, and the section photos about 1.25× larger.
+  - The photos look soft on those screens and on high-density (Retina) screens.
+- **To sharpen them:** send the original photographs. Replace the files in `public/careers/img/`, keeping the same names and crops, and raise the `?v=` number on their URLs in `careers.html` (currently `?v=4`, or `?v=5` for the two desktop landing files) so browsers fetch the new versions.
+
+**Member ID generator (added 30 Sep 2026)**
+- **Where:** the page is `/member-id` (`public/member-id.html`), built from the Careers page components. It contains everything in the supplied design:
+  - traveller details (full name, passport nationality, passport number, expiry date, ₹499 fee reference);
+  - the Member ID card (status, nationality, the ID, member, masked passport, issue time, fee reference, plan);
+  - the register of issued IDs, with search, CSV export and revoke;
+  - the privacy and legal note.
+- **Rules:** one Member ID per passport. The ID comes from a one-way fingerprint of nationality and passport number, so the same passport always returns the same ID (`ASK-XXXX-XXXX-X`), and a second request shows "Already a member".
+  - Passport numbers are never stored; only the fingerprint and the last four characters are kept.
+  - The rules and messages match the file, and the IDs are identical to the ones it produces.
+- **On the Careers page (kept subtle):**
+  - a "Member ID" link in the top bar;
+  - a slim Membership band before the footer;
+  - a footer link;
+  - a "Membership" group in the phone menu.
+  The main navigation is unchanged.
+- **Brand casing:** the file writes "AeroSkys"; the new text follows the Careers page, which writes "Aeroskys".
 
 **Careers content to confirm before launch**
 1. **TASA and HR questions.** The reference shows only the TAG Manager questions (used word for word). The TASA (7) and HR (9) questions were written for the prototype and need approval.
@@ -112,19 +167,30 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
    - The HR photo carousel is captioned with hiring stages (Sourcing, Screening and so on), not staff names.
 8. **Language menu** offers English only.
 9. **Data handling.** Applications are plain files on the server. Decide who can read them, how long they are kept, and add that to the privacy policy.
+10. **Member ID generator:**
+    - **Who can use it.** It issues and revokes memberships but is currently a public page, linked from the Careers page, and marked no-index. For real use, put it behind a staff login.
+    - **Where the register lives.** It is stored in each browser, so every device has its own list. A shared register needs a server and database.
+    - **Fee structure.** The supplied file notes that the membership fee structure is still subject to legal review.
 
 ## Quality checks (29 Sep 2026)
 Audited in Chrome with Lighthouse 13, axe-core (WCAG 2.2 AA) and html-validate. The audit scripts ran outside the project, so nothing is installed here.
 
 | Page | Performance | Accessibility | Best practices | SEO |
 |---|---|---|---|---|
-| Careers, desktop | 100 | 100 | 100 | 100 |
-| Careers, phone | 92 | 100 | 100 | 100 |
+| Careers, desktop | 99–100 | 100 | 100 | 100 |
+| Careers, phone | 90 (median of 3 runs, 83–92) | 100 | 100 | 100 |
 | Home, desktop | 88 | 100 | 100 | 100 |
 | Home, phone | 72 | 100 | 100 | 100 |
 
 - **Accessibility:** no axe violations on the 33 main-site routes at desktop and phone widths. That includes the pickers, the login dialog and the filter sheets. The Careers page is also clean in every state: menus, story dialog, form errors, failed and successful submission.
-- **Layout:** no sideways scrolling and no covered or undersized controls (24px minimum) from 320px to 1920px wide.
+- **Layout:** no sideways scrolling and no covered or undersized controls (24px minimum) from 320px to 2,560px wide. Short laptop windows (620px tall) were also checked, because the landing sizes itself to the screen height.
+- **Full-screen landing (re-audited after the change):**
+  - Clean at every size tested: 22 widths, plus the short-window pass.
+  - Clean in all 12 interactive states.
+  - 87 keyboard stops, each with a visible focus ring.
+  - The markup is valid.
+  - The landing photo's preload now carries `fetchpriority="high"`, so Lighthouse's check that the browser finds the landing photo early now passes.
+  - Phone performance varies from run to run on the test machine, so the table gives the median.
 - **Markup:** the page sources and the pages as rendered by the scripts are valid HTML.
 - **Keyboard:** every control is reachable with a visible focus ring, dialogs and menus trap and return focus, and reduced-motion settings switch the animation off.
 
