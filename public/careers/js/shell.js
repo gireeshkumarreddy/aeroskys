@@ -1,5 +1,5 @@
-// Page shell shared by the Careers page and the Member ID generator: footer year, sticky header,
-// dropdown menus, the phone menu and the scroll reveals. Runs on import.
+// Page shell for the Careers page: footer year, sticky header, dropdown menus, the phone menu and the
+// scroll reveals. Runs on import.
 import { $, $$, reducedMotion, trapTab } from './ui.js';
 
 const yearEl = $('[data-year]');
@@ -11,7 +11,7 @@ const onScroll = () => header.classList.toggle('is-scrolled', scrollY > 30);
 addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-// Dropdown menus (Our Roles, Compensation, Life at Aeroskys, language)
+// Dropdown menus (Open positions, language)
 const dds = $$('[data-dd]');
 function closeDropdowns(except) {
   for (const dd of dds) {

@@ -1,19 +1,20 @@
 // Home-page content imported from aeroskys.com on 2026-09-28. The ticker, coupon card and
 // "Why choose us" wording was rewritten in plain language at the client's request (2026-09-29).
+// Support number changed to +91 79703 36785 at the client's request (2026-10-04); the old number is retired.
 export const COMPANY = {
  "brand": "AeroSkys",
  "legal": "Jackpot Travels Private Limited",
  "address": "22A, Asif Ali Road, New Delhi - 110002",
  "email": "customercare@aeroskys.com",
- "phone": "9526956609",
- "phoneIntl": "+919526956609"
+ "phone": "+91 79703 36785",
+ "phoneIntl": "+917970336785"
 };
 export const TICKER = [
  "Flat ₹200 off flights with code TRAVO200",
  "Free cancellation on many hotel rooms",
  "Student and senior citizen fares on flights",
  "Travelling as a group of 10 or more? Ask us for group fares",
- "Need help? Call us 24/7 on 9526956609"
+ "Need help? Call us 24/7 on +91 79703 36785"
 ];
 export const COUPON_CARD = {
  "code": "TRAVO200",

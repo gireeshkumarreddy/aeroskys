@@ -54,7 +54,7 @@ export function pageBand({ eyebrow = '', title, text = '', trail = [], art = '',
         ${text ? html`<p class="pg-band-text">${text}</p>` : ''}
       </div>
       ${contact ? html`<div class="pg-band-contact">
-        <a href="tel:${COMPANY.phone}">${icon('headset')}<span><small>24/7 support</small><b>${COMPANY.phone}</b></span></a>
+        <a href="tel:${COMPANY.phoneIntl}">${icon('headset')}<span><small>24/7 support</small><b>${COMPANY.phone}</b></span></a>
         <a href="mailto:${COMPANY.email}">${icon('mail')}<span><small>Email us</small><b>${COMPANY.email}</b></span></a>
       </div>` : ''}
     </div>
@@ -332,7 +332,7 @@ export function successPanel(entry, { heading = 'Enquiry received', lead = '', n
     ${d.summary?.length ? html`<dl class="pg-sum">${d.summary.map(([k, v]) => html`<div><dt>${k}</dt><dd>${v}</dd></div>`)}</dl>` : ''}
     <h3 class="pg-next-h">What happens next</h3>
     <ol class="pg-next">${next.map(([t, s]) => html`<li><b>${t}</b><span>${s}</span></li>`)}</ol>
-    <p class="pg-sooner">Need it sooner? Call <a class="link" href="tel:${COMPANY.phone}">${COMPANY.phone}</a> — support is available 24/7.</p>
+    <p class="pg-sooner">Need it sooner? Call <a class="link" href="tel:${COMPANY.phoneIntl}">${COMPANY.phone}</a> — support is available 24/7.</p>
     <div class="note note-amber">${icon('info')}<span>Prototype: this enquiry is saved on this device only. Nothing has been sent to AeroSkys yet.</span></div>
     <div class="pg-success-actions">
       <a class="btn btn-dark" href="#/account?tab=enquiries">${icon('chat')} View my enquiries</a>
@@ -409,7 +409,7 @@ export function stepsCard(title, list) {
 export function contactCard(title = 'Prefer to talk?') {
   return html`<section class="card pg-aside-card"><h2 class="h4">${title}</h2>
     <p class="pg-aside-text">Get assistance 24/7 on any kind of travel related query.</p>
-    <a class="pg-contact-row" href="tel:${COMPANY.phone}">${icon('phone')}<span><small>Call us</small><b>${COMPANY.phone}</b></span></a>
+    <a class="pg-contact-row" href="tel:${COMPANY.phoneIntl}">${icon('phone')}<span><small>Call us</small><b>${COMPANY.phone}</b></span></a>
     <a class="pg-contact-row" href="mailto:${COMPANY.email}">${icon('mail')}<span><small>Email</small><b>${COMPANY.email}</b></span></a></section>`;
 }
 

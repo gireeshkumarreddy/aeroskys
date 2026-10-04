@@ -1,7 +1,7 @@
 // Zero-dependency static server. Serves /public; extension-less paths fall back to index.html (the app
-// uses hash routes). Also serves the Careers page at /careers and the Member ID generator at /member-id,
-// and accepts applications at POST /api/careers/applications. Text files are compressed, and every
-// response carries security headers.
+// uses hash routes). Also serves the Careers page at /careers and the Membership page at /membership (the
+// earlier /member-id address redirects there), and accepts applications at POST /api/careers/applications.
+// Text files are compressed, and every response carries security headers.
 import { createReadStream } from 'node:fs';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
@@ -9,7 +9,7 @@ import { randomBytes } from 'node:crypto';
 import { brotliCompressSync, gzipSync, constants as zlib } from 'node:zlib';
 import { extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ROLES, nationalDigits } from './public/careers/js/roles.js';
+import { ROLES, isRole, questionsOf, answerFields, isAnswered, nationalDigits } from './public/careers/js/roles.js';
 import { SECURITY_HEADERS, contentSecurityPolicy } from './security.mjs';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
@@ -36,7 +36,9 @@ const types = {
 };
 const COMPRESSIBLE = new Set(['.html', '.css', '.js', '.mjs', '.json', '.webmanifest', '.svg', '.txt', '.xml']);
 // Standalone pages served at clean URLs (the rest of the site is the hash-routed app).
-const CLEAN_PAGES = { '/careers': 'careers.html', '/member-id': 'member-id.html' };
+const CLEAN_PAGES = { '/careers': 'careers.html', '/membership': 'membership.html' };
+// Addresses that moved: the Member ID generator is now part of the Membership page.
+const MOVED = { '/member-id': '/membership', '/member-id.html': '/membership' };
 
 // Text files are kept in memory with compressed copies, rebuilt when the file changes. Images, fonts and
 // other binaries stream from disk.
@@ -96,7 +98,7 @@ async function handleApplication(req, res) {
   try { body = await readJson(req); }
   catch (e) { return sendJson(res, e.status || 400, { ok: false, error: e.status === 413 ? 'The upload is too large' : 'The request could not be read' }); }
 
-  const role = ROLES[body?.role];
+  const role = isRole(body?.role) ? ROLES[body.role] : null;
   if (!role) return sendJson(res, 400, { ok: false, error: 'Choose a role', fields: {} });
   const s = v => (typeof v === 'string' ? v.trim() : '');
   const a = body.about || {};
@@ -110,14 +112,13 @@ async function handleApplication(req, res) {
   if (s(a.cvLink) && !/^https?:\/\/[^\s/]+\.[^\s]+$/i.test(s(a.cvLink))) fields.cvLink = 'Enter a full link starting with https://';
 
   const answers = {};
-  for (const section of role.sections) {
-    for (const q of section.questions) {
-      const v = s(body.answers?.[q.id]);
-      if (q.max && v.length > q.max) fields[q.id] = `Keep your answer under ${q.max} characters`;
-      else if (q.required && !v) fields[q.id] = 'This question is required';
-      else if (q.type === 'choice' && v && !q.options.includes(v)) fields[q.id] = 'Choose an option';
-      answers[q.id] = v;
+  for (const q of questionsOf(body.role)) {
+    for (const f of answerFields(q)) {
+      const v = s(body.answers?.[f.id]);
+      if (v.length > f.max) fields[q.id] = `Keep each answer under ${f.max} characters`;
+      answers[f.id] = v;
     }
+    if (!fields[q.id] && q.required && !isAnswered(q, answers)) fields[q.id] = 'This question is required';
   }
 
   let cv = null;
@@ -172,9 +173,11 @@ createServer(async (req, res) => {
     catch (e) { console.error(e); return sendJson(res, 500, { ok: false, error: 'The application could not be saved. Please try again' }); }
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') { res.setHeader('Allow', 'GET, HEAD'); return plain(res, 405, 'Method not allowed'); }
-  // Clean URLs for the standalone pages (careers.html and member-id.html also work on any static host).
-  if (pathname.length > 1 && pathname.endsWith('/') && CLEAN_PAGES[pathname.slice(0, -1)]) {
-    res.writeHead(301, { ...SECURITY_HEADERS, Location: pathname.slice(0, -1) }); return res.end();
+  // Clean URLs for the standalone pages (careers.html and membership.html also work on any static host).
+  const bare = pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  if (MOVED[bare]) { res.writeHead(301, { ...SECURITY_HEADERS, Location: MOVED[bare] + url.search }); return res.end(); }
+  if (bare !== pathname && CLEAN_PAGES[bare]) {
+    res.writeHead(301, { ...SECURITY_HEADERS, Location: bare + url.search }); return res.end();
   }
 
   let file = CLEAN_PAGES[pathname] ? join(root, CLEAN_PAGES[pathname]) : join(root, normalize(pathname).replace(/^([/\\])+/, ''));

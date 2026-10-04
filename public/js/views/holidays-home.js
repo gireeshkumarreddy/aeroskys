@@ -131,7 +131,7 @@ export default async function holidaysHome(el) {
         </div>
         <div class="hd-custom-actions">
           <button type="button" class="btn btn-white btn-lg" data-hd-custom>${icon('sparkles')} Plan a custom holiday</button>
-          <a class="hd-custom-call" href="tel:${COMPANY.phone}">${icon('phone')} Or call ${COMPANY.phone}, 24/7</a>
+          <a class="hd-custom-call" href="tel:${COMPANY.phoneIntl}">${icon('phone')} Or call ${COMPANY.phone}, 24/7</a>
         </div>
       </div>
     </section>

@@ -70,7 +70,7 @@ const companyCard = () => html`<aside class="pg-company" aria-label="Company det
   <dl>
     <div><dt>${icon('pin')}Office</dt><dd>${COMPANY.address}</dd></div>
     <div><dt>${icon('mail')}Email</dt><dd><a class="link" href="mailto:${COMPANY.email}">${COMPANY.email}</a></dd></div>
-    <div><dt>${icon('phone')}Phone</dt><dd><a class="link" href="tel:${COMPANY.phone}">${COMPANY.phone}</a> · 24/7 support</dd></div>
+    <div><dt>${icon('phone')}Phone</dt><dd><a class="link" href="tel:${COMPANY.phoneIntl}">${COMPANY.phone}</a> · 24/7 support</dd></div>
   </dl>
 </aside>`;
 
@@ -99,7 +99,7 @@ export default async function page(el, ctx) {
         ${toc.length >= 3 ? html`<nav class="pg-toc" aria-label="On this page"><p class="pg-doc-nav-h">On this page</p><ol>${toc.map(t => html`<li><button type="button" data-pg-toc="${t.id}">${t.text}</button></li>`)}</ol></nav>` : ''}
         <div class="pg-doc-help">
           <p><b>Questions?</b> Our team is available 24/7.</p>
-          <a href="tel:${COMPANY.phone}">${icon('phone')} ${COMPANY.phone}</a>
+          <a href="tel:${COMPANY.phoneIntl}">${icon('phone')} ${COMPANY.phone}</a>
           <a href="mailto:${COMPANY.email}">${icon('mail')} ${COMPANY.email}</a>
         </div>
       </aside>

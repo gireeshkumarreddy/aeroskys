@@ -98,7 +98,7 @@ export default async function review(el, ctx) {
     <div class="co-card co-help">
       <div class="spread"><h3 class="h4" style="font-size:.95rem">Need Assistance? Talk to Our Experts</h3><span class="badge badge-green"><i class="co-live"></i>Available Now</span></div>
       <p class="small muted" style="margin:6px 0 12px">Get help with your booking before you pay.</p>
-      <div class="row gap-8"><a class="btn btn-light btn-sm" href="tel:${COMPANY.phone}">${icon('phone')} Call</a><a class="btn btn-light btn-sm" href="https://wa.me/91${COMPANY.phone}" target="_blank" rel="noopener">${icon('chat')} WhatsApp</a></div>
+      <div class="row gap-8"><a class="btn btn-light btn-sm" href="tel:${COMPANY.phoneIntl}">${icon('phone')} Call</a><a class="btn btn-light btn-sm" href="https://wa.me/${COMPANY.phoneIntl.slice(1)}" target="_blank" rel="noopener">${icon('chat')} WhatsApp</a></div>
     </div>`;
   };
 

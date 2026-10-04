@@ -185,7 +185,7 @@ export default async function visa(el, ctx) {
     $('[data-pg-dest-count]', root).textContent = term ? (list.length ? `${plural(list.length, 'destination')} found` : 'No destinations found') : `${POPULAR.length} popular destinations · ${ALL.length} in the form`;
     grid.innerHTML = String(list.length
       ? html`${list.map(destCard)}`
-      : html`<div class="pg-dest-empty">${icon('globe')}<p>We couldn’t find “${q.value.trim()}”. Send a visa query with the closest destination, or call us on <a class="link" href="tel:${COMPANY.phone}">${COMPANY.phone}</a>.</p><button type="button" class="btn btn-primary btn-sm" data-pg-assist="">Go to the visa query form</button></div>`);
+      : html`<div class="pg-dest-empty">${icon('globe')}<p>We couldn’t find “${q.value.trim()}”. Send a visa query with the closest destination, or call us on <a class="link" href="tel:${COMPANY.phoneIntl}">${COMPANY.phone}</a>.</p><button type="button" class="btn btn-primary btn-sm" data-pg-assist="">Go to the visa query form</button></div>`);
   };
   q.addEventListener('input', renderDest);
   renderDest();

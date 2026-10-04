@@ -232,7 +232,7 @@ export default async function packageView(el, ctx) {
 
       <aside class="hd-pkg-aside" aria-label="Enquire about ${p.name}">
         <div class="card hd-enq" id="hd-enquiry" data-hd-enq></div>
-        <p class="hd-enq-help">${icon('headset')}<span>Questions about this trip? Call <a class="link" href="tel:${COMPANY.phone}">${COMPANY.phone}</a> — 24/7 support.</span></p>
+        <p class="hd-enq-help">${icon('headset')}<span>Questions about this trip? Call <a class="link" href="tel:${COMPANY.phoneIntl}">${COMPANY.phone}</a> — 24/7 support.</span></p>
       </aside>
     </div>
 

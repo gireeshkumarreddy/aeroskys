@@ -85,24 +85,25 @@ Flight `item`: `{ trip, journeys:[{ from, to, date, itinerary, fare }], pax:{adt
 ## Careers page
 A separate static page, not part of the hash-routed app. The main site links to it with a normal link (`careers.html`), so the router ignores it. `server.mjs` also serves it at `/careers` (and redirects `/careers/` there).
 ```
-public/careers.html        the page: header, 9 sections, application host, footer, "Our story" dialog
+public/careers.html        the page: header, landing, open positions, life at Aeroskys, the role pages,
+                           how we hire, application host, membership band, footer, "Our story" dialog
 public/careers/careers.css one stylesheet (Inter, self-hosted in assets/fonts); prefix cr-
 public/careers/icons.svg   its own icon sprite; icon('name') in careers/js/ui.js points here
 public/careers/img/        WebP crops of the reference screens (rebuilt by tools/careers_images.py); hero-desktop
                            is the landing photo with its lettering lifted off, hero-script that lettering
-public/careers/js/shell.js page shell shared with member-id.html: sticky header, dropdowns, phone menu, reveals
-public/careers/js/app.js   section navigators, pay calculator, ladder tabs, fit check, HR carousel, hiring
-                           steps; starts the application
-public/careers/js/apply.js the application (role choice, steps, validation, drafts, history, CV, submission)
-public/careers/js/roles.js roles, sections and questions (shared with server.mjs); nationalDigits(cc, phone)
+public/careers/js/shell.js page shell: sticky header, dropdowns, phone menu, reveals
+public/careers/js/app.js   the two views (landing / one designation), role pages for positions 02 and 04–15,
+                           position bar, section navigators, pay calculator, ladder tabs, fit check, HR carousel,
+                           hiring steps; starts the application
+public/careers/js/apply.js the application: four steps on one panel, validation, drafts, progress, CV, submission
+public/careers/js/roles.js the 15 designations: summary, pay, tiers, questions and role-page details (shared with
+                           server.mjs); generated from the client's handoff file; nationalDigits(cc, phone)
 data/careers/              applications/<ref>.json, cv/<ref>.<ext>, index.json (clientId → ref); never served
-public/member-id.html      the Member ID generator, served at /member-id (Careers header, fields and footer)
-public/careers/js/member-id.js  its logic: validation, SHA-256 fingerprint → ASK-XXXX-XXXX-C, register
 ```
-- **Member ID generator.** The ID is derived from `SHA-256('AEROSKYS-MEMBER-V1|' + nationality + '|' + passport)`, so the same passport always gives the same ID and cannot be registered twice.
-  - The ID is eight base-32 characters plus a weighted check character.
-  - The register (`localStorage` key `aeroskys-member-register`) keeps the fingerprint, the last four characters, name, nationality, fee reference, expiry and issue time.
-  - Full passport numbers are never stored. The algorithm is the one in the supplied design file, so IDs match it exactly.
+- **Two views, one page.** `/careers` is the landing (hero, the 15 open positions grouped Operational / Growth / Executive, life at Aeroskys, how we hire). `/careers?position=<key>` is one designation: the position bar (breadcrumb, previous / next), the role page, how we hire and the application. The keys are the client's: `tag`, `tasa`, `hr`, `membership-growth`, `customer-support`, `tour-planner`, `accounts-executive`, `sales-director`, `rewards-director`, `cfo`, `group-executive`, `legal-counsel`, `investor-relations`, `ceo-acquisitions`, `airline-alliances`.
+  - Elements carry `data-show="home|role|tag|hr|generic"`; `app.js` hides what the current view does not use. An inline script in `<head>` adds `cr-role-view` when the URL has `?position=`, so the landing never flashes before a role page.
+  - Positions 01 (TAG Manager) and 03 (HR & Recruitment) keep their designed sections (`#roles`, `#the-role`, `#pay`, `#profile`; `#hr-role`). Every other designation is drawn into `#role` from `roles.js`: header and compensation card, then the details (`#role-details`).
+  - Choosing a position pushes `?position=<key>`; Back returns to the list with focus on the position just viewed (its scroll position is kept in `history.state.crScroll`). A link to a section of the other view switches view first. Old links from the one-role page (`#pay`, `#profile`, `#hr-role` …) open the designation they belong to; `#apply` on its own lands on the positions list.
 - **Stages.** Sections copied from a reference screen use `.cr-stage` with `--W/--H` (the screen's size). Children use `.cr-abs` with `--x/--y/--w/--h` (the reference's own pixels) and `.cr-fs` with `--fs` (font size in reference pixels), so the composition scales with the page. Stage text stays at 11px or larger; only small uppercase labels, and the role-intro cards on phones, go down to 9px.
   - Below 1200px the stages switch to stacked layouts designed per section.
   - The role-introduction composition is the exception: it keeps its layout at every width.
@@ -116,29 +117,38 @@ public/careers/js/member-id.js  its logic: validation, SHA-256 fingerprint → A
   - `[data-reveal]` elements animate in once, at about 85% of the viewport (`data-reveal="left|right|scale|fade"`, stagger with `--d`).
   - `.cr-draw` paths draw in, and floating cards use the `translate` property, so they never fight the reveal transform.
   - `prefers-reduced-motion` switches all of it off.
-- **Application history.**
-  - Each step change pushes `{ crApply, role, step, from }` with the URL `#apply`.
-  - Before leaving an entry that has no application state (for example one added by an `#apply` link), the entry is stamped with the current step.
-  - A role switch inside the form gets its own entry.
-  - The in-page Back button uses `history.back()` when the previous entry is the previous step.
-  - `popstate` restores role and step, but never a step the current application hasn't reached.
-- **Drafts.** `localStorage` keys `aeroskys:careers:application:v1` (the draft) and `aeroskys:careers:submitted:v1` (the last reference). A draft is written only after a real change.
+- **Application.** The same four steps for every designation, on one scrollable panel: 01 designation & pay structure (from `roles.js`), 02 About you, 03 the role's questions, 04 CV, review, declaration and submit. A progress card (a sticky bar on phones) follows the step in view.
+  - Question kinds: `text`, `pair` (two short answers, both needed when required) and `table` (the HR KPI table: a row of KPI / Lean / Over-target / Time to lean / Time to over-target per entry, plus a note; one complete row needed). One question per designation is the primary evaluation (`core`).
+- **Drafts.** `localStorage` key `aeroskys:careers:application:v2`: About you (shared by every designation) and the answers per designation. A v1 draft from the three-role form is carried over (About you and the TAG Manager answers). `aeroskys:careers:submitted:v1` keeps the last reference. A draft is written only after a real change.
 - **Endpoint contract** (`POST /api/careers/applications`, `Content-Type: application/json`, max 16 MB):
   ```js
   // request
   { clientId,                       // uuid made per application; a repeat returns the same reference
-    role: 'tag'|'tasa'|'hr', roleTitle,
+    role: 'tag' | 'tasa' | … ,      // one of the 15 keys in roles.js
+    roleTitle,
     about: { name, email, cc: '+91', phone /* national digits */, location, cvLink, notice },
-    answers: { q01: '…', … },       // ids from roles.js
+    answers: { q1: '…', q1b: '…', … }, // every answer field of the role (answerFields() in roles.js)
     confirm: true, submittedAt,
     cv: null | { name, type, size, data /* base64 */ } }
   // responses
   201 { ok: true, reference: 'ASC-YYMMDD-XXXXXX', receivedAt }
   200 { ok: true, reference, duplicate: true }
-  400 { ok: false, error, fields: { name|email|…|q07|cv|confirm: 'message' } }   // shown next to each field
+  400 { ok: false, error, fields: { name|email|…|q7|cv|confirm: 'message' } }    // shown next to each field
   405 / 413 / 415 / 500 { ok: false, error }
   ```
 - **Caching.** Fonts and versioned URLs (`?v=…`) are cached for a year as immutable; everything else is sent `no-cache` with an ETag, so edits show up at once. Careers images, the icon sprite and the logo carry `?v=4` (`?v=5` for the two desktop landing files): raise it whenever one of them changes.
+
+## Membership page
+A separate static page like Careers, served at `/membership` (`/member-id`, the address of the earlier Member ID generator, redirects there). It is a port of the client's *Membership – Developer Handoff* file: its markup, its own stylesheet and typefaces, and its logic rewritten as plain DOM code.
+```
+public/membership.html             the page: header, landing, plans, benefits, status, join, register, footer,
+                                   test-mode checkout <dialog>
+public/membership/membership.css   its stylesheet (Barlow / Barlow Condensed, self-hosted in membership/fonts); prefix m-
+public/membership/membership.js    plans, GST breakdown, validation, fingerprint, Member IDs, checkout, register, CSV
+```
+- **Member ID.** `SHA-256('AEROSKYS-MEMBER-V1|' + nationality + '|' + passport)` identifies the passport, so one passport holds one ID; only the fingerprint and the last four characters are stored. IDs are `ASK-G<years>-XXX-XXXX-XXXX`: a per-plan serial scrambled by a fixed bijection mod 10¹⁰ plus a Luhn check digit (`aeroskys-member-seq-<plan>` in `localStorage`). An active passport gets its existing card back; an expired one renews under the same ID.
+- **GST.** 18% on top of the plan price; billing state Delhi (the supplier state) splits it CGST 9% + SGST 9%, any other state or "Outside India" is IGST 18%. The rate, supplier state and inclusive pricing are the `data-gst-rate`, `data-supplier-state` and `data-gst-inclusive` attributes on `#join`. Invoices are numbered `ASK/<FY>/000001` (`aeroskys-invoice-seq`).
+- **Register.** `localStorage` key `aeroskys-member-register` (the same key as the earlier page, whose IDs are migrated to the current series on load). In production the register, the serials and invoices belong on a server and payment goes to a licensed gateway; the checkout here is test mode.
 
 ## CSS conventions
 - Tokens in `css/base.css` (`--navy`, `--blue`, `--ink`, `--muted`, `--line`, `--wash`, `--r`, `--r-lg`, `--shadow-*`, `--serif`, `--ease`).

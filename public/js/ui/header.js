@@ -48,8 +48,8 @@ function headerHTML() {
       <a class="nav-link nav-careers" href="careers.html">${icon('users')}Careers<span class="nav-badge">Hiring</span></a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-util hide-m" href="#/find-booking">${icon('search')}<span class="util-label">Find Booking</span></a>
-      <a class="nav-util hide-m" href="tel:${COMPANY.phone}" aria-label="Call ${COMPANY.phone}">${icon('phone')}<span class="util-label">${COMPANY.phone}</span></a>
+      <a class="nav-util hide-m" href="#/find-booking" aria-label="Find Booking">${icon('search')}<span class="util-label">Find Booking</span></a>
+      <a class="nav-util hide-m" href="tel:${COMPANY.phoneIntl}" aria-label="Call ${COMPANY.phone}">${icon('phone')}<span class="util-label">${COMPANY.phone}</span></a>
       <span class="nav-sep" aria-hidden="true"></span>
       <div class="dropdown" data-dd="currency">
         <button type="button" class="nav-util currency-btn" data-dd-btn aria-expanded="false" aria-haspopup="true" aria-label="Currency: ${cur.code}"><span aria-hidden="true">${cur.symbol === '$' ? 'C$' : cur.symbol}</span><span class="cur-label">${cur.code}</span>${icon('chevron-down')}</button>
@@ -98,7 +98,7 @@ function drawerHTML() {
         </nav>
         <div class="drawer-support">
           <span class="eyebrow">24/7 Support</span>
-          <a class="btn btn-light btn-block" href="tel:${COMPANY.phone}">${icon('phone')} Call ${COMPANY.phone}</a>
+          <a class="btn btn-light btn-block" href="tel:${COMPANY.phoneIntl}">${icon('phone')} Call ${COMPANY.phone}</a>
           <a class="btn btn-light btn-block" href="mailto:${COMPANY.email}">${icon('mail')} ${COMPANY.email}</a>
         </div>
       </div>

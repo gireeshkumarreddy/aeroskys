@@ -39,6 +39,20 @@ export function toast(message, { iconName = 'check-circle', timeout = 4200 } = {
   setTimeout(() => { el.classList.add('is-out'); setTimeout(() => el.remove(), 300); }, timeout);
 }
 
+/** Wide tables scroll sideways inside their box on small screens: while one does, it becomes a named,
+ *  keyboard-focusable region so it can be scrolled without a mouse. */
+export function scrollRegions(root = document) {
+  for (const box of root.querySelectorAll('.cr-table-wrap')) {
+    if (box.scrollWidth > box.clientWidth + 1) {
+      box.tabIndex = 0;
+      box.setAttribute('role', 'region');
+      box.setAttribute('aria-label', box.querySelector('caption')?.textContent.trim() || 'Table');
+    } else if (box.hasAttribute('role')) {
+      box.removeAttribute('tabindex'); box.removeAttribute('role'); box.removeAttribute('aria-label');
+    }
+  }
+}
+
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 /** Keep Tab / Shift+Tab inside a container (used by the mobile menu). */
 export function trapTab(container, e) {

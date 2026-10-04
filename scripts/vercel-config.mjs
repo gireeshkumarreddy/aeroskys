@@ -21,16 +21,21 @@ export async function buildVercelConfig() {
     $schema: 'https://openapi.vercel.sh/vercel.json',
     framework: null,
     outputDirectory: 'public',
-    cleanUrls: true,                         // /careers and /member-id serve their pages, as on the Node server
+    cleanUrls: true,                         // /careers and /membership serve their pages, as on the Node server
     trailingSlash: false,                    // /careers/ redirects to /careers
     // extension-less paths fall back to the app, which uses hash routes; /api/* stays a real 404.
     // With cleanUrls the app is addressed as "/" (a destination of /index.html would not resolve).
     rewrites: [{ source: '/((?!api/)[^.]*)', destination: '/' }],
+    // the Member ID generator became part of the Membership page (4 Oct 2026)
+    redirects: [
+      { source: '/member-id', destination: '/membership', permanent: true },
+      { source: '/member-id.html', destination: '/membership', permanent: true }
+    ],
     headers: [
       { source: '/(.*)', headers: always },
-      { source: '/((?!careers$|member-id$)[^.]*)', headers: [{ key: 'Content-Security-Policy', value: await csp('index.html') }] },
+      { source: '/((?!careers$|membership$)[^.]*)', headers: [{ key: 'Content-Security-Policy', value: await csp('index.html') }] },
       { source: '/careers', headers: [{ key: 'Content-Security-Policy', value: await csp('careers.html') }] },
-      { source: '/member-id', headers: [{ key: 'Content-Security-Policy', value: await csp('member-id.html') }] },
+      { source: '/membership', headers: [{ key: 'Content-Security-Policy', value: await csp('membership.html') }] },
       { source: '/assets/fonts/(.*)', headers: [{ key: 'Cache-Control', value: IMMUTABLE }] },
       { source: '/(.*)', has: [{ type: 'query', key: 'v' }], headers: [{ key: 'Cache-Control', value: IMMUTABLE }] }
     ]

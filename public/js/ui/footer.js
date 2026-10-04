@@ -26,7 +26,7 @@ export function renderFooter() {
         <div class="footer-contact">
           <div>${icon('pin')}<span>${COMPANY.legal}<br>${COMPANY.address}</span></div>
           <a href="mailto:${COMPANY.email}">${icon('mail')}<span>${COMPANY.email}</span></a>
-          <a href="tel:${COMPANY.phone}">${icon('phone')}<span>${COMPANY.phone} · 24/7 support</span></a>
+          <a href="tel:${COMPANY.phoneIntl}">${icon('phone')}<span>${COMPANY.phone} · 24/7 support</span></a>
         </div>
       </div>
       <div class="footer-col"><h3>Bookings</h3><a href="#/">Flights</a><a href="#/hotels">Hotels</a><a href="#/holidays">Holiday</a><a href="#/bus">Bus</a><a href="#/find-booking">Find Booking</a><a href="#/offers">Offers</a></div>

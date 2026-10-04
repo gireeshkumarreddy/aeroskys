@@ -32,7 +32,7 @@ export default async function support(el) {
   mount(el, html`<div class="pg-view pg-support-view">
     ${pageBand({ eyebrow: 'Contact Us', title: 'We’re here to help, <em>24/7.</em>', text: 'Call, email or send us a message about any booking or travel question. We’re available 24/7.', trail: [{ label: 'Contact Us' }], art: 'headset', contact: false })}
     <div class="wrap pg-lift pg-cc-grid">
-      <a class="pg-cc" href="tel:${COMPANY.phone}"><span class="pg-cc-ic" aria-hidden="true">${icon('phone')}</span><span><small>Call us</small><b>${COMPANY.phone}</b><span>24/7 support</span></span></a>
+      <a class="pg-cc" href="tel:${COMPANY.phoneIntl}"><span class="pg-cc-ic" aria-hidden="true">${icon('phone')}</span><span><small>Call us</small><b>${COMPANY.phone}</b><span>24/7 support</span></span></a>
       <a class="pg-cc" href="mailto:${COMPANY.email}"><span class="pg-cc-ic" aria-hidden="true">${icon('mail')}</span><span><small>Email</small><b>${COMPANY.email}</b><span>Bookings, changes and refunds</span></span></a>
       <div class="pg-cc"><span class="pg-cc-ic" aria-hidden="true">${icon('pin')}</span><span><small>Office Address</small><b>${COMPANY.address}</b><span>${COMPANY.legal}</span></span></div>
     </div>

@@ -15,21 +15,24 @@ Node 18+ and nothing to install. `public/` is a static site: any static host wor
 
 ## Deploying to Vercel
 
-The review copy is live at **https://aeroskys.vercel.app**, with the Careers page at **https://aeroskys.vercel.app/careers**. It is the Vercel project `aeroskys` in the `gireesh3` team.
+The review copy is live at **https://aeroskys.vercel.app**. It is the Vercel project `aeroskys` in the `gireesh3` team.
+
+- **Careers:** https://aeroskys.vercel.app/careers (one designation: `/careers?position=<key>`, e.g. `/careers?position=membership-growth`)
+- **Membership:** https://aeroskys.vercel.app/membership (the old `/member-id` address redirects here)
 
 ```bash
-npm run vercel:config        # only after editing an inline <script> in index.html or careers.html
+npm run vercel:config        # only after editing an inline <script> in index.html, careers.html or membership.html
 npx vercel deploy --prod     # a manual deploy from this folder (pushes to main deploy on their own)
 ```
 
 - **What is uploaded:** only `public/` and `vercel.json` (see `.vercelignore`), so applicant data, `.env` files and tools never leave this machine.
 - **Same behaviour as `server.mjs`:**
-  - `/careers` serves the Careers page, and `/careers/` redirects there.
+  - `/careers` and `/membership` serve their pages, and `/careers/` and `/membership/` redirect there. `/member-id` redirects to `/membership`.
   - Other extension-less paths open the app; missing files return a real 404.
   - The security headers, including the Content-Security-Policy, come from the shared `security.mjs`, and `npm run check` fails if `vercel.json` falls out of step with the pages.
   - Fonts and `?v=` assets are cached for a year.
 - **Not indexed:** the copy is sent with `X-Robots-Tag: noindex`. Set `NOINDEX = false` in `scripts/vercel-config.mjs` when it becomes the live site.
-- **Applications:** Vercel runs no `server.mjs`, so `POST /api/careers/applications` returns 404 there. The form then shows "Online submission isn't available on this version of the site", with **Download my answers**, **Email us instead** and **Try again**, and the answers stay saved on the applicant's device.
+- **Applications:** Vercel runs no `server.mjs`, so `POST /api/careers/applications` returns 404 there. The form then shows "Online submission isn't available on this version of the site yet", with **Download my answers**, **Email us instead** and **Try again**, and the answers stay saved on the applicant's device.
   - To accept applications on Vercel, add a serverless function backed by storage (for example Vercel Blob or a database), or post to your ATS.
   - That is also where the data-handling decision below applies.
 - **Automatic deploys (connected 30 Sep 2026):** the project is connected to `gireeshkumarreddy/aeroskys`.
@@ -88,7 +91,7 @@ These items were imported as they appear on aeroskys.com and need a business dec
 4. The Handpicked tabs file **Krabi Phuket** under Domestic and **Tirupati Balaji** under International. The prototype files them by actual region.
 5. Top-search links use airport codes **WTC** ("New York") and **CIR** ("Cairo"), which are wrong (WTC is not a New York airport; CIR is Cairo, Illinois). The prototype uses JFK and CAI.
 6. Footer route labels on the live site are reversed relative to their links (e.g. "Dehra Dun to DELHI" searches DEL→DED).
-7. The WhatsApp button uses the main support number (9526956609). Confirm the WhatsApp Business number.
+7. The WhatsApp button uses the main support number (+91 79703 36785 since 4 Oct 2026). Confirm the WhatsApp Business number.
 8. The FAQ on the live Holidays page is empty. The prototype's FAQs are written from the published policies.
 9. Currency conversion rates (₹61.2 per CAD, ₹112.6 per GBP) are indicative placeholders.
 
@@ -100,13 +103,19 @@ Assumptions made in the prototype where the live site gave no answer:
 13. The **Visa** destination list is authored and shows no fees. Confirm the countries and fees you want to advertise.
 14. Hotel and bus **cancellation charges** are prototype rules. Hotels: free until the rate's deadline, then 25%. Buses: 10% / 25% / 50% charge by time to departure (48+ h / 24–48 h / 6–24 h), no refund within 6 hours. Replace them with the supplier rules.
 
-## Careers page (added 29 Sep 2026)
-A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Reference* document, for three roles: **AeroForce TAG Manager**, **TASA – Travel Sales Associate** and **HR & Recruitment Specialist**.
+## Careers page (added 29 Sep 2026, revised 4 Oct 2026)
+A dedicated page for the **15 open designations** in the client's Careers handoff file (4 Oct 2026): Operational — AeroForce TAG Manager, TASA — Travel Sales Associate, HR & Recruitment Specialist; Growth — Membership Growth Manager; Executive — eleven leadership and specialist roles from Customer Support & Experience Manager to Head of Airline Alliances & Block Seat Contracts. The visual design is the one rebuilt from the *Aeroskys Client Design Reference* document.
 
 - **Open it:** `http://localhost:3000/careers` with `npm start`, or `public/careers.html` on any static host.
+- **One designation:** `/careers?position=<key>` opens that role directly, for example `/careers?position=membership-growth` or `/careers?position=cfo` (all 15 keys are listed in `ARCHITECTURE.md`).
 - **From the main site:** "Careers" in the top navigation (with a "Hiring" badge on wide screens), in the phone menu, and in the footer.
 - **Back to the main site:** "← Back to Aeroskys.com" above the header, the logo, and the footer links.
-- **Sections:** header, a full-screen landing, role introduction, Building the Direction, What the Job Actually Is, Performance Pay (with a pay calculator and the six-month ladder), Candidate Profile (a tick-list self-check), HR & Recruitment Specialist, How We Hire (four steps), then the application (About You → the role's questions → final details and CV).
+- **The journey (the same for every designation):**
+  1. **Open positions:** all 15, grouped Operational / Growth / Executive, each with its number, engagement, reporting line, hire timing, pay and a "View & apply" button. The header's "Open positions" menu lists them too.
+  2. **The role page:** the designation's own page — summary, compensation, and its details (duties, KPIs, pay tables, bonus or commission structure, career ladder, candidate profile). A position bar gives the breadcrumb and the previous / next position.
+  3. **How we hire:** the four steps (written application, commercial review, role plan, offer & benchmark).
+  4. **The application, on one scrollable panel:** 01 designation & pay structure → 02 About you → 03 the role's own questions (the primary-evaluation question marked) → 04 CV, review and submit. A progress card follows the step in view (a slim sticky bar on phones).
+- **Landing sections:** the full-screen landing, Open positions, Life at Aeroskys (Building the Direction), How We Hire, and the Membership band.
 
 **Full-screen layout**
 - **Landing:** on laptops, desktops and landscape tablets (1024px and wider), the landing fills the first screen from edge to edge.
@@ -123,7 +132,7 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
 - **Storage:** each application is saved to `data/careers/applications/<reference>.json`, and the CV to `data/careers/cv/`. That folder is outside `public/` and is never served.
 - **Success message:** the "Application received" screen appears only when the server returns a reference.
 - **When it fails:** the page says so and offers **Try again**, **Download my answers** and **Email us instead**. On a static host with no endpoint, it says online submission isn't available.
-- **Drafts:** answers are saved on the applicant's device as they type (not the CV file). The browser's Back and Forward buttons move between form steps.
+- **Drafts:** answers are saved on the applicant's device as they type (not the CV file), separately for each designation; About you is shared. The browser's Back button returns from a role page to the positions list.
 - **Integration point:** to use an ATS or HR system, replace the endpoint. The request and response format is in `ARCHITECTURE.md`.
 
 **Images**
@@ -138,43 +147,27 @@ A dedicated page, rebuilt from the 14 screens in the *Aeroskys Client Design Ref
   - The photos look soft on those screens and on high-density (Retina) screens.
 - **To sharpen them:** send the original photographs. Replace the files in `public/careers/img/`, keeping the same names and crops, and raise the `?v=` number on their URLs in `careers.html` (currently `?v=4`, or `?v=5` for the two desktop landing files) so browsers fetch the new versions.
 
-**Member ID generator (added 30 Sep 2026)**
-- **Where:** the page is `/member-id` (`public/member-id.html`), built from the Careers page components. It contains everything in the supplied design:
-  - traveller details (full name, passport nationality, passport number, expiry date, ₹499 fee reference);
-  - the Member ID card (status, nationality, the ID, member, masked passport, issue time, fee reference, plan);
-  - the register of issued IDs, with search, CSV export and revoke;
-  - the privacy and legal note.
-- **Rules:** one Member ID per passport. The ID comes from a one-way fingerprint of nationality and passport number, so the same passport always returns the same ID (`ASK-XXXX-XXXX-X`), and a second request shows "Already a member".
-  - Passport numbers are never stored; only the fingerprint and the last four characters are kept.
-  - The rules and messages match the file, and the IDs are identical to the ones it produces.
-- **On the Careers page (kept subtle):**
-  - a "Member ID" link in the top bar;
-  - a slim Membership band before the footer;
-  - a footer link;
-  - a "Membership" group in the phone menu.
-  The main navigation is unchanged.
-- **Brand casing:** the file writes "AeroSkys"; the new text follows the Careers page, which writes "Aeroskys".
+**Membership page (revamped 4 Oct 2026)**
+- **Where:** `/membership` (`public/membership.html`, with `public/membership/`), its own page so the white-label site can link to it on its own. It replaces the Member ID generator of 30 Sep (`/member-id` now redirects here).
+- **Built from** the client's *AeroSkys Membership – Developer Handoff* file: the same sections, wording, layout and typefaces (Barlow and Barlow Condensed, self-hosted from the file):
+  - the navy landing ("Travel as a member", from ₹333 a year);
+  - the three plans (₹499 for 1 year, ₹699 for 2 years, ₹999 for 3 years, plus GST), each with "Choose";
+  - benefits (₹0 convenience fee, 9 passengers, 3 ways to travel, 1 ID per passport);
+  - traveller status (Member, Silver, Gold, Platinum, Black) and the planned enhancements;
+  - **Issue a Member ID:** plan and traveller form with the live GST breakdown (CGST 9% + SGST 9% for Delhi billing, IGST 18% for other states and outside India), the test-mode checkout (UPI, card or net banking; `fail@test` simulates a decline), the membership card and its details;
+  - the register of issued IDs, with search, CSV export and revoke.
+- **Rules (as in the file):** one Member ID per passport (SHA-256 fingerprint of nationality and passport number; only the last four characters are kept). IDs follow `ASK-GY-XXX-XXXX-XXXX` (Y = plan years, Luhn check digit); a repeat for an active passport shows the existing card, an expired one renews under the same ID, and invoices are numbered `ASK/<financial year>/000001`. IDs issued on the earlier page are moved to the new series automatically.
+- **From the Careers page:** "Membership" in the header, utility bar, phone menu and footer, and the Membership band above the footer.
 
-**Careers content to confirm before launch**
-1. **TASA and HR questions.** The reference shows only the TAG Manager questions (used word for word). The TASA (7) and HR (9) questions were written for the prototype and need approval.
-2. **TASA career ladder.** It is marked "indicative" on the page; confirm the milestones.
-3. **Replaced statistics.** The reference showed figures we could not verify: 15,000+, 300+ and 50+ on the landing screen, "98% Partner Satisfaction" and "40% Cost Savings", and "AI matched 98%". They were replaced with facts from the role brief (pay, four hiring steps, the four travel services). Send real figures if you want them shown.
-4. **"Roughly two weeks"** from application to offer: confirm it holds for all three roles. The page says the four steps apply to the TAG Manager role.
-5. **Pay:**
-   - TAG Manager: ₹42,000 fixed base, plus a monthly bonus from ₹0 (below 70% of benchmark) to ₹1,00,000 (above 130%).
-   - HR: ₹15,000 a month plus a quarterly bonus.
-   - Confirm these can be published. The bonus is described as variable and not guaranteed.
-6. **Contact email.** customercare@aeroskys.com is used for questions and emailed applications. Send a careers address if you have one.
-7. **Replaced reference elements:**
-   - "Watch Story" and "Watch Overview" became "Read our story" and "View role details", because there is no video.
-   - The unrelated logo strip (Airbnb and others) became an "Also hiring" strip.
-   - The HR photo carousel is captioned with hiring stages (Sourcing, Screening and so on), not staff names.
-8. **Language menu** offers English only.
-9. **Data handling.** Applications are plain files on the server. Decide who can read them, how long they are kept, and add that to the privacy policy.
-10. **Member ID generator:**
-    - **Who can use it.** It issues and revokes memberships but is currently a public page, linked from the Careers page, and marked no-index. For real use, put it behind a staff login.
-    - **Where the register lives.** It is stored in each browser, so every device has its own list. A shared register needs a server and database.
-    - **Fee structure.** The supplied file notes that the membership fee structure is still subject to legal review.
+**Careers and Membership: to confirm before launch**
+1. **Online applications on the live site.** Vercel runs no server, so applications cannot be submitted there yet: applicants are offered "Download my answers" and "Email us instead" (customercare@aeroskys.com). Connect the form to your ATS or add a serverless endpoint with storage (see *Deploying to Vercel*).
+2. **Membership payments and the register.** The checkout is a **test mode** (no money is charged), and the Member ID register lives in each visitor's browser. For real sales, connect a licensed payment gateway and keep the register, ID counters and invoices on a server; put the register behind a staff login.
+3. **Hiring images.** The client is sending recruitment images through Instagram. They will be added to the Careers page once received (no stock or generated photos are used).
+4. **Pay and fee structure.** All pay figures, bonuses and commissions are published exactly as in the client's file and described as variable where they are; the file notes that the membership fee structure and the TASA classification remain subject to legal and tax review.
+5. **Contact.** The support number is **+91 79703 36785** everywhere (site, Careers, Membership, WhatsApp link); 9526956609 has been removed. customercare@aeroskys.com is used for questions and emailed applications. Send a careers address if you have one.
+6. **Search indexing.** Both pages are still sent as no-index. Set `NOINDEX = false` in `scripts/vercel-config.mjs` when they should appear in search results.
+7. **Data handling.** Applications are plain files on the server. Decide who can read them, how long they are kept, and add that to the privacy policy.
+8. **Language menu** offers English only. **Brand casing:** the client's files write "AeroSkys"; the Careers page keeps the "Aeroskys" casing of its original design.
 
 ## Quality checks (29 Sep 2026)
 Audited in Chrome with Lighthouse 13, axe-core (WCAG 2.2 AA) and html-validate. The audit scripts ran outside the project, so nothing is installed here.

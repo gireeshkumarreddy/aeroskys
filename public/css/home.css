@@ -99,7 +99,7 @@
 
 /* ---------- Top fares & routes ---------- */
 .fares-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.fare-card{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;background:#fff;border:1px solid var(--line-2);box-shadow:var(--shadow-xs);text-align:left;transition:transform .3s var(--ease),box-shadow .3s,border-color .2s}
+.fare-card{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;background:#fff;border:1px solid var(--line-2);box-shadow:var(--shadow-xs);text-align:left;transition:transform .3s var(--ease),box-shadow .3s,border-color .2s}
 .fare-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);border-color:var(--blue-line)}
 .fare-route{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);font-size:1rem;letter-spacing:-.01em}
 .fare-route svg.i{width:16px;height:16px;color:var(--faint)}

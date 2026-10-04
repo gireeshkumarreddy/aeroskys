@@ -27,7 +27,7 @@ export default async function webCheckin(el) {
           <span class="pg-wc-name"><b>${name}</b><small>${code}</small></span>
           <a class="btn btn-light btn-sm pg-wc-go" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="Web Checkin Now: ${name} (opens in a new tab)">Web Checkin Now ${icon('external')}</a>
         </li>`)}</ul>
-        <div class="pg-wc-empty" data-pg-wc-empty hidden>${icon('search')}<p>No airline matches that search. Try the airline name or its two-letter code, or call us on <a class="link" href="tel:${COMPANY.phone}">${COMPANY.phone}</a> for help.</p></div>
+        <div class="pg-wc-empty" data-pg-wc-empty hidden>${icon('search')}<p>No airline matches that search. Try the airline name or its two-letter code, or call us on <a class="link" href="tel:${COMPANY.phoneIntl}">${COMPANY.phone}</a> for help.</p></div>
       </section>
 
       <aside class="pg-aside">
