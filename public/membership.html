@@ -2,10 +2,10 @@
 <html lang="en-IN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AeroSkys Membership — Plans from ₹333 a year</title>
 <meta name="description" content="₹0 convenience fee on eligible flights, hotels and buses for up to nine passengers per booking. AeroSkys Membership plans from ₹333 a year, plus GST.">
-<meta name="theme-color" content="#f2f2f3">
+<meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AeroSkys">
 <meta property="og:locale" content="en_IN">
@@ -13,453 +13,453 @@
 <meta property="og:description" content="₹0 convenience fee on eligible flights, hotels and buses for up to nine passengers per booking. Plans from ₹333 a year, plus GST.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/brand/icon.svg" type="image/svg+xml">
-<link rel="preload" href="membership/fonts/barlow-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="membership/fonts/barlow-condensed-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="membership/fonts/barlow-condensed-500-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="membership/fonts/barlow-condensed-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="careers/careers.css">
 <link rel="stylesheet" href="membership/membership.css">
+<link rel="modulepreload" href="careers/js/shell.js">
+<link rel="modulepreload" href="careers/js/ui.js">
+<script>document.documentElement.classList.add('js')</script>
 <script type="module" src="membership/membership.js"></script>
 </head>
-<body>
-<a class="m-skip" href="#main">Skip to content</a>
+<body class="ms-page">
+<a class="cr-skip" href="#main">Skip to content</a>
 
-<header class="m-header" data-header>
-  <div class="m-brand">
-    <span class="m-wordmark">AeroSkys</span>
-    <span class="m-brand-sub">Membership</span>
+<!-- Header / navigation (the Careers page header, with the Membership sections) -->
+<nav class="cr-util" aria-label="Aeroskys.com">
+  <div class="cr-wrap cr-util-row">
+    <a class="cr-util-back" href="./#/"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-left"/></svg> Back to Aeroskys.com</a>
+    <span class="cr-util-end"><span class="cr-util-note">AeroSkys Membership · plans from ₹333 a year</span><a class="cr-util-link" href="careers"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-briefcase"/></svg> Careers</a></span>
   </div>
-  <button class="m-menu-btn" type="button" aria-expanded="false" aria-controls="m-nav" data-menu-btn><span class="m-menu-icon" aria-hidden="true"></span>Menu</button>
-  <nav class="m-nav" id="m-nav" aria-label="Membership">
-    <ul>
-      <li><a href="#plans">Plans</a></li>
-      <li><a href="#benefits">Benefits</a></li>
-      <li><a href="#status">Status</a></li>
-      <li><a href="#join">Join</a></li>
-      <li><a href="#register">Register</a></li>
-    </ul>
-  </nav>
+</nav>
+<header class="cr-header cr-header-simple" data-header data-menu-max="899">
+  <div class="cr-header-bar">
+    <a class="cr-logo" href="./#/" aria-label="Aeroskys — go to the main website"><img src="assets/brand/aeroskys-logo-480.webp?v=4" alt="Aeroskys" width="480" height="95"></a>
+    <nav class="cr-nav" aria-label="Membership page">
+      <a class="cr-nav-link" href="#plans" data-nav="plans">Plans</a>
+      <a class="cr-nav-link" href="#benefits" data-nav="benefits">Benefits</a>
+      <a class="cr-nav-link" href="#status" data-nav="status">Status</a>
+      <a class="cr-nav-link" href="#join" data-nav="join">Join</a>
+      <a class="cr-nav-link" href="#register" data-nav="register">Register</a>
+    </nav>
+    <span class="cr-bar-sep" aria-hidden="true"></span>
+    <a class="cr-btn cr-btn-primary cr-header-cta" href="#join"><span>Join<span class="cr-hide-xs"> now</span></span> <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
+    <button class="cr-menu-btn" type="button" aria-expanded="false" aria-controls="cr-mnav" aria-label="Open menu" data-menu-open><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-menu"/></svg></button>
+  </div>
 </header>
+
+<!-- Phone navigation -->
+<div class="cr-mnav" id="cr-mnav" role="dialog" aria-modal="true" aria-label="Membership menu" hidden>
+  <div class="cr-mnav-scrim" data-menu-close></div>
+  <div class="cr-mnav-panel">
+    <div class="cr-mnav-head">
+      <img src="assets/brand/aeroskys-logo-480.webp?v=4" alt="Aeroskys" width="480" height="95">
+      <button class="cr-icon-btn" type="button" aria-label="Close menu" data-menu-close><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-x"/></svg></button>
+    </div>
+    <nav class="cr-mnav-links" aria-label="Membership page menu">
+      <p class="cr-mnav-label">Membership</p>
+      <a href="#plans">Plans</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#status">Traveller status</a>
+      <a href="#join">Issue a Member ID</a>
+      <a href="#register">Register</a>
+      <p class="cr-mnav-label">Aeroskys</p>
+      <a href="careers">Careers</a>
+      <a href="./#/about">About Aeroskys</a>
+    </nav>
+    <div class="cr-mnav-foot">
+      <a class="cr-btn cr-btn-primary cr-btn-block" href="#join">Join now <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
+      <a class="cr-btn cr-btn-outline cr-btn-block" href="./#/"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-left"/></svg> Back to Aeroskys.com</a>
+    </div>
+  </div>
+</div>
 
 <main id="main" tabindex="-1">
 
-<section class="m-hero m-on-dark" aria-labelledby="hero-title">
-  <div>
-    <p class="m-hero-eyebrow">AeroSkys Membership</p>
-    <h1 id="hero-title">Travel as<br> a member.</h1>
-    <p class="m-hero-lede">Every eligible flight, hotel and bus booked without a convenience fee. One membership covers everyone on the booking — up to nine passengers.</p>
-  </div>
-  <div>
-    <p class="m-hero-from">Membership from</p>
-    <p class="m-hero-price">₹333<span> / YEAR</span></p>
-    <p class="m-hero-small">On the 3-year plan, plus GST. 1-year membership ₹499 plus GST.</p>
-    <dl class="m-facts">
-      <div class="m-fact"><dt>Convenience fee per booking</dt><dd>₹0</dd></div>
-      <div class="m-fact"><dt>Passengers covered per booking</dt><dd>Up to 9</dd></div>
-      <div class="m-fact"><dt>Flights · Hotels · Buses</dt><dd>One ID</dd></div>
-    </dl>
-    <div class="m-hero-ctas">
-      <a class="btn blueprint btn-hero btn-light" href="#plans">Choose your plan</a>
-      <a class="btn btn-hero btn-outline-light" href="#benefits">What’s included</a>
-    </div>
-  </div>
-</section>
-
-<section class="m-section" id="plans" aria-labelledby="plans-title">
-  <div class="m-intro">
-    <div>
-      <p class="m-eyebrow">The plans</p>
-      <h2 class="m-h2" id="plans-title">One membership.<br> Three horizons.</h2>
-    </div>
-    <p class="m-intro-text">Every plan carries the same privileges. The longer you commit, the less each year costs — and the longer your Member ID stays active without renewal.</p>
-  </div>
-
-  <ul class="m-plans">
-    <li class="card blueprint m-plan m-plan--1">
-      <div class="m-plan-head"><h3 class="m-plan-name">1 Year</h3></div>
-      <div>
-        <p class="m-plan-price">₹499</p>
-        <p class="m-plan-sub">₹499 per year · renews at expiry · plus GST</p>
+<!-- Landing -->
+<section class="ms-hero" id="top" aria-labelledby="hero-title">
+  <div class="cr-wrap ms-hero-grid">
+    <div class="ms-hero-copy">
+      <p class="cr-eyebrow is-crimson" data-reveal>AeroSkys Membership</p>
+      <h1 id="hero-title" class="ms-hero-title" data-reveal style="--d:.06s">Travel as<br><span class="is-crimson">a member.</span></h1>
+      <svg class="ms-swoosh" viewBox="0 0 320 24" aria-hidden="true" focusable="false"><path d="M4 20 C 90 4, 220 2, 316 14"/></svg>
+      <p class="cr-lead" data-reveal style="--d:.12s">Every eligible flight, hotel and bus booked without a convenience fee. One membership covers everyone on the booking — up to nine passengers.</p>
+      <div class="cr-cta-row" data-reveal="left" style="--d:.2s">
+        <a class="cr-btn cr-btn-primary cr-btn-lg" href="#plans">Choose your plan <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-right"/></svg></a>
+        <a class="cr-btn cr-btn-outline cr-btn-lg" href="#benefits">What’s included</a>
       </div>
-      <ul class="m-plan-list">
-        <li><span class="m-plus" aria-hidden="true">+</span><span>₹0 convenience fee on eligible flights, hotels and buses</span></li>
-        <li><span class="m-plus" aria-hidden="true">+</span><span>Up to 9 passengers on every booking</span></li>
-        <li><span class="m-plus" aria-hidden="true">+</span><span>Priority access to new member benefits as they are introduced</span></li>
+      <ul class="ms-hero-points" aria-label="At a glance" data-reveal style="--d:.26s">
+        <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-plane"/></svg>Flights · Hotels · Buses</li>
+        <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-users"/></svg>Up to 9 passengers</li>
+        <li><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-id-card"/></svg>One Member ID</li>
       </ul>
-      <button class="btn btn-secondary btn-plan" type="button" data-choose="1y">Choose 1 Year</button>
-    </li>
-
-    <li class="card blueprint m-plan m-plan--2">
-      <div class="m-plan-head"><h3 class="m-plan-name">2 Years</h3></div>
-      <div>
-        <p class="m-plan-price">₹699</p>
-        <p class="m-plan-sub">₹350 per year · save ₹299 against two 1-year plans · plus GST</p>
-      </div>
-      <ul class="m-plan-list">
-        <li><span class="m-plus" aria-hidden="true">+</span><span>₹0 convenience fee on eligible flights, hotels and buses</span></li>
-        <li><span class="m-plus" aria-hidden="true">+</span><span>Up to 9 passengers on every booking</span></li>
-        <li><span class="m-plus" aria-hidden="true">+</span><span>Priority access to new member benefits as they are introduced</span></li>
-      </ul>
-      <button class="btn btn-secondary btn-plan" type="button" data-choose="2y">Choose 2 Years</button>
-    </li>
-
-    <li class="card blueprint m-plan m-plan--3">
-      <div class="m-plan-head"><h3 class="m-plan-name">3 Years</h3><span class="tag tag-accent">Best value</span></div>
-      <div>
-        <p class="m-plan-price">₹999</p>
-        <p class="m-plan-sub">₹333 per year · save ₹498 against three 1-year plans · plus GST</p>
-      </div>
-      <ul class="m-plan-list">
-        <li><span class="m-plus" aria-hidden="true">+</span><span>₹0 convenience fee on eligible flights, hotels and buses</span></li>
-        <li><span class="m-plus" aria-hidden="true">+</span><span>Up to 9 passengers on every booking</span></li>
-        <li><span class="m-plus" aria-hidden="true">+</span><span>Priority access to new member benefits as they are introduced</span></li>
-        <li><span class="m-plus" aria-hidden="true">+</span><span>Three full years before your first renewal</span></li>
-      </ul>
-      <button class="btn btn-primary blueprint btn-plan" type="button" data-choose="3y">Choose 3 Years</button>
-    </li>
-  </ul>
-  <p class="m-small m-small--note">Prices exclude GST at 18%, which is added at checkout and shown on your tax invoice. Membership fees are one-time per plan period and renew at expiry. ₹0 convenience fee applies to eligible bookings; supplier fares, taxes and airline or hotel charges still apply.</p>
-</section>
-
-<section class="m-section" id="benefits" aria-labelledby="benefits-title">
-  <p class="m-eyebrow">Included from day one</p>
-  <h2 class="m-h2 m-h2--benefits" id="benefits-title">Not cheaper. Better.</h2>
-  <ul class="m-benefits">
-    <li class="m-benefit">
-      <p class="m-benefit-num">₹0</p>
-      <h3 class="m-benefit-title">Convenience fee</h3>
-      <p class="m-benefit-text">The ₹399 per-booking convenience fee is waived on every eligible flight, hotel and bus booking — from your very first one.</p>
-    </li>
-    <li class="m-benefit">
-      <p class="m-benefit-num">9</p>
-      <h3 class="m-benefit-title">Passengers per booking</h3>
-      <p class="m-benefit-text">Travelling alone or with the whole family, one membership covers everyone on the booking.</p>
-    </li>
-    <li class="m-benefit">
-      <p class="m-benefit-num">3</p>
-      <h3 class="m-benefit-title">Ways to travel</h3>
-      <p class="m-benefit-text">Flights, hotels and buses under a single Member ID, on a single account.</p>
-    </li>
-    <li class="m-benefit">
-      <p class="m-benefit-num">1</p>
-      <h3 class="m-benefit-title">ID, tied to your passport</h3>
-      <p class="m-benefit-text">Issued once, verified against your passport, and kept for life — renewals keep the same Member ID.</p>
-    </li>
-  </ul>
-</section>
-
-<section class="m-section" id="status" aria-labelledby="status-title">
-  <div class="m-intro">
-    <div>
-      <p class="m-eyebrow">Traveller status</p>
-      <h2 class="m-h2" id="status-title">Earned.<br> Never bought.</h2>
     </div>
-    <p class="m-intro-text">Membership is where it begins. As you travel, your status rises — on what you book, not what you pay for. The highest tier, AeroSkys Black, is by qualification only.</p>
+    <div class="ms-hero-media" data-reveal="fade">
+      <figure class="ms-hero-photo"><img src="membership/img/plane.webp" width="531" height="625" alt="A white airliner above soft clouds" decoding="async" fetchpriority="high"></figure>
+      <div class="ms-price" role="group" aria-labelledby="price-k">
+        <p class="ms-price-k" id="price-k">Membership from</p>
+        <p class="ms-price-fig">₹333 <span>/ year</span></p>
+        <p class="ms-price-line">On the 3-year plan, plus GST. 1-year membership ₹499 plus GST.</p>
+        <dl class="ms-price-rows">
+          <div><dt>Convenience fee per booking</dt><dd class="is-coral">₹0</dd></div>
+          <div><dt>Passengers covered per booking</dt><dd>Up to 9</dd></div>
+          <div><dt>Flights · Hotels · Buses</dt><dd>One ID</dd></div>
+        </dl>
+      </div>
+    </div>
   </div>
-
-  <ol class="m-tiers">
-    <li class="m-tier">
-      <p class="m-tier-n">01</p>
-      <h3 class="m-tier-name">Member</h3>
-      <p class="m-tier-text">From the day you join, on any plan.</p>
-    </li>
-    <li class="m-tier">
-      <p class="m-tier-n">02</p>
-      <h3 class="m-tier-name">Silver</h3>
-      <p class="m-tier-text">Earned through regular annual booking activity.</p>
-    </li>
-    <li class="m-tier">
-      <p class="m-tier-n">03</p>
-      <h3 class="m-tier-name">Gold</h3>
-      <p class="m-tier-text">For frequent travellers across flights, hotels and buses.</p>
-    </li>
-    <li class="m-tier">
-      <p class="m-tier-n">04</p>
-      <h3 class="m-tier-name">Platinum</h3>
-      <p class="m-tier-text">For members whose travel defines their year.</p>
-    </li>
-    <li class="m-tier m-tier--black">
-      <p class="m-tier-n">05 · By qualification</p>
-      <h3 class="m-tier-name">Black</h3>
-      <p class="m-tier-text">Earned on trips, spend, tenure and referrals.</p>
-    </li>
-  </ol>
-
-  <h3 class="m-h3-lg">Your membership keeps getting better.</h3>
-  <p class="m-lede">Enjoy priority access to new AeroSkys member benefits as they are introduced, with exclusive member-only pricing on selected premium services, upgrades and experiences.</p>
-  <ul class="m-roadmap">
-    <li class="card blueprint m-road">
-      <h4 class="m-road-title">Month 3</h4>
-      <p class="m-road-text">Member-only fares shown beside the public fare, and rewards for introducing new members.</p>
-    </li>
-    <li class="card blueprint m-road">
-      <h4 class="m-road-title">Month 6</h4>
-      <p class="m-road-text">Family membership, the Member Price Promise and offers shaped around the way you travel.</p>
-    </li>
-    <li class="card blueprint m-road">
-      <h4 class="m-road-title">Month 9</h4>
-      <p class="m-road-text">Traveller status goes live — Silver, Gold and Platinum earned on booking activity.</p>
-    </li>
-    <li class="card blueprint m-road">
-      <h4 class="m-road-title">Year 1</h4>
-      <p class="m-road-text">AeroSkys Black, the Travel Wallet — savings, rewards and credits in one place — and partner privileges.</p>
-    </li>
-  </ul>
-  <p class="m-small m-small--top">Planned enhancements. Benefits, qualification rules and timing may change and will be published before launch.</p>
 </section>
 
-<section class="m-section" id="join" aria-labelledby="join-title" data-gst-rate="18" data-supplier-state="Delhi" data-gst-inclusive="false">
-  <div class="m-intro">
-    <div>
-      <p class="m-eyebrow">Join</p>
-      <h2 class="m-h2" id="join-title">Issue a Member ID</h2>
+<!-- Plans -->
+<section class="cr-section ms-plans-sec" id="plans" aria-labelledby="plans-title">
+  <div class="cr-wrap">
+    <div class="ms-head">
+      <div>
+        <p class="cr-eyebrow is-crimson" data-reveal>The plans</p>
+        <h2 id="plans-title" class="cr-h1" data-reveal style="--d:.05s">One membership.<br><span class="is-blue">Three horizons.</span></h2>
+      </div>
+      <p class="cr-lead" data-reveal style="--d:.1s">Every plan carries the same privileges. The longer you commit, the less each year costs — and the longer your Member ID stays active without renewal.</p>
     </div>
-    <p class="m-intro-text m-intro-text--wide">One Member ID per passport. The same passport and nationality always return the same ID; an expired membership is renewed under it. Passport numbers are never stored — only a one-way fingerprint and the last four characters.</p>
+    <ul class="ms-plans">
+      <li class="ms-plan" data-reveal>
+        <p class="ms-plan-name">1 Year</p>
+        <p class="ms-plan-price">₹499</p>
+        <p class="ms-plan-sub">₹499 per year · renews at expiry · plus GST</p>
+        <ul class="cr-plus-list ms-plan-list">
+          <li>₹0 convenience fee on eligible flights, hotels and buses</li>
+          <li>Up to 9 passengers on every booking</li>
+          <li>Priority access to new member benefits as they are introduced</li>
+        </ul>
+        <button class="cr-btn cr-btn-outline ms-plan-btn" type="button" data-choose="1y">Choose 1 Year</button>
+      </li>
+      <li class="ms-plan" data-reveal style="--d:.08s">
+        <p class="ms-plan-name">2 Years</p>
+        <p class="ms-plan-price">₹699</p>
+        <p class="ms-plan-sub">₹350 per year · <b>save ₹299</b> against two 1-year plans · plus GST</p>
+        <ul class="cr-plus-list ms-plan-list">
+          <li>₹0 convenience fee on eligible flights, hotels and buses</li>
+          <li>Up to 9 passengers on every booking</li>
+          <li>Priority access to new member benefits as they are introduced</li>
+        </ul>
+        <button class="cr-btn cr-btn-outline ms-plan-btn" type="button" data-choose="2y">Choose 2 Years</button>
+      </li>
+      <li class="ms-plan is-best" data-reveal style="--d:.16s">
+        <span class="ms-ribbon">Best value</span>
+        <p class="ms-plan-name">3 Years</p>
+        <p class="ms-plan-price">₹999</p>
+        <p class="ms-plan-sub">₹333 per year · <b>save ₹498</b> against three 1-year plans · plus GST</p>
+        <ul class="cr-plus-list ms-plan-list">
+          <li>₹0 convenience fee on eligible flights, hotels and buses</li>
+          <li>Up to 9 passengers on every booking</li>
+          <li>Priority access to new member benefits as they are introduced</li>
+          <li>Three full years before your first renewal</li>
+        </ul>
+        <button class="cr-btn ms-plan-btn ms-btn-light" type="button" data-choose="3y">Choose 3 Years</button>
+      </li>
+    </ul>
+    <p class="ms-note">Prices exclude GST at 18%, which is added at checkout and shown on your tax invoice. Membership fees are one-time per plan period and renew at expiry. ₹0 convenience fee applies to eligible bookings; supplier fares, taxes and airline or hotel charges still apply.</p>
   </div>
+</section>
 
-  <noscript><p class="m-noscript">Issuing a Member ID needs JavaScript: the GST breakdown, the test checkout and your membership card all run in the browser. Please turn JavaScript on and reload this page, or call us on <a href="tel:+917970336785">+91&nbsp;79703&nbsp;36785</a>.</p></noscript>
+<!-- Benefits -->
+<section class="cr-section ms-benefits-sec" id="benefits" aria-labelledby="benefits-title">
+  <div class="cr-wrap">
+    <p class="cr-eyebrow is-crimson" data-reveal>Included from day one</p>
+    <h2 id="benefits-title" class="cr-h1" data-reveal style="--d:.05s">Not cheaper. <span class="is-blue">Better.</span></h2>
+    <ul class="ms-benefits">
+      <li class="ms-benefit is-coral" data-reveal><p class="ms-benefit-num">₹0</p><h3 class="ms-benefit-title">Convenience fee</h3><p>The ₹399 per-booking convenience fee is waived on every eligible flight, hotel and bus booking — from your very first one.</p></li>
+      <li class="ms-benefit is-blue" data-reveal style="--d:.06s"><p class="ms-benefit-num">9</p><h3 class="ms-benefit-title">Passengers per booking</h3><p>Travelling alone or with the whole family, one membership covers everyone on the booking.</p></li>
+      <li class="ms-benefit is-mint" data-reveal style="--d:.12s"><p class="ms-benefit-num">3</p><h3 class="ms-benefit-title">Ways to travel</h3><p>Flights, hotels and buses under a single Member ID, on a single account.</p></li>
+      <li class="ms-benefit is-lav" data-reveal style="--d:.18s"><p class="ms-benefit-num">1</p><h3 class="ms-benefit-title">ID, tied to your passport</h3><p>Issued once, verified against your passport, and kept for life — renewals keep the same Member ID.</p></li>
+    </ul>
+  </div>
+</section>
 
-  <div class="m-join-grid m-js">
-    <form class="card blueprint m-form" novalidate aria-labelledby="form-title" data-form>
-      <div class="m-step-head"><span class="m-step-n" aria-hidden="true">01</span><h3 class="m-step-title" id="form-title">Plan &amp; traveller</h3></div>
+<!-- Traveller status -->
+<section class="cr-section ms-status-sec" id="status" aria-labelledby="status-title">
+  <div class="cr-wrap">
+    <div class="ms-head">
+      <div>
+        <p class="cr-eyebrow is-crimson" data-reveal>Traveller status</p>
+        <h2 id="status-title" class="cr-h1" data-reveal style="--d:.05s">Earned.<br><span class="is-blue">Never bought.</span></h2>
+      </div>
+      <p class="cr-lead" data-reveal style="--d:.1s">Membership is where it begins. As you travel, your status rises — on what you book, not what you pay for. The highest tier, AeroSkys Black, is by qualification only.</p>
+    </div>
+    <ol class="ms-tiers">
+      <li class="ms-tier is-member" data-reveal><span class="ms-tier-n">01</span><h3>Member</h3><p>From the day you join, on any plan.</p></li>
+      <li class="ms-tier is-silver" data-reveal style="--d:.05s"><span class="ms-tier-n">02</span><h3>Silver</h3><p>Earned through regular annual booking activity.</p></li>
+      <li class="ms-tier is-gold" data-reveal style="--d:.1s"><span class="ms-tier-n">03</span><h3>Gold</h3><p>For frequent travellers across flights, hotels and buses.</p></li>
+      <li class="ms-tier is-platinum" data-reveal style="--d:.15s"><span class="ms-tier-n">04</span><h3>Platinum</h3><p>For members whose travel defines their year.</p></li>
+      <li class="ms-tier is-black" data-reveal style="--d:.2s"><span class="ms-tier-n">05 · By qualification</span><h3>Black</h3><p>Earned on trips, spend, tenure and referrals.</p></li>
+    </ol>
+    <div class="ms-better" data-reveal>
+      <h3 class="cr-h2">Your membership keeps getting better.</h3>
+      <p class="cr-lead">Enjoy priority access to new AeroSkys member benefits as they are introduced, with exclusive member-only pricing on selected premium services, upgrades and experiences.</p>
+    </div>
+    <ol class="ms-road" aria-label="Planned enhancements">
+      <li data-reveal><p class="ms-road-when">Month 3</p><p>Member-only fares shown beside the public fare, and rewards for introducing new members.</p></li>
+      <li data-reveal style="--d:.06s"><p class="ms-road-when">Month 6</p><p>Family membership, the Member Price Promise and offers shaped around the way you travel.</p></li>
+      <li data-reveal style="--d:.12s"><p class="ms-road-when">Month 9</p><p>Traveller status goes live — Silver, Gold and Platinum earned on booking activity.</p></li>
+      <li data-reveal style="--d:.18s"><p class="ms-road-when">Year 1</p><p>AeroSkys Black, the Travel Wallet — savings, rewards and credits in one place — and partner privileges.</p></li>
+    </ol>
+    <p class="ms-note">Planned enhancements. Benefits, qualification rules and timing may change and will be published before launch.</p>
+  </div>
+</section>
 
-      <fieldset class="m-fieldset m-plan-field">
-        <legend class="m-legend">Membership plan</legend>
-        <div class="m-plan-opts">
-          <label class="m-opt"><input type="radio" name="plan" value="1y"><span class="m-opt-name">1 Year</span><span class="m-opt-price">₹499</span><span class="m-opt-per">₹499 / year</span></label>
-          <label class="m-opt"><input type="radio" name="plan" value="2y"><span class="m-opt-name">2 Years</span><span class="m-opt-price">₹699</span><span class="m-opt-per">₹350 / year</span></label>
-          <label class="m-opt"><input type="radio" name="plan" value="3y" checked><span class="m-opt-name">3 Years</span><span class="m-opt-price">₹999</span><span class="m-opt-per">₹333 / year</span></label>
-        </div>
-      </fieldset>
+<!-- Join: issue a Member ID -->
+<section class="cr-section ms-join-sec" id="join" aria-labelledby="join-title" data-gst-rate="18" data-supplier-state="Delhi" data-gst-inclusive="false">
+  <img class="cr-apply-art" src="careers/img/app-wing.webp?v=4" width="463" height="215" alt="" loading="lazy">
+  <div class="cr-wrap">
+    <div class="ms-join-head">
+      <p class="cr-eyebrow is-crimson" data-reveal>Join</p>
+      <h2 id="join-title" class="cr-h1" data-reveal style="--d:.05s">Issue a <span class="is-blue">Member ID</span></h2>
+      <p class="cr-lead" data-reveal style="--d:.1s">One Member ID per passport. The same passport and nationality always return the same ID; an expired membership is renewed under it. Passport numbers are never stored — only a one-way fingerprint and the last four characters.</p>
+    </div>
 
-      <div class="m-fields">
-        <div class="field m-field--full">
-          <label for="m-name">Full name (as on passport)</label>
-          <input class="input" id="m-name" type="text" autocomplete="off" placeholder="Given names and surname" aria-required="true" aria-describedby="e-name" data-key="name">
-          <p class="m-error" id="e-name" hidden></p>
+    <noscript><p class="cr-form-alert">Issuing a Member ID needs JavaScript: the GST breakdown, the test checkout and your membership card all run in the browser. Please turn JavaScript on and reload this page, or call us on +91&nbsp;79703&nbsp;36785.</p></noscript>
+
+    <div class="ms-join-grid ms-js">
+      <form class="ms-panel" novalidate aria-labelledby="form-title" data-form>
+        <header class="cr-astep-head"><span class="cr-astep-n" aria-hidden="true">01</span><div class="cr-astep-hgroup"><h3 class="cr-astep-title" id="form-title">Plan &amp; traveller</h3><p class="cr-astep-sub">Choose a plan and enter the traveller’s passport details.</p></div></header>
+
+        <fieldset class="ms-plan-field">
+          <legend class="ms-legend">Membership plan</legend>
+          <div class="ms-opts">
+            <label class="ms-opt"><input type="radio" name="plan" value="1y"><span class="ms-opt-name">1 Year</span><span class="ms-opt-price">₹499</span><span class="ms-opt-per">₹499 / year</span></label>
+            <label class="ms-opt"><input type="radio" name="plan" value="2y"><span class="ms-opt-name">2 Years</span><span class="ms-opt-price">₹699</span><span class="ms-opt-per">₹350 / year</span></label>
+            <label class="ms-opt"><input type="radio" name="plan" value="3y" checked><span class="ms-opt-name">3 Years</span><span class="ms-opt-price">₹999</span><span class="ms-opt-per">₹333 / year</span></label>
+          </div>
+        </fieldset>
+
+        <div class="cr-fields ms-fields">
+          <div class="cr-field is-full">
+            <label for="m-name">Full name (as on passport)<span class="cr-req" aria-hidden="true">*</span></label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user"/></svg><input class="cr-input" id="m-name" type="text" autocomplete="off" placeholder="Given names and surname" aria-required="true" aria-describedby="e-name" data-key="name"></div>
+            <p class="cr-error" id="e-name" hidden></p>
+          </div>
+          <div class="cr-field is-half">
+            <label for="m-country">Passport nationality</label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-globe"/></svg><select class="cr-select" id="m-country" data-key="country">
+              <option value="IND" selected>India</option><option value="ARE">United Arab Emirates</option><option value="GBR">United Kingdom</option><option value="USA">United States</option><option value="SGP">Singapore</option><option value="SAU">Saudi Arabia</option><option value="QAT">Qatar</option><option value="OMN">Oman</option><option value="KWT">Kuwait</option><option value="BHR">Bahrain</option><option value="NPL">Nepal</option><option value="LKA">Sri Lanka</option><option value="BGD">Bangladesh</option><option value="MYS">Malaysia</option><option value="THA">Thailand</option><option value="AUS">Australia</option><option value="CAN">Canada</option><option value="DEU">Germany</option><option value="FRA">France</option><option value="OTH">Other</option>
+            </select></div>
+          </div>
+          <div class="cr-field is-half">
+            <label for="m-passport">Passport number<span class="cr-req" aria-hidden="true">*</span></label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-id-card"/></svg><input class="cr-input ms-upper" id="m-passport" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. A1234567" aria-required="true" aria-describedby="e-passport" data-key="passport"></div>
+            <p class="cr-error" id="e-passport" hidden></p>
+          </div>
+          <div class="cr-field is-half">
+            <label for="m-expiry">Passport expiry date<span class="cr-req" aria-hidden="true">*</span></label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-calendar"/></svg><input class="cr-input" id="m-expiry" type="date" aria-required="true" aria-describedby="e-expiry" data-key="expiry"></div>
+            <p class="cr-error" id="e-expiry" hidden></p>
+          </div>
+          <div class="cr-field is-half">
+            <label for="m-state">Billing state (for GST)<span class="cr-req" aria-hidden="true">*</span></label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-pin"/></svg><select class="cr-select" id="m-state" aria-required="true" aria-describedby="e-billState" data-key="billState">
+              <option value="" selected>Select state</option><option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chandigarh">Chandigarh</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option><option value="Delhi">Delhi</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jammu and Kashmir">Jammu and Kashmir</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Ladakh">Ladakh</option><option value="Lakshadweep">Lakshadweep</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Puducherry">Puducherry</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option><option value="Outside India">Outside India</option>
+            </select></div>
+            <p class="cr-error" id="e-billState" hidden></p>
+          </div>
+          <div class="cr-field is-half">
+            <label for="m-gstin">GSTIN <span class="cr-hint">(optional, for business invoices)</span></label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-file-text"/></svg><input class="cr-input ms-upper" id="m-gstin" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="15-character GSTIN" aria-describedby="e-gstin" data-key="gstin"></div>
+            <p class="cr-error" id="e-gstin" hidden></p>
+          </div>
         </div>
-        <div class="field">
-          <label for="m-country">Passport nationality</label>
-          <select class="input" id="m-country" data-key="country">
-            <option value="IND" selected>India</option><option value="ARE">United Arab Emirates</option><option value="GBR">United Kingdom</option><option value="USA">United States</option><option value="SGP">Singapore</option><option value="SAU">Saudi Arabia</option><option value="QAT">Qatar</option><option value="OMN">Oman</option><option value="KWT">Kuwait</option><option value="BHR">Bahrain</option><option value="NPL">Nepal</option><option value="LKA">Sri Lanka</option><option value="BGD">Bangladesh</option><option value="MYS">Malaysia</option><option value="THA">Thailand</option><option value="AUS">Australia</option><option value="CAN">Canada</option><option value="DEU">Germany</option><option value="FRA">France</option><option value="OTH">Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="m-passport">Passport number</label>
-          <input class="input m-mono m-passport m-upper" id="m-passport" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. A1234567" aria-required="true" aria-describedby="e-passport" data-key="passport">
-          <p class="m-error" id="e-passport" hidden></p>
-        </div>
-        <div class="field">
-          <label for="m-expiry">Passport expiry date</label>
-          <input class="input" id="m-expiry" type="date" aria-required="true" aria-describedby="e-expiry" data-key="expiry">
-          <p class="m-error" id="e-expiry" hidden></p>
-        </div>
-        <div class="field">
-          <label for="m-state">Billing state (for GST)</label>
-          <select class="input" id="m-state" aria-required="true" aria-describedby="e-billState" data-key="billState">
-            <option value="" selected>Select state</option><option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chandigarh">Chandigarh</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option><option value="Delhi">Delhi</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jammu and Kashmir">Jammu and Kashmir</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Ladakh">Ladakh</option><option value="Lakshadweep">Lakshadweep</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Puducherry">Puducherry</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option><option value="Outside India">Outside India</option>
-          </select>
-          <p class="m-error" id="e-billState" hidden></p>
-        </div>
-        <div class="field">
-          <label for="m-gstin">GSTIN (optional, for business invoices)</label>
-          <input class="input m-mono m-upper" id="m-gstin" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="15-character GSTIN" aria-describedby="e-gstin" data-key="gstin">
-          <p class="m-error" id="e-gstin" hidden></p>
-        </div>
-        <div class="m-sum-wrap m-field--full" aria-live="polite" aria-atomic="true" data-sum>
+
+        <div class="ms-sum" aria-live="polite" aria-atomic="true" data-sum>
           <dl data-sum-list>
-            <div class="m-sum-row"><dt>3 Years membership</dt><dd>₹999.00</dd></div>
-            <div class="m-sum-row"><dt>GST 18%</dt><dd>₹179.82</dd></div>
-            <div class="m-sum-row is-total"><dt>Total payable</dt><dd>₹1,178.82</dd></div>
+            <div class="ms-sum-row"><dt>3 Years membership</dt><dd>₹999.00</dd></div>
+            <div class="ms-sum-row"><dt>GST 18%</dt><dd>₹179.82</dd></div>
+            <div class="ms-sum-row is-total"><dt>Total payable</dt><dd>₹1,178.82</dd></div>
           </dl>
-          <p class="m-sum-note" data-sum-note>Select a billing state to see the CGST/SGST or IGST split.</p>
+          <p class="ms-sum-note" data-sum-note>Select a billing state to see the CGST/SGST or IGST split.</p>
         </div>
-      </div>
 
-      <div class="m-form-foot">
-        <div class="m-form-alert" role="alert" data-form-error></div>
-        <p class="m-form-hint">The Member ID is issued the moment payment succeeds, with a GST tax invoice.</p>
-        <div class="m-actions">
-          <button class="btn btn-secondary" type="button" data-reset>Clear</button>
-          <button class="btn btn-primary blueprint btn-cta" type="submit" data-generate>Proceed to pay ₹1,178.82</button>
+        <div class="ms-form-foot">
+          <div class="cr-form-alert ms-alert" role="alert" data-form-error></div>
+          <p class="cr-hint">The Member ID is issued the moment payment succeeds, with a GST tax invoice.</p>
+          <div class="cr-cta-row ms-actions">
+            <button class="cr-btn cr-btn-outline" type="button" data-reset>Clear</button>
+            <button class="cr-btn cr-btn-primary" type="submit" data-generate>Proceed to pay ₹1,178.82</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
 
-    <div class="m-cardcol">
-      <div class="m-step-head"><span class="m-step-n" aria-hidden="true">02</span><h3 class="m-step-title" id="card-title" tabindex="-1">Membership card</h3></div>
+      <div class="ms-cardcol" data-cardcol>
+        <header class="cr-astep-head"><span class="cr-astep-n" aria-hidden="true">02</span><div class="cr-astep-hgroup"><h3 class="cr-astep-title" id="card-title" tabindex="-1">Membership card</h3><p class="cr-astep-sub">Your card appears here once payment succeeds.</p></div></header>
 
-      <figure class="m-card-fig">
-        <div class="m-mcard m-mcard--3" data-card>
-          <svg class="m-mcard-art" viewBox="0 0 560 353" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="w1" d="M0 210 C 110 160 210 260 330 205 S 500 140 560 180 L560 353 L0 353 Z"/>
-            <path class="w2" d="M0 255 C 130 215 250 305 380 255 S 520 215 560 240 L560 353 L0 353 Z"/>
-            <path class="w3" d="M0 300 C 150 270 280 340 420 300 S 530 285 560 295 L560 353 L0 353 Z"/>
-            <path class="s1" d="M0 120 C 120 70 240 170 360 115 S 510 60 560 95"/>
-            <path class="s2" d="M0 140 C 120 90 240 190 360 135 S 510 80 560 115"/>
-            <path class="s3" d="M0 160 C 120 110 240 210 360 155 S 510 100 560 135"/>
-          </svg>
-          <div class="m-mcard-shade" aria-hidden="true"></div>
-          <div class="m-mcard-body">
-            <div class="m-mcard-top">
-              <span class="m-mcard-brand">AeroSkys</span>
-              <span class="m-mcard-pill"><span data-card-plan>3 Years</span> Member</span>
-            </div>
-            <div>
-              <p class="m-mcard-label">Member ID</p>
-              <p class="m-mcard-id" data-card-id>ASK-G3-143-4710-6626</p>
-            </div>
-            <div class="m-mcard-bottom">
-              <div class="m-mcard-who">
-                <p class="m-mcard-label">Member</p>
-                <p class="m-mcard-name" data-card-name>Aarav Mehta</p>
+        <figure class="ms-card-fig">
+          <div class="ms-card ms-card--3" data-card>
+            <svg class="ms-card-art" viewBox="0 0 560 353" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path class="w1" d="M0 210 C 110 160 210 260 330 205 S 500 140 560 180 L560 353 L0 353 Z"/>
+              <path class="w2" d="M0 255 C 130 215 250 305 380 255 S 520 215 560 240 L560 353 L0 353 Z"/>
+              <path class="s1" d="M0 120 C 120 70 240 170 360 115 S 510 60 560 95"/>
+              <path class="s2" d="M0 140 C 120 90 240 190 360 135 S 510 80 560 115"/>
+            </svg>
+            <div class="ms-card-body">
+              <div class="ms-card-top">
+                <img class="ms-card-logo" src="assets/brand/aeroskys-logo-480.webp?v=4" alt="Aeroskys" width="480" height="95">
+                <span class="ms-card-pill"><span data-card-plan>3 Years</span><span class="ms-card-pill-x"> Member</span></span>
               </div>
-              <div class="m-mcard-valid">
-                <p class="m-mcard-label">Valid thru</p>
-                <p class="m-mcard-val" data-card-valid>—</p>
+              <div>
+                <p class="ms-card-label">Member ID</p>
+                <p class="ms-card-id" data-card-id>ASK-G3-143-4710-6626</p>
+              </div>
+              <div class="ms-card-bottom">
+                <div><p class="ms-card-label">Member</p><p class="ms-card-val" data-card-name>Aarav Mehta</p></div>
+                <div class="ms-card-valid"><p class="ms-card-label">Valid thru</p><p class="ms-card-val" data-card-valid>—</p></div>
               </div>
             </div>
           </div>
-        </div>
-        <figcaption class="m-sample" data-sample>
-          <span class="tag tag-outline" data-sample-tag>Sample card · 3 Years</span>
-          <span class="m-sample-text">Choose a plan above to preview its card. Your own card is issued after payment.</span>
-        </figcaption>
-      </figure>
+          <figcaption class="ms-sample" data-sample>
+            <span class="ms-tag" data-sample-tag>Sample card · 3 Years</span>
+            <span>Choose a plan to preview its card. Your own card is issued after payment.</span>
+          </figcaption>
+        </figure>
 
-      <div class="m-result" data-result hidden>
-        <div class="m-tags">
-          <span class="tag tag-accent" data-r="statusLabel"></span>
-          <span class="tag tag-outline" data-r="countryName"></span>
-        </div>
-        <dl class="m-details">
-          <div><dt>Plan</dt><dd class="is-strong" data-r="planLine"></dd></div>
-          <div><dt>Amount paid</dt><dd class="is-strong" data-r="totalLine"></dd></div>
-          <div><dt>GST</dt><dd data-r="taxLine"></dd></div>
-          <div><dt>Payment</dt><dd data-r="methodLine"></dd></div>
-          <div><dt>Payment reference</dt><dd class="is-ref" data-r="payRef"></dd></div>
-          <div><dt>Tax invoice</dt><dd data-r="invoiceLine"></dd></div>
-          <div><dt>Valid until</dt><dd data-r="validLabel"></dd></div>
-          <div><dt>Passport</dt><dd class="is-pass" data-r="masked"></dd></div>
-          <div><dt>First issued</dt><dd data-r="issuedLabel"></dd></div>
-        </dl>
-        <p class="m-notice" data-r="notice"></p>
-        <div class="m-actions">
-          <button class="btn btn-secondary" type="button" data-copy>Copy ID</button>
-          <button class="btn btn-ghost" type="button" data-new>New traveller</button>
+        <div class="ms-result" data-result hidden>
+          <div class="ms-tags">
+            <span class="ms-tag is-ok" data-r="statusLabel"></span>
+            <span class="ms-tag" data-r="countryName"></span>
+          </div>
+          <dl class="ms-details">
+            <div><dt>Plan</dt><dd class="is-strong" data-r="planLine"></dd></div>
+            <div><dt>Amount paid</dt><dd class="is-strong" data-r="totalLine"></dd></div>
+            <div><dt>GST</dt><dd data-r="taxLine"></dd></div>
+            <div><dt>Payment</dt><dd data-r="methodLine"></dd></div>
+            <div><dt>Payment reference</dt><dd class="is-mono" data-r="payRef"></dd></div>
+            <div><dt>Tax invoice</dt><dd data-r="invoiceLine"></dd></div>
+            <div><dt>Valid until</dt><dd data-r="validLabel"></dd></div>
+            <div><dt>Passport</dt><dd class="is-mono" data-r="masked"></dd></div>
+            <div><dt>First issued</dt><dd data-r="issuedLabel"></dd></div>
+          </dl>
+          <p class="ms-notice" data-r="notice"></p>
+          <div class="cr-cta-row">
+            <button class="cr-btn cr-btn-primary" type="button" data-copy>Copy ID</button>
+            <button class="cr-btn cr-btn-outline" type="button" data-new>New traveller</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="m-section" id="register" aria-labelledby="register-title">
-  <div class="m-reg-head">
-    <div>
-      <p class="m-eyebrow m-eyebrow--tight">Register</p>
-      <h2 class="m-h2--register" id="register-title" tabindex="-1">Issued Member IDs</h2>
-    </div>
-    <div class="m-reg-tools m-js">
-      <div class="m-search">
-        <label class="m-field-label" for="m-search">Search the register</label>
-        <input class="input" id="m-search" type="search" autocomplete="off" spellcheck="false" placeholder="Search ID, name or last 4" data-search>
-      </div>
-      <button class="btn btn-secondary" type="button" data-export>Export CSV</button>
-    </div>
-  </div>
-  <noscript><p class="m-noscript">The register of issued Member IDs is kept in this browser and needs JavaScript to show, search, export or revoke them. Please turn JavaScript on and reload this page.</p></noscript>
-  <p class="m-count m-js" data-count>0 Member IDs issued</p>
-  <div class="m-table-wrap m-js" role="region" aria-label="Issued Member IDs table" tabindex="0">
-    <table class="m-table">
-      <caption class="visually-hidden">Issued Member IDs</caption>
-      <colgroup><col class="c-id"><col class="c-name"><col class="c-plan"><col class="c-date"><col class="c-date"><col class="c-pass"><col class="c-nation"><col class="c-status"><col class="c-act"></colgroup>
-      <thead>
-        <tr><th scope="col">Member ID</th><th scope="col">Name</th><th scope="col">Plan</th><th scope="col">Issued</th><th scope="col">Valid until</th><th scope="col">Passport</th><th scope="col">Nation</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr>
-      </thead>
-      <tbody data-rows></tbody>
-    </table>
-    <p class="m-empty" data-empty>No Member IDs issued yet.</p>
-  </div>
-</section>
-
-<p class="visually-hidden" role="status" aria-live="polite" data-status></p>
-
-<dialog class="m-dialog" id="checkout" aria-labelledby="pay-title" aria-describedby="pay-note" data-dialog>
-  <form class="m-dialog-form" novalidate data-pay-form>
-    <div class="m-dialog-head">
+<!-- Register -->
+<section class="cr-section ms-register-sec" id="register" aria-labelledby="register-title">
+  <div class="cr-wrap">
+    <div class="ms-reg-head">
       <div>
-        <p class="m-dialog-eyebrow">AeroSkys secure checkout</p>
-        <h2 class="m-dialog-title" id="pay-title">Pay <span data-pay-amount>₹1,178.82</span></h2>
+        <p class="cr-eyebrow is-crimson">Register</p>
+        <h2 class="cr-h2" id="register-title" tabindex="-1">Issued Member IDs</h2>
       </div>
-      <span class="tag tag-outline">Test mode</span>
+      <div class="ms-reg-tools ms-js">
+        <div class="cr-field ms-search">
+          <label for="m-search">Search the register</label>
+          <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-search"/></svg><input class="cr-input" id="m-search" type="search" autocomplete="off" spellcheck="false" placeholder="ID, name or last 4" data-search></div>
+        </div>
+        <button class="cr-btn cr-btn-outline" type="button" data-export><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-download"/></svg> Export CSV</button>
+      </div>
     </div>
+    <noscript><p class="cr-form-alert">The register of issued Member IDs is kept in this browser and needs JavaScript to show, search, export or revoke them. Please turn JavaScript on and reload this page.</p></noscript>
+    <p class="ms-count ms-js" data-count>0 Member IDs issued</p>
+    <div class="ms-table-wrap ms-js" role="region" aria-label="Issued Member IDs table" tabindex="0" data-table-wrap>
+      <table class="ms-table">
+        <caption class="sr-only">Issued Member IDs</caption>
+        <thead>
+          <tr><th scope="col">Member ID</th><th scope="col">Name</th><th scope="col">Plan</th><th scope="col">Issued</th><th scope="col">Valid until</th><th scope="col">Passport</th><th scope="col">Nation</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Actions</span></th></tr>
+        </thead>
+        <tbody data-rows></tbody>
+      </table>
+      <p class="ms-empty" data-empty>No Member IDs issued yet.</p>
+    </div>
+  </div>
+</section>
 
-    <dl class="m-sum-wrap" data-pay-sum></dl>
+<p class="sr-only" role="status" data-status></p>
 
-    <fieldset class="m-fieldset">
-      <legend class="m-legend">Payment method</legend>
-      <div class="m-methods">
-        <label class="m-method"><input type="radio" name="pay-method" value="upi" checked><span>UPI</span></label>
-        <label class="m-method"><input type="radio" name="pay-method" value="card"><span>Card</span></label>
-        <label class="m-method"><input type="radio" name="pay-method" value="nb"><span>Net banking</span></label>
+<!-- Test-mode checkout -->
+<dialog class="cr-dialog ms-dialog" id="checkout" aria-labelledby="pay-title" aria-describedby="pay-note" data-dialog>
+  <form class="cr-dialog-inner ms-pay" novalidate data-pay-form>
+    <div class="ms-pay-head">
+      <div>
+        <p class="cr-eyebrow">AeroSkys secure checkout</p>
+        <h2 class="cr-h2" id="pay-title">Pay <span data-pay-amount>₹1,178.82</span></h2>
+      </div>
+      <span class="ms-tag is-test">Test mode</span>
+    </div>
+    <dl class="ms-sum ms-pay-sum" data-pay-sum></dl>
+    <fieldset class="ms-plan-field">
+      <legend class="ms-legend">Payment method</legend>
+      <div class="ms-methods">
+        <label class="ms-method"><input type="radio" name="pay-method" value="upi" checked><span>UPI</span></label>
+        <label class="ms-method"><input type="radio" name="pay-method" value="card"><span>Card</span></label>
+        <label class="ms-method"><input type="radio" name="pay-method" value="nb"><span>Net banking</span></label>
       </div>
     </fieldset>
-
-    <div class="field" data-panel="upi">
+    <div class="cr-field" data-panel="upi">
       <label for="p-upi">UPI ID</label>
-      <input class="input m-mono" id="p-upi" type="text" inputmode="email" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="name@bank" data-pay-key="upi">
+      <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-zap"/></svg><input class="cr-input" id="p-upi" type="text" inputmode="email" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="name@bank" data-pay-key="upi"></div>
     </div>
-    <div class="m-pay-fields" data-panel="card" hidden>
-      <div class="field m-field--full">
+    <div class="ms-pay-fields" data-panel="card" hidden>
+      <div class="cr-field ms-pay-wide">
         <label for="p-card">Card number</label>
-        <input class="input m-mono" id="p-card" type="text" inputmode="numeric" autocomplete="off" placeholder="1234 5678 9012 3456" data-pay-key="card">
+        <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-lock"/></svg><input class="cr-input" id="p-card" type="text" inputmode="numeric" autocomplete="off" placeholder="1234 5678 9012 3456" data-pay-key="card"></div>
       </div>
-      <div class="field">
+      <div class="cr-field">
         <label for="p-exp">Expiry (MM/YY)</label>
-        <input class="input m-mono" id="p-exp" type="text" inputmode="numeric" autocomplete="off" placeholder="MM/YY" data-pay-key="exp">
+        <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-calendar"/></svg><input class="cr-input" id="p-exp" type="text" inputmode="numeric" autocomplete="off" placeholder="MM/YY" data-pay-key="exp"></div>
       </div>
-      <div class="field">
+      <div class="cr-field">
         <label for="p-cvv">CVV</label>
-        <input class="input m-mono" id="p-cvv" type="text" inputmode="numeric" autocomplete="off" placeholder="•••" data-pay-key="cvv">
+        <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-shield"/></svg><input class="cr-input" id="p-cvv" type="text" inputmode="numeric" autocomplete="off" placeholder="•••" data-pay-key="cvv"></div>
       </div>
     </div>
-    <div class="field" data-panel="nb" hidden>
+    <div class="cr-field" data-panel="nb" hidden>
       <label for="p-bank">Bank</label>
-      <select class="input" id="p-bank" data-pay-key="bank">
+      <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-building"/></svg><select class="cr-select" id="p-bank" data-pay-key="bank">
         <option value="" selected>Select your bank</option><option value="State Bank of India">State Bank of India</option><option value="HDFC Bank">HDFC Bank</option><option value="ICICI Bank">ICICI Bank</option><option value="Axis Bank">Axis Bank</option><option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option><option value="Bank of Baroda">Bank of Baroda</option><option value="Punjab National Bank">Punjab National Bank</option><option value="Canara Bank">Canara Bank</option><option value="Union Bank of India">Union Bank of India</option><option value="Federal Bank">Federal Bank</option><option value="IDFC FIRST Bank">IDFC FIRST Bank</option><option value="Yes Bank">Yes Bank</option>
-      </select>
+      </select></div>
     </div>
-
-    <div class="m-pay-alert" id="pay-err" role="alert" data-pay-err></div>
-    <p class="visually-hidden" role="status" aria-live="polite" data-pay-status></p>
-
-    <div class="m-dialog-actions">
-      <button class="btn btn-ghost" type="button" data-pay-cancel>Cancel</button>
-      <button class="btn btn-primary blueprint btn-cta" type="submit" data-pay-submit>Pay ₹1,178.82</button>
+    <div class="cr-form-alert ms-alert" id="pay-err" role="alert" data-pay-err></div>
+    <p class="sr-only" role="status" data-pay-status></p>
+    <div class="cr-cta-row ms-pay-actions">
+      <button class="cr-btn cr-btn-outline" type="button" data-pay-cancel>Cancel</button>
+      <button class="cr-btn cr-btn-primary" type="submit" data-pay-submit>Pay ₹1,178.82</button>
     </div>
-    <p class="m-pay-note" id="pay-note">Test payment — no money is charged. In production this step is handed to a licensed payment gateway; card details are entered on the gateway, never stored by AeroSkys. Use <strong>fail@test</strong> as the UPI ID to simulate a declined payment.</p>
+    <p class="ms-pay-note" id="pay-note">Test payment — no money is charged. In production this step is handed to a licensed payment gateway; card details are entered on the gateway, never stored by AeroSkys. Use <strong>fail@test</strong> as the UPI ID to simulate a declined payment.</p>
   </form>
 </dialog>
 
 </main>
 
-<footer class="m-footer">
-  <div>
-    <p class="m-foot-wordmark">AeroSkys</p>
-    <p class="m-foot-tagline">Go further. Grow further.</p>
-    <address class="m-contact">
-      <ul class="m-foot-links">
-        <li><a href="mailto:customercare@aeroskys.com">customercare@aeroskys.com</a></li>
-        <li><a href="tel:+917970336785">+91&nbsp;79703&nbsp;36785</a></li>
-      </ul>
-    </address>
-    <nav aria-label="AeroSkys">
-      <ul class="m-foot-links">
-        <li><a href="careers">Careers</a></li>
-        <li><a href="./#/">Back to AeroSkys.com</a></li>
-      </ul>
+<footer class="cr-footer">
+  <div class="cr-wrap cr-footer-grid">
+    <div class="cr-footer-brand">
+      <a href="./#/" aria-label="Aeroskys — go to the main website"><img src="assets/brand/aeroskys-logo-480.webp?v=4" alt="Aeroskys" width="480" height="95"></a>
+      <p>Go further. Grow further.</p>
+    </div>
+    <nav class="cr-footer-col" aria-label="Membership links">
+      <p>Membership</p>
+      <a href="#plans">Plans</a><a href="#benefits">Benefits</a><a href="#status">Traveller status</a><a href="#join">Issue a Member ID</a>
     </nav>
+    <nav class="cr-footer-col" aria-label="Aeroskys links">
+      <p>Aeroskys</p>
+      <a href="./#/">Back to Aeroskys.com</a><a href="careers">Careers</a><a href="./#/privacy">Privacy policy</a><a href="./#/terms">Terms &amp; conditions</a>
+    </nav>
+    <div class="cr-footer-col">
+      <p>Questions?</p>
+      <a href="mailto:customercare@aeroskys.com">customercare@aeroskys.com</a>
+      <a href="tel:+917970336785">+91 79703 36785&nbsp;·&nbsp;24/7&nbsp;support</a>
+      <a href="./#/support">Contact us</a>
+    </div>
   </div>
-  <p class="m-legal">Member IDs are issued under AeroSkys privacy and consumer-protection policy. Full passport numbers are not retained on this page. GST is charged by AeroSkys, registered in Delhi: CGST 9% + SGST 9% for Delhi billing addresses, IGST 18% for all other states and for billing outside India. Membership pricing, benefits and the fee structure remain subject to legal review. Multi-year membership fees are recognised over the membership period for statutory accounts.</p>
+  <p class="cr-wrap cr-footer-legal">Member IDs are issued under AeroSkys privacy and consumer-protection policy. Full passport numbers are not retained on this page. GST is charged by AeroSkys, registered in Delhi: CGST 9% + SGST 9% for Delhi billing addresses, IGST 18% for all other states and for billing outside India. Membership pricing, benefits and the fee structure remain subject to legal review. Multi-year membership fees are recognised over the membership period for statutory accounts.</p>
+  <div class="cr-wrap cr-footer-bottom">
+    <span>© <span data-year>2026</span> Jackpot Travels Private Limited · 22A, Asif Ali Road, New Delhi - 110002</span>
+    <a href="#main">Back to top <svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-arrow-up"/></svg></a>
+  </div>
 </footer>
+
+<div class="cr-toasts" aria-live="polite" aria-atomic="false"></div>
 </body>
 </html>

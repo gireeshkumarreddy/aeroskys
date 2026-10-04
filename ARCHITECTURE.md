@@ -117,7 +117,8 @@ data/careers/              applications/<ref>.json, cv/<ref>.<ext>, index.json (
   - `[data-reveal]` elements animate in once, at about 85% of the viewport (`data-reveal="left|right|scale|fade"`, stagger with `--d`).
   - `.cr-draw` paths draw in, and floating cards use the `translate` property, so they never fight the reveal transform.
   - `prefers-reduced-motion` switches all of it off.
-- **Application.** The same four steps for every designation, on one scrollable panel: 01 designation & pay structure (from `roles.js`), 02 About you, 03 the role's questions, 04 CV, review, declaration and submit. A progress card (a sticky bar on phones) follows the step in view.
+- **Role pages show each pay line once.** The compensation card (`roleHead`) carries the headline figure and its terms; the details carry the tables (bonus tiers, CTC structure, commission). Step 01 of the application only confirms the designation, so nothing is repeated below the role page.
+- **Application.** The same four steps for every designation, on one scrollable panel: 01 designation (number, title, question count), 02 About you, 03 the role's questions, 04 CV, review, declaration and submit. A progress card (a sticky bar on phones) follows the step in view.
   - Question kinds: `text`, `pair` (two short answers, both needed when required) and `table` (the HR KPI table: a row of KPI / Lean / Over-target / Time to lean / Time to over-target per entry, plus a note; one complete row needed). One question per designation is the primary evaluation (`core`).
 - **Drafts.** `localStorage` key `aeroskys:careers:application:v2`: About you (shared by every designation) and the answers per designation. A v1 draft from the three-role form is carried over (About you and the TAG Manager answers). `aeroskys:careers:submitted:v1` keeps the last reference. A draft is written only after a real change.
 - **Endpoint contract** (`POST /api/careers/applications`, `Content-Type: application/json`, max 16 MB):
@@ -139,13 +140,17 @@ data/careers/              applications/<ref>.json, cv/<ref>.<ext>, index.json (
 - **Caching.** Fonts and versioned URLs (`?v=…`) are cached for a year as immutable; everything else is sent `no-cache` with an ETag, so edits show up at once. Careers images, the icon sprite and the logo carry `?v=4` (`?v=5` for the two desktop landing files): raise it whenever one of them changes.
 
 ## Membership page
-A separate static page like Careers, served at `/membership` (`/member-id`, the address of the earlier Member ID generator, redirects there). It is a port of the client's *Membership – Developer Handoff* file: its markup, its own stylesheet and typefaces, and its logic rewritten as plain DOM code.
+A separate static page like Careers, served at `/membership` (`/member-id`, the address of the earlier Member ID generator, redirects there). It is built on the Careers design system: it loads `careers/careers.css` and imports `careers/js/shell.js` (header, phone menu, reveals, footer year), and uses the same components (`cr-header`, `cr-btn`, `cr-field`, `cr-astep-head`, `cr-dialog`, `cr-footer` …). Membership-only pieces are prefixed `ms-` and add the coral / crimson accent. The content and logic are the client's *Membership – Developer Handoff* file, rewritten as plain DOM code.
 ```
 public/membership.html             the page: header, landing, plans, benefits, status, join, register, footer,
                                    test-mode checkout <dialog>
-public/membership/membership.css   its stylesheet (Barlow / Barlow Condensed, self-hosted in membership/fonts); prefix m-
-public/membership/membership.js    plans, GST breakdown, validation, fingerprint, Member IDs, checkout, register, CSV
+public/membership/membership.css   membership-only styles on top of careers.css; coral / crimson tokens; prefix ms-
+public/membership/membership.js    plans, GST breakdown, validation, fingerprint, Member IDs, checkout, register, CSV,
+                                   header highlight of the section in view
+public/membership/img/plane.webp   the airliner from the client's design reference (careers/img/dir-plane.webp),
+                                   with the flight-path mark trimmed off its top edge
 ```
+- **Colour.** `--crimson #c8102e` (5.9:1 on white) is the accent for text; `--coral #f0525a` (3.5:1) is for decoration and large figures only; on navy, text uses `--coral-on-dark #ff9ea2` (8.4:1). Blue stays the action colour (buttons, selected plan, focus).
 - **Member ID.** `SHA-256('AEROSKYS-MEMBER-V1|' + nationality + '|' + passport)` identifies the passport, so one passport holds one ID; only the fingerprint and the last four characters are stored. IDs are `ASK-G<years>-XXX-XXXX-XXXX`: a per-plan serial scrambled by a fixed bijection mod 10¹⁰ plus a Luhn check digit (`aeroskys-member-seq-<plan>` in `localStorage`). An active passport gets its existing card back; an expired one renews under the same ID.
 - **GST.** 18% on top of the plan price; billing state Delhi (the supplier state) splits it CGST 9% + SGST 9%, any other state or "Outside India" is IGST 18%. The rate, supplier state and inclusive pricing are the `data-gst-rate`, `data-supplier-state` and `data-gst-inclusive` attributes on `#join`. Invoices are numbered `ASK/<FY>/000001` (`aeroskys-invoice-seq`).
 - **Register.** `localStorage` key `aeroskys-member-register` (the same key as the earlier page, whose IDs are migrated to the current series on load). In production the register, the serials and invoices belong on a server and payment goes to a licensed gateway; the checkout here is test mode.

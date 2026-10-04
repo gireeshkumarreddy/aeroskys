@@ -112,9 +112,9 @@ A dedicated page for the **15 open designations** in the client's Careers handof
 - **Back to the main site:** "← Back to Aeroskys.com" above the header, the logo, and the footer links.
 - **The journey (the same for every designation):**
   1. **Open positions:** all 15, grouped Operational / Growth / Executive, each with its number, engagement, reporting line, hire timing, pay and a "View & apply" button. The header's "Open positions" menu lists them too.
-  2. **The role page:** the designation's own page — summary, compensation, and its details (duties, KPIs, pay tables, bonus or commission structure, career ladder, candidate profile). A position bar gives the breadcrumb and the previous / next position.
+  2. **The role page:** the designation's own page — summary, compensation, and its details (duties, KPIs, pay tables, bonus or commission structure, career ladder, candidate profile). Each pay figure, bonus and commission line appears once (client feedback, 4 Oct): the compensation card gives the headline, the details give the tables. A position bar gives the breadcrumb and the previous / next position.
   3. **How we hire:** the four steps (written application, commercial review, role plan, offer & benchmark).
-  4. **The application, on one scrollable panel:** 01 designation & pay structure → 02 About you → 03 the role's own questions (the primary-evaluation question marked) → 04 CV, review and submit. A progress card follows the step in view (a slim sticky bar on phones).
+  4. **The application, on one scrollable panel:** 01 designation (a confirmation of the role chosen; its pay is on the role page above) → 02 About you → 03 the role's own questions (the primary-evaluation question marked) → 04 CV, review and submit. A progress card follows the step in view (a slim sticky bar on phones).
 - **Landing sections:** the full-screen landing, Open positions, Life at Aeroskys (Building the Direction), How We Hire, and the Membership band.
 
 **Full-screen layout**
@@ -149,8 +149,9 @@ A dedicated page for the **15 open designations** in the client's Careers handof
 
 **Membership page (revamped 4 Oct 2026)**
 - **Where:** `/membership` (`public/membership.html`, with `public/membership/`), its own page so the white-label site can link to it on its own. It replaces the Member ID generator of 30 Sep (`/member-id` now redirects here).
-- **Built from** the client's *AeroSkys Membership – Developer Handoff* file: the same sections, wording, layout and typefaces (Barlow and Barlow Condensed, self-hosted from the file):
-  - the navy landing ("Travel as a member", from ₹333 a year);
+- **Design (redesigned 4 Oct 2026, client feedback):** the AeroSkys brand design of the Careers page, not the look of the handoff file. It uses the same Inter typeface, colour tokens, floating header, phone menu, buttons, form fields, cards and footer (it loads `careers/careers.css` and the Careers page shell). A coral / crimson accent (`--coral #f0525a`, `--crimson #c8102e`) marks the membership offer: eyebrows, the "a member." headline, the "Best value" ribbon, savings, the roadmap and the card's sheen. Crimson is used for text because it meets WCAG AA contrast; coral is used only for decoration and large figures.
+- **Content and logic** come from the client's *AeroSkys Membership – Developer Handoff* file:
+  - the landing ("Travel as a member", from ₹333 a year), with the airliner photo from the client's design reference;
   - the three plans (₹499 for 1 year, ₹699 for 2 years, ₹999 for 3 years, plus GST), each with "Choose";
   - benefits (₹0 convenience fee, 9 passengers, 3 ways to travel, 1 ID per passport);
   - traveller status (Member, Silver, Gold, Platinum, Black) and the planned enhancements;

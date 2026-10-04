@@ -17,7 +17,7 @@ const EMAIL = 'customercare@aeroskys.com';
 const PHONE = '+91 79703 36785';
 const PHONE_TEL = '+917970336785';
 const COUNTRY_CODES = [['+91', 'India'], ['+971', 'UAE'], ['+44', 'UK'], ['+1', 'US / Canada'], ['+65', 'Singapore'], ['+61', 'Australia']];
-const STEPS = ['Designation & pay', 'About you', 'Application questions', 'Submit'];
+const STEPS = ['Designation', 'About you', 'Application questions', 'Submit'];
 const ABOUT_KEYS = ['name', 'email', 'cc', 'phone', 'location', 'cvLink', 'notice'];
 const KPI_COLS = [['kpi', 'KPI'], ['lean', 'Lean'], ['over', 'Over-target'], ['tlean', 'Time to lean'], ['tover', 'Time to over-target']];
 
@@ -126,7 +126,7 @@ export function initApply(host) {
   const aboutCount = () => ['name', 'email', 'phone', 'location', 'notice'].filter(k => !validateAbout(st.about)[k]).length;
   const cvDone = () => !!(file || st.about.cvLink.trim());
   function stepStatus(i) {
-    if (i === 0) return { done: true, text: 'Reviewed' };
+    if (i === 0) return { done: true, text: 'Confirmed' };
     if (i === 1) return aboutDone() ? { done: true, text: 'Complete' } : { done: false, text: `${aboutCount()} of 5 details` };
     if (i === 2) { const d = reqDone(), t = requiredCount(role); return { done: d >= t, text: `${d} of ${t} required` }; }
     return confirm && cvDone() && aboutDone() && reqDone() >= requiredCount(role) ? { done: true, text: 'Ready to send' } : { done: false, text: cvDone() ? 'Confirm and send' : 'Add your CV' };
@@ -209,37 +209,15 @@ export function initApply(host) {
     return '';
   }
 
+  // Step 01 confirms the designation; its pay structure is on the role page above, so it is not repeated here.
   function designationHTML(r) {
-    const total = questionsOf(role).length;
-    const tiers = r.tiers ? `
-          <p class="cr-kicker cr-desig-k2">${esc(r.tiersTitle)}</p>
-          <div class="cr-table-wrap"><table class="cr-dtable">
-            <caption class="sr-only">${esc(r.tiersTitle)}</caption>
-            <thead><tr><th scope="col">${esc(r.tierHead.a)}</th><th scope="col" class="num">${esc(r.tierHead.b)}</th><th scope="col" class="num">${esc(r.tierHead.c)}</th></tr></thead>
-            <tbody>${r.tiers.map(t => `<tr><th scope="row">${esc(t.a)}</th><td class="num">${esc(t.b)}</td><td class="num">${esc(t.c)}</td></tr>`).join('')}</tbody>
-          </table></div>` : '';
     return `<section class="cr-astep" id="apply-step-1" aria-labelledby="as-1" data-astep="0">
-      ${stepHead(1, 'Designation &amp; pay structure', `Applying for Position ${r.num}. Your answers are saved for this designation only.`,
+      ${stepHead(1, 'Designation', 'Your answers are saved for this designation only.',
         `<a class="cr-btn cr-btn-outline cr-astep-switch" href="#positions">${icon('arrow-left')} Choose a different position</a>`)}
-      <div class="cr-desig">
-        <div class="cr-desig-role">
-          <p class="cr-kicker">${esc(r.group)} designation</p>
-          <p class="cr-desig-title">${esc(r.title)}</p>
-          <p class="cr-desig-sum">${esc(r.summary)}</p>
-          <p class="cr-kicker cr-desig-k2">Role details</p>
-          <dl class="cr-kv">
-            <div><dt>Engagement</dt><dd>${esc(r.type)}</dd></div>
-            <div><dt>Reports to</dt><dd>${esc(r.reportsTo)}</dd></div>
-            <div><dt>Hire timing</dt><dd>${esc(r.hire)}</dd></div>
-            <div><dt>Questions</dt><dd>${total} total · ${requiredCount(role)} required</dd></div>
-          </dl>
-        </div>
-        <div class="cr-desig-pay">
-          <p class="cr-kicker">Pay structure</p>
-          <dl class="cr-kv cr-kv-pay">${r.pay.map(p => `<div><dt>${esc(p.label)}</dt><dd>${esc(p.value)}</dd></div>`).join('')}</dl>
-          ${tiers}
-          <p class="cr-desig-note">${icon('info')}<span>${esc(r.payNote)}</span></p>
-        </div>
+      <div class="cr-desig-strip">
+        <span class="cr-desig-n" aria-hidden="true">${r.num}</span>
+        <div class="cr-desig-who"><p class="cr-kicker">Position ${r.num} · ${esc(r.group)} designation</p><p class="cr-desig-title">${esc(r.title)}</p></div>
+        <p class="cr-desig-q">${questionsOf(role).length} questions · ${requiredCount(role)} required</p>
       </div>
     </section>`;
   }
@@ -408,7 +386,7 @@ export function initApply(host) {
   function tipText(i) {
     const core = questionsOf(role).find(q => q.core);
     return [
-      'These are the confirmed pay figures for this designation. Read them before you answer — your KPI answers should fit the structure.',
+      'Check this is the designation you want. Its full pay structure is on the role page above — your KPI answers should fit it.',
       'Use the name on your CV and an email and number you check often — that is how we will contact you.',
       `Be specific and use real numbers.${core ? ` Question ${core.label.slice(1)} is the primary evaluation and carries the greatest weighting.` : ''} Effort without metrics counts against you.`,
       'Attach your CV (PDF, DOC or DOCX, up to 10 MB) or add a link in About you, review your answers, then confirm and submit.'

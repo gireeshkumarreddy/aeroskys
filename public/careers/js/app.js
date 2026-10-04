@@ -4,7 +4,7 @@
 // Every designation follows the same sequence (role → pay → how we hire → apply). The header, menus and
 // reveals live in shell.js; the application itself in apply.js; the roles in roles.js.
 import { $, $$, esc, icon, inr, reducedMotion, scrollToEl, scrollRegions, debounce } from './ui.js';
-import { ROLES, ROLE_ORDER, isRole, EXEC_NOTE, EXEC_FOOTNOTE } from './roles.js';
+import { ROLES, ROLE_ORDER, isRole, EXEC_FOOTNOTE } from './roles.js';
 import { initApply } from './apply.js';
 import './shell.js';
 
@@ -39,7 +39,7 @@ function compCard(c) {
     <p class="cr-comp-note">${icon('info')}<span>${esc(c.note)}</span></p>
   </div>`;
 }
-function roleHead(r, { lead, tags, comp, note = '' }) {
+function roleHead(r, { lead, tags, comp }) {
   return `<div class="cr-wrap cr-rolehead">
     <div class="cr-rolehead-copy">
       <p class="cr-eyebrow is-blue">Position ${r.num} · ${esc(r.group)}</p>
@@ -50,7 +50,6 @@ function roleHead(r, { lead, tags, comp, note = '' }) {
         <a class="cr-btn cr-btn-primary cr-btn-lg" href="#apply">Start your application ${icon('arrow-right')}</a>
         <a class="cr-btn cr-btn-outline cr-btn-lg" href="#role-details">Read the role</a>
       </div>
-      ${note ? `<p class="cr-rolehead-note">${icon('info')}<span>${esc(note)}</span></p>` : ''}
     </div>
     ${compCard(comp)}
   </div>`;
@@ -73,8 +72,7 @@ function execPage(r) {
   return roleHead(r, {
     lead: r.summary,
     tags: [r.type, `Reports to ${r.reportsTo}`, `Hire: ${r.hire}`],
-    note: EXEC_NOTE,
-    comp: { label: 'Compensation — monthly', figure, unit: '/ month fixed', line: r.pay[0].label + '.', rows: r.pay.slice(1).map(p => [p.label, p.value]), note: r.payNote }
+    comp: { label: 'Compensation — monthly', figure, unit: '/ month fixed', line: r.pay[0].label + '.', rows: r.pay.slice(1).map(p => [p.label, p.value]), note: EXEC_FOOTNOTE }
   }) + `
   <div class="cr-wrap cr-rd" id="role-details" tabindex="-1">
     <div class="cr-rd-grid">
@@ -82,7 +80,6 @@ function execPage(r) {
         <p class="cr-eyebrow">Position ${r.num} · The role</p>
         <h2 class="cr-h2 cr-rd-title">What the job actually is</h2>
         <p class="cr-rd-desc">${esc(d.desc)}</p>
-        <p class="cr-rd-lead">${esc(d.lead)}</p>
         <h3 class="cr-kicker cr-rd-k">Responsibilities</h3>
         <ul class="cr-plus-list">${d.duties.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
       </div>
@@ -92,15 +89,13 @@ function execPage(r) {
         ${applyCta()}
       </div>
     </div>
-    <p class="cr-rd-foot">${esc(EXEC_FOOTNOTE)}</p>
   </div>`;
 }
 
 function growthPage(r) {
   const d = r.details;
   return roleHead(r, {
-    lead: d.lead, tags: d.chips,
-    comp: { ...d.comp, rows: [[r.pay[2].label, r.pay[2].value], [r.pay[4].label, r.pay[4].value]] }
+    lead: d.lead, tags: d.chips, comp: d.comp
   }) + `
   <div class="cr-wrap cr-rd" id="role-details" tabindex="-1">
     <p class="cr-eyebrow">Position ${r.num} · The role</p>
@@ -111,6 +106,7 @@ function growthPage(r) {
         <p class="cr-rd-text">${esc(d.kpi.text)}</p>
         ${dataTable(d.kpi, { caption: 'Primary KPI targets' })}
         <p class="cr-rd-note">${esc(d.kpi.note)}</p>
+        <p class="cr-rd-note">${esc(d.kpi.objective)}</p>
       </div>
       <div class="cr-rd-block">
         <h3 class="cr-rd-h">${esc(d.bonus.title)}</h3>
@@ -136,8 +132,7 @@ function growthPage(r) {
 function tasaPage(r) {
   const d = r.details;
   return roleHead(r, {
-    lead: d.lead, tags: [...d.chips.slice(0, 1), `Reports to ${r.reportsTo}`, `Hire: ${r.hire}`, ...d.chips.slice(1)],
-    comp: { ...d.comp, rows: r.pay.slice(4).map(p => [p.label, p.value]) }
+    lead: d.lead, tags: [...d.chips, `Reports to ${r.reportsTo}`, `Hire: ${r.hire}`], comp: d.comp
   }) + `
   <div class="cr-wrap cr-rd" id="role-details" tabindex="-1">
     <p class="cr-eyebrow">Position ${r.num} · The role</p>
@@ -145,9 +140,7 @@ function tasaPage(r) {
     <div class="cr-rd-two">
       <div class="cr-rd-block">
         <h3 class="cr-rd-h">How you earn</h3>
-        <p class="cr-rd-text">${esc(r.summary)}</p>
-        <dl class="cr-kv cr-kv-pay">${r.pay.map(p => `<div><dt>${esc(p.label)}</dt><dd>${esc(p.value)}</dd></div>`).join('')}</dl>
-        <p class="cr-rd-note">${esc(r.payNote)}</p>
+        <dl class="cr-kv cr-kv-pay">${r.pay.filter(p => !/^(Commission|Paid on)$/.test(p.label)).map(p => `<div><dt>${esc(p.label)}</dt><dd>${esc(p.value)}</dd></div>`).join('')}</dl>
       </div>
       <div class="cr-rd-block">
         <h3 class="cr-rd-h">${esc(d.ladderTitle)}</h3>

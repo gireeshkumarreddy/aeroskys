@@ -1138,8 +1138,6 @@ body[data-view="role"] .cr-intro, body[data-view="role"] .cr-hr { padding-top: c
 .cr-rolehead .cr-lead { margin-top: 20px; max-width: 46em; }
 .cr-rolehead .cr-tags { margin-top: 24px; }
 .cr-rolehead .cr-cta-row { margin-top: 30px; }
-.cr-rolehead-note { display: flex; gap: 10px; align-items: flex-start; margin-top: 24px; max-width: 46em; font-size: 14px; line-height: 1.55; color: var(--muted); }
-.cr-rolehead-note svg.i { flex-shrink: 0; margin-top: 2px; color: var(--blue); }
 .cr-comp { position: relative; overflow: hidden; isolation: isolate; padding: clamp(22px, 2.4vw, 32px); border-radius: 24px; color: #c9d5ea; background: radial-gradient(120% 90% at 100% 0%, #16407a 0, transparent 55%), linear-gradient(160deg, var(--navy-2), var(--navy)); box-shadow: var(--shadow-lg); }
 .cr-comp::after { content: ''; position: absolute; z-index: -1; right: -70px; top: -90px; width: 240px; height: 240px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 0 0 36px rgba(255, 255, 255, .03); }
 .cr-comp-k { font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #a9c1ea; }
@@ -1158,7 +1156,6 @@ body[data-view="role"] .cr-intro, body[data-view="role"] .cr-hr { padding-top: c
 .cr-rd-title { margin-top: 12px; }
 .cr-rd-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
 .cr-rd-desc { margin-top: 18px; max-width: 44em; font-size: clamp(16.5px, 1.25vw, 18.5px); line-height: 1.6; color: var(--ink-2); }
-.cr-rd-lead { margin-top: 14px; max-width: 46em; font-size: 15px; line-height: 1.55; color: var(--text); }
 .cr-rd-k { margin: 30px 0 14px; }
 .cr-rd-side { display: grid; gap: 16px; position: sticky; top: calc(var(--header-h) + 40px); }
 .cr-rd-card { padding: 22px; border-radius: 18px; background: #fff; border: 1px solid var(--line-2); box-shadow: var(--shadow-sm); }
@@ -1166,7 +1163,6 @@ body[data-view="role"] .cr-intro, body[data-view="role"] .cr-hr { padding-top: c
 .cr-rd-card p { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
 .cr-rd-cta { margin-top: 20px; }
 .cr-rd-side .cr-rd-cta { margin-top: 4px; }
-.cr-rd-foot { margin-top: 32px; padding-top: 18px; border-top: 1px solid var(--line-2); max-width: 90ch; font-size: 13px; line-height: 1.55; color: var(--muted); }
 .cr-rd-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 28px; }
 .cr-rd-block { min-width: 0; padding: clamp(20px, 2.4vw, 30px); border-radius: 20px; background: #fff; border: 1px solid var(--line-2); box-shadow: var(--shadow-sm); }
 .cr-rd-h { margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line-2); font-size: 21px; font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
@@ -1186,7 +1182,6 @@ body[data-view="role"] .cr-intro, body[data-view="role"] .cr-hr { padding-top: c
 .cr-kv dd { color: var(--ink); font-weight: 600; }
 
 /* Position 01: notes added from the client's latest version */
-.cr-intro-note { margin-top: 22px; max-width: 40em; font-size: 13.5px; line-height: 1.55; color: var(--muted); }
 .cr-notfor { margin-top: clamp(28px, 3vw, 44px); }
 .cr-notfor-title { font-size: clamp(20px, 1.8vw, 24px); font-weight: 700; letter-spacing: -.02em; color: var(--ink); }
 .cr-notfor-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
@@ -1213,13 +1208,12 @@ body[data-view="role"] .cr-intro, body[data-view="role"] .cr-hr { padding-top: c
 .cr-astep-role { color: var(--blue); }
 .cr-astep-sub { margin-top: 6px; font-size: 15px; color: var(--text); }
 .cr-astep-switch { min-height: 44px; padding: 0 18px; font-size: 14.5px; }
-.cr-desig { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(20px, 3vw, 44px); }
-.cr-desig .cr-kicker { margin-bottom: 10px; color: var(--text); }
-.cr-desig-title { font-size: clamp(24px, 2.3vw, 32px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; color: var(--ink); }
-.cr-desig-sum { margin-top: 10px; font-size: 15.5px; line-height: 1.6; color: var(--ink-2); }
-.cr-desig .cr-desig-k2 { margin-top: 26px; }
-.cr-desig-note { display: flex; gap: 8px; align-items: flex-start; margin-top: 16px; font-size: 13px; line-height: 1.5; color: var(--muted); }
-.cr-desig-note svg.i { flex-shrink: 0; margin-top: 1px; color: var(--blue); }
+.cr-desig-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; padding: 18px 20px; border-radius: 16px; background: var(--bg-soft); border: 1px solid var(--line-2); }
+.cr-desig-n { flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: #fff; color: var(--blue); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; box-shadow: var(--shadow-sm); }
+.cr-desig-who { flex: 1 1 260px; min-width: 0; }
+.cr-desig-who .cr-kicker { margin-bottom: 4px; color: var(--text); }
+.cr-desig-title { font-size: clamp(20px, 1.8vw, 24px); font-weight: 700; letter-spacing: -.02em; line-height: 1.2; color: var(--ink); }
+.cr-desig-q { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
 .cr-astep .cr-fields { margin-top: 0; }
 .cr-qgroup + .cr-qgroup { margin-top: 30px; }
 .cr-qgroup-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
@@ -1272,9 +1266,6 @@ body[data-view="role"] .cr-intro, body[data-view="role"] .cr-hr { padding-top: c
 .cr-help .cr-link { display: inline; font-size: inherit; }
 .cr-apbar { display: none; }
 
-@media (max-width: 1279px) {
-  .cr-desig { grid-template-columns: minmax(0, 1fr); }
-}
 @media (max-width: 1199px) {
   .cr-pos-link { grid-template-columns: 56px minmax(0, 1fr) auto; }
   .cr-pos-facts { grid-column: 2; grid-row: 2; grid-template-columns: 130px minmax(0, 1fr); }
@@ -1287,7 +1278,7 @@ body[data-view="role"] .cr-intro, body[data-view="role"] .cr-hr { padding-top: c
 }
 @media (max-width: 1023px) {
   .cr-positions-head { grid-template-columns: minmax(0, 1fr); }
-  .cr-rd-two, .cr-desig { grid-template-columns: minmax(0, 1fr); }
+  .cr-rd-two { grid-template-columns: minmax(0, 1fr); }
   .cr-rolebar-nav { width: 100%; margin-left: 0; }
   .cr-rolebar-step { flex: 1 1 0; }
   .cr-rolebar-step b { max-width: none; }

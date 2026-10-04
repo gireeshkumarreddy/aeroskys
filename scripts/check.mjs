@@ -104,14 +104,15 @@ const wrong = phones.filter(([cc, p, want]) => nationalDigits(cc, p) !== want);
 wrong.length ? fail(`phone normalising: ${wrong.map(w => w[1]).join(', ')}`) : ok(`phone numbers normalised (${phones.length} formats)`);
 
 console.log('Membership');
-// membership.html is its own page (served at /membership): its stylesheet, script and fonts must all exist.
+// membership.html is its own page (served at /membership) built on the Careers stylesheet and shell: every local
+// file it references and every icon it uses must exist.
 const memberHtml = await readFile(join(root, 'membership.html'), 'utf8');
-const memberAssets = [...memberHtml.matchAll(/(?:href|src)="(membership\/[^"?#]+)/g)].map(m => m[1]);
-const memberCss = await readFile(join(root, 'membership/membership.css'), 'utf8');
-for (const m of memberCss.matchAll(/url\(['"]?([^'")]+\.woff2)/g)) memberAssets.push(decodeURI(new URL(m[1], 'http://site/membership/').pathname.slice(1)));
-const memberMissing = [];
-for (const f of new Set(memberAssets)) { try { await access(join(root, f)); } catch { memberMissing.push(f); } }
-memberMissing.length ? fail(`membership files missing: ${memberMissing.join(', ')}`) : ok(`membership page: ${new Set(memberAssets).size} files referenced, all present`);
+const memberAssets = new Set([...memberHtml.matchAll(/(?:href|src)="((?:membership|careers|assets)\/[^"?#]+)/g)].map(m => m[1]));
+const memberIcons = new Set([...memberHtml.matchAll(/icons\.svg\?v=\d+#(i-[\w-]+)/g)].map(m => m[1]));
+const iconsSvg = await readFile(join(root, 'careers/icons.svg'), 'utf8');
+const memberMissing = [...memberIcons].filter(id => !iconsSvg.includes(`id="${id}"`)).map(id => `icon ${id}`);
+for (const f of memberAssets) { try { await access(join(root, f)); } catch { memberMissing.push(f); } }
+memberMissing.length ? fail(`membership files missing: ${memberMissing.join(', ')}`) : ok(`membership page: ${memberAssets.size} files and ${memberIcons.size} icons referenced, all present`);
 
 console.log('Contact');
 // The support number changed on 4 Oct 2026 (client change request): the old number must not appear anywhere.

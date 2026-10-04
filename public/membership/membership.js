@@ -1,8 +1,11 @@
 // AeroSkys Membership: plan choice, live GST breakdown, the test-mode checkout and the Member ID register.
-// A port of the client's design-handoff logic (logic.js) to plain DOM code. The register, the ID serials
-// and the invoice numbers live in this browser's localStorage under the same keys as the earlier Member ID
-// page, whose IDs are migrated to the current series on load. In production the counters, invoices and
-// register must live server-side, and payment is handed to a licensed gateway.
+// A port of the client's design-handoff logic (logic.js) to plain DOM code; the page itself uses the Careers
+// shell (header, phone menu, reveals). The register, the ID serials and the invoice numbers live in this
+// browser's localStorage under the same keys as the earlier Member ID page, whose IDs are migrated to the
+// current series on load. In production the counters, invoices and register must live server-side, and
+// payment is handed to a licensed gateway.
+import '../careers/js/shell.js';
+import { scrollToEl } from '../careers/js/ui.js';
 
 const KEY = 'aeroskys-member-register';
 const INVOICE_KEY = 'aeroskys-invoice-seq';
@@ -67,7 +70,6 @@ const inr = n => '₹' + Number(n).toLocaleString('en-IN', { minimumFractionDigi
 const fy = d => { const y = d.getMonth() >= 3 ? d.getFullYear() : d.getFullYear() - 1; return y + '-' + String((y + 1) % 100).padStart(2, '0'); };
 const planName = k => (PLANS[k] ? PLANS[k].name : 'Lifetime');
 const shortDate = d => d.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function fmt(iso, withTime) {
   if (!iso) return 'Lifetime';
@@ -181,9 +183,6 @@ function el(tag, attrs = {}, ...children) {
 }
 const setFlag = (node, attr, on) => (on ? node.setAttribute(attr, 'true') : node.removeAttribute(attr));
 
-const header = $('[data-header]');
-const menuBtn = $('[data-menu-btn]');
-const nav = $('#m-nav');
 const form = $('[data-form]');
 const generateBtn = $('[data-generate]');
 const formError = $('[data-form-error]');
@@ -193,7 +192,7 @@ const planRadios = $$('input[name="plan"]', form);
 const sumList = $('[data-sum-list]');
 const sumNote = $('[data-sum-note]');
 const cardTitle = $('#card-title');
-const cardCol = $('.m-cardcol');
+const cardCol = $('[data-cardcol]');
 const card = $('[data-card]');
 const cardText = { plan: $('[data-card-plan]'), id: $('[data-card-id]'), name: $('[data-card-name]'), valid: $('[data-card-valid]') };
 const sample = $('[data-sample]');
@@ -204,7 +203,7 @@ const search = $('[data-search]');
 const rowsEl = $('[data-rows]');
 const countEl = $('[data-count]');
 const emptyEl = $('[data-empty]');
-const tableWrap = $('.m-table-wrap');
+const tableWrap = $('[data-table-wrap]');
 const status = $('[data-status]');
 const dialog = $('[data-dialog]');
 const payForm = $('[data-pay-form]');
@@ -232,10 +231,7 @@ function announce(msg) {
 function setFormError(msg) {
   if (msg) formError.replaceChildren(el('p', {}, msg)); else formError.replaceChildren();
 }
-function scrollToEl(node, offset) {
-  const top = window.scrollY + node.getBoundingClientRect().top - offset;
-  window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion() ? 'auto' : 'smooth' });
-}
+const HEADER_CLEAR = 110;   // the floating header bar's bottom edge once it is stuck (as in ui.js scrollToEl)
 
 /* ------------------------------------------------------------------ rendering */
 function taxView() {
@@ -256,7 +252,7 @@ function renderRows(dl, rows) {
   const have = $$(':scope > div', dl).map(d => $$('dt, dd', d).map(n => n.textContent).join('\u0000')).join('\u0001');
   if (want === have) return;
   dl.replaceChildren(...rows.map(([label, value, total]) =>
-    el('div', { class: total ? 'm-sum-row is-total' : 'm-sum-row' }, el('dt', {}, label), el('dd', {}, value))));
+    el('div', { class: total ? 'ms-sum-row is-total' : 'ms-sum-row' }, el('dt', {}, label), el('dd', {}, value))));
 }
 
 function renderSummary() {
@@ -318,7 +314,7 @@ function renderCard() {
     name = 'Aarav Mehta';
     valid = shortDate(termEnd(new Date(), pl.years));
   }
-  card.className = 'm-mcard m-mcard--' + (['1', '2', '3'].includes(tier) ? tier : '3');
+  card.className = 'ms-card ms-card--' + (['1', '2', '3'].includes(tier) ? tier : '3');
   cardText.plan.textContent = plan;
   cardText.id.textContent = id;
   cardText.name.textContent = name;
@@ -353,7 +349,7 @@ function renderRegister() {
       el('td', { class: 'is-pass' }, String(x.masked || '')),
       el('td', {}, nation),
       el('td', {}, isActive(x) ? 'Active' : 'Expired'),
-      el('td', {}, el('button', { class: 'btn btn-ghost btn-sm', type: 'button', 'data-revoke': S.register.indexOf(x), 'aria-label': 'Revoke Member ID ' + id }, 'Revoke')));
+      el('td', {}, el('button', { class: 'ms-revoke', type: 'button', 'data-revoke': S.register.indexOf(x), 'aria-label': 'Revoke Member ID ' + id }, 'Revoke')));
   }));
   countEl.textContent = S.register.length === 1 ? '1 Member ID issued' : S.register.length + ' Member IDs issued';
   emptyEl.hidden = rows.length > 0;
@@ -400,7 +396,7 @@ function showResult() {
   const r = S.result;
   if (!r) return;
   const box = cardCol.getBoundingClientRect();
-  if (box.top < header.offsetHeight || box.top > window.innerHeight * 0.5) scrollToEl(cardCol, header.offsetHeight + 16);
+  if (box.top < HEADER_CLEAR || box.top > window.innerHeight * 0.5) scrollToEl(cardCol, 6);
   cardTitle.focus({ preventScroll: true });
   const id = fmtId(r.id);
   announce(r.mode === 'duplicate'
@@ -582,7 +578,7 @@ for (const btn of $$('[data-choose]')) {
   btn.addEventListener('click', () => {
     const k = btn.dataset.choose;
     pickPlan(k);
-    scrollToEl(joinSection, header.offsetHeight + 16);
+    scrollToEl(form, 6);
     planRadios.find(r => r.value === k)?.focus({ preventScroll: true });
   });
 }
@@ -678,22 +674,16 @@ $('[data-export]').addEventListener('click', () => {
   announce((S.register.length === 1 ? '1 Member ID' : S.register.length + ' Member IDs') + ' exported to aeroskys-member-ids.csv.');
 });
 
-/* ------------------------------------------------------------------ header menu (phones) */
-function setMenu(open, focusButton = false) {
-  header.classList.toggle('is-open', open);
-  menuBtn.setAttribute('aria-expanded', String(open));
-  if (!open && focusButton) menuBtn.focus();
-}
-const menuOpen = () => menuBtn.getAttribute('aria-expanded') === 'true';
-menuBtn.addEventListener('click', () => setMenu(!menuOpen()));
-nav.addEventListener('click', e => { if (menuOpen() && e.target.closest('a')) setMenu(false); });
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && menuOpen()) setMenu(false, header.contains(document.activeElement));
-});
-document.addEventListener('click', e => { if (menuOpen() && !header.contains(e.target)) setMenu(false); });
-header.addEventListener('focusout', e => { if (menuOpen() && e.relatedTarget && !header.contains(e.relatedTarget)) setMenu(false); });
-const wide = window.matchMedia('(min-width: 760px)');
-wide.addEventListener('change', () => { if (wide.matches) setMenu(false); });
+/* ------------------------------------------------------------------ header: highlight the section in view */
+const spyLinks = $$('[data-nav]');
+const spyIo = new IntersectionObserver(entries => {
+  for (const en of entries) {
+    if (!en.isIntersecting) continue;
+    const key = en.target.id === 'top' ? null : en.target.id;
+    spyLinks.forEach(l => l.classList.toggle('is-active', l.dataset.nav === key));
+  }
+}, { rootMargin: '-45% 0px -50% 0px' });
+['top', 'plans', 'benefits', 'status', 'join', 'register'].forEach(id => { const s = document.getElementById(id); if (s) spyIo.observe(s); });
 
 /* ------------------------------------------------------------------ start */
 S.register = migrate(loadRegister());

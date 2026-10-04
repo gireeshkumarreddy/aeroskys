@@ -420,15 +420,13 @@ export const ROLES = {
       "page": "tasa",
       "lead": "An independent, commission-based sales partner who builds their own customer network. Commission of 30%–47% of eligible contribution, no earning ceiling, supported by an assigned TAG Manager.",
       "chips": [
-        "Independent contractor",
-        "No fixed ceiling",
-        "Fixed-pay review at 3 months"
+        "Independent contractor"
       ],
       "comp": {
         "label": "Commission",
         "figure": "30% – 47%",
         "unit": "of eligible contribution",
-        "line": "100% commission, paid on completed, settled bookings — no fixed salary and no earning ceiling.",
+        "line": "Paid on completed, settled bookings.",
         "note": "No earnings are guaranteed. GST treatment on commission income is subject to legal and tax review."
       },
       "ladderTitle": "Six-month TASA track",
@@ -828,7 +826,7 @@ export const ROLES = {
     "listPay": "₹1,00,000 / month",
     "details": {
       "page": "growth",
-      "lead": "Lead acquisition of paying members into the AeroSkys Membership Programme — three plans — ₹499 for 1 year, ₹699 for 2 years and ₹999 for 3 years — each waiving the ₹399 per-booking convenience fee on eligible flights, hotels and buses, and renewing at expiry. Every booking supports up to 9 passengers, so one membership covers a solo traveller or a large family group. A high-volume, KPI-driven acquisition role, measured in verified members registered rather than individual relationships closed.",
+      "lead": "Lead acquisition of paying members into the AeroSkys Membership Programme — three plans — ₹499 for 1 year, ₹699 for 2 years and ₹999 for 3 years — enjoy zero convenience fees on flights, hotels and buses throughout your membership, with seamless renewal at expiry. Every booking supports up to 9 passengers, so one membership covers a solo traveller or a large family group. A high-volume, KPI-driven acquisition role, measured in verified members registered rather than individual relationships closed.",
       "chips": [
         "Full-time",
         "Growth / Membership",
@@ -872,7 +870,8 @@ export const ROLES = {
             "Within company threshold"
           ]
         ],
-        "note": "A verified member has completed registration, paid the fee for a 1-, 2- or 3-year plan and passed AeroSkys identity and data-quality verification. Renewals at expiry are tracked separately from new members."
+        "note": "A verified member has completed registration, paid the fee for a 1-, 2- or 3-year plan and passed AeroSkys identity and data-quality verification. Renewals at expiry are tracked separately from new members.",
+        "objective": "First-year objective: a scalable acquisition engine — 100,000 cumulative members by end of Year 1 in the base case, scaling to 2,500,000 by Year 5."
       },
       "bonus": {
         "title": "Quarterly performance bonus",
@@ -915,8 +914,7 @@ export const ROLES = {
         ],
         "target": 3,
         "notes": [
-          "The bonus is added on top of salary, calculated on a quarterly base of ₹45,000 (one month’s basic salary); maximum ₹67,500 per quarter at 125%+.",
-          "First-year objective: a scalable acquisition engine — 100,000 cumulative members by end of Year 1 in the base case, scaling to 2,500,000 by Year 5."
+          "The bonus is added on top of salary, calculated on a quarterly base of ₹45,000 — one month’s basic salary."
         ]
       },
       "duties": [
