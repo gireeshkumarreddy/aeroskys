@@ -63,28 +63,38 @@ html:not(.js) .ms-js { display: none !important; }
 
 /* ---------------------------------------------------------------- plans */
 .ms-plans-sec { background: linear-gradient(180deg, #fff, #f7f9fc); }
+@media (min-width: 1024px) { .ms-plans-sec .ms-head { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); } }   /* room for "Extraordinary journeys." on one line */
 .ms-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: clamp(36px, 4vw, 56px); }
 .ms-plan { position: relative; display: flex; flex-direction: column; padding: clamp(24px, 2.6vw, 34px); border-radius: 24px; background: #fff; border: 1px solid var(--line-2); box-shadow: var(--shadow-sm);
   transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out); }
 .ms-plan:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 .ms-plan-name { font-size: 12.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--text); }
-.ms-plan-price { margin-top: 14px; font-size: clamp(48px, 4.6vw, 64px); font-weight: 800; letter-spacing: -.045em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
-.ms-plan-sub { margin-top: 10px; min-height: 3em; font-size: 14px; line-height: 1.5; color: var(--text); }
+/* the tier name (Explorer, Voyager, Summit) and its one-line promise, above the price (client v3, 14 Oct 2026) */
+.ms-plan-tier { margin-top: 18px; font-size: clamp(30px, 2.8vw, 38px); font-weight: 800; letter-spacing: -.035em; line-height: 1.05; color: var(--ink); }
+.ms-plan-tag { margin-top: 6px; font-size: 15px; line-height: 1.45; color: var(--text); }
+.ms-plan-price { margin-top: 22px; font-size: clamp(48px, 4.6vw, 64px); font-weight: 800; letter-spacing: -.045em; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.ms-plan-sub { margin-top: 10px; font-size: 14px; line-height: 1.5; color: var(--text); }
 .ms-plan-sub b { color: var(--crimson); font-weight: 600; }
-.ms-plan-list { flex: 1; margin: 22px 0 26px; padding-top: 20px; border-top: 1px solid var(--line-2); }
+.ms-plan-list { flex: 1; align-content: start; margin: 22px 0 26px; padding-top: 20px; border-top: 1px solid var(--line-2); }
+.ms-plan-list b { color: var(--ink); font-weight: 600; }
 .ms-plan-btn { width: 100%; }
+/* Voyager, the most popular plan: a light brand-blue card between the white Explorer and the navy Summit */
+.ms-plan.is-popular { border-color: var(--blue-line); background: linear-gradient(180deg, var(--blue-50), #fff 72%); }
+.ms-plan.is-popular .ms-plan-name { color: var(--blue); }
+.ms-plan.is-popular .ms-plan-list { border-top-color: var(--blue-100); }
 .ms-plan.is-best { overflow: hidden; border-color: transparent; color: #c9d5ea; box-shadow: var(--shadow-lg);
   background: radial-gradient(120% 70% at 100% 0%, #16407a 0, transparent 60%), linear-gradient(160deg, var(--navy-2), var(--navy)); }
 .ms-plan.is-best::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: linear-gradient(90deg, var(--crimson), var(--coral)); }
 .ms-plan.is-best .ms-plan-name { color: #a9c1ea; }
-.ms-plan.is-best .ms-plan-price { color: #fff; }
-.ms-plan.is-best .ms-plan-sub { color: #c9d5ea; }
+.ms-plan.is-best .ms-plan-tier, .ms-plan.is-best .ms-plan-price, .ms-plan.is-best .ms-plan-list b { color: #fff; }
+.ms-plan.is-best .ms-plan-tag, .ms-plan.is-best .ms-plan-sub { color: #c9d5ea; }
 .ms-plan.is-best .ms-plan-sub b { color: var(--coral-on-dark); }
 .ms-plan.is-best .ms-plan-list { border-top-color: rgba(255, 255, 255, .16); }
 .ms-plan.is-best .cr-plus-list li { color: #e1e9f6; }
 .ms-plan.is-best .cr-plus-list li::before { color: var(--coral-on-dark); }
 .ms-ribbon { position: absolute; top: 24px; right: 24px; padding: 6px 12px; border-radius: 999px; background: var(--crimson); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em;
   box-shadow: 0 10px 22px -10px rgba(200, 16, 46, .7); }
+.ms-ribbon.is-outline { background: #fff; color: var(--blue); border: 1px solid var(--blue-line); box-shadow: none; }
 .ms-btn-light { background: #fff; color: var(--ink); }
 .ms-btn-light:hover { background: #eef3ff; }
 

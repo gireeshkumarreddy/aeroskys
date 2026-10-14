@@ -16,7 +16,7 @@ const ID_PREFIX = 'ASKG';
 const TIER_OFFSET = { 1: 1047290173, 2: 5298704119, 3: 7613008937 };
 const PLANS = {
   '1y': { name: '1 Year', years: 1, price: 499, perYear: '₹499 / year' },
-  '2y': { name: '2 Years', years: 2, price: 699, perYear: '₹350 / year' },
+  '2y': { name: '2 Years', years: 2, price: 699, perYear: '₹349.50 / year' },
   '3y': { name: '3 Years', years: 3, price: 999, perYear: '₹333 / year' }
 };
 const COUNTRIES = { IND: 'India', ARE: 'United Arab Emirates', GBR: 'United Kingdom', USA: 'United States', SGP: 'Singapore', SAU: 'Saudi Arabia', QAT: 'Qatar', OMN: 'Oman', KWT: 'Kuwait', BHR: 'Bahrain', NPL: 'Nepal', LKA: 'Sri Lanka', BGD: 'Bangladesh', MYS: 'Malaysia', THA: 'Thailand', AUS: 'Australia', CAN: 'Canada', DEU: 'Germany', FRA: 'France', OTH: 'Other' };
