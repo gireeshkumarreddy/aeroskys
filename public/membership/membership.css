@@ -16,7 +16,7 @@ html:not(.js) .ms-js { display: none !important; }
 .ms-upper { text-transform: uppercase; }
 .ms-upper::placeholder { text-transform: none; }
 
-/* header: the five section links fit down to tablet width; below 900px the Careers menu button takes over */
+/* header: the four section links fit down to tablet width; below 900px the Careers menu button takes over */
 @media (min-width: 900px) and (max-width: 1139px) {
   .cr-header-simple .cr-nav { display: flex; }
   .cr-header-simple .cr-menu-btn { display: none; }
@@ -206,28 +206,6 @@ html:not(.js) .ms-js { display: none !important; }
 .ms-notice { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--blue-50); font-size: 14px; line-height: 1.5; color: var(--ink-2); }
 .ms-result .cr-cta-row { margin-top: 16px; }
 
-/* ---------------------------------------------------------------- register */
-.ms-register-sec { background: var(--bg-soft); border-top: 1px solid var(--line-2); }
-.ms-reg-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
-.ms-reg-head .cr-h2 { margin-top: 10px; outline: none; }
-.ms-reg-tools { display: flex; align-items: flex-end; gap: 12px; }
-.ms-search { flex: 0 1 320px; min-width: 0; }
-.ms-reg-tools .cr-btn { flex-shrink: 0; }
-.ms-count { margin-top: 20px; font-size: 14px; color: var(--text); }
-.ms-table-wrap { position: relative; margin-top: 12px; overflow-x: auto; border-radius: 18px; border: 1px solid var(--line-2); background: #fff; box-shadow: var(--shadow-sm); }
-.ms-table-wrap:focus-visible { outline: 3px solid rgba(11, 92, 255, .45); outline-offset: 2px; }
-.ms-table { width: 100%; min-width: 880px; border-collapse: collapse; font-size: 14.5px; }
-.ms-table th, .ms-table td { padding: 12px 16px; text-align: left; vertical-align: middle; white-space: nowrap; border-bottom: 1px solid var(--line-2); }
-.ms-table thead th { background: #fbfcfe; font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.ms-table tbody th { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
-.ms-table td { color: var(--ink-2); }
-.ms-table td.is-pass { font-variant-numeric: tabular-nums; letter-spacing: .06em; }
-.ms-table abbr { text-decoration: none; }
-.ms-table tbody tr:last-child > * { border-bottom: 0; }
-.ms-revoke { min-height: 36px; padding: 0 12px; border-radius: 10px; font-size: 13.5px; font-weight: 600; color: var(--crimson); transition: background-color var(--t-micro); }
-.ms-revoke:hover { background: var(--coral-50); }
-.ms-empty { padding: 22px 16px; font-size: 14.5px; color: var(--text); }
-
 /* ---------------------------------------------------------------- test-mode checkout */
 .ms-dialog { width: min(560px, calc(100vw - 32px)); }
 .ms-pay-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
@@ -276,8 +254,6 @@ html:not(.js) .ms-js { display: none !important; }
   .ms-join-sec .cr-apply-art { display: none; }
   .ms-actions .cr-btn { flex: 1 1 100%; }
   .ms-actions .cr-btn-primary { min-width: 0; order: -1; }
-  .ms-reg-tools { flex-wrap: wrap; width: 100%; }
-  .ms-search, .ms-reg-tools .cr-btn { flex: 1 1 100%; }
   .ms-details > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .ms-pay-head { flex-wrap: wrap; }
 }

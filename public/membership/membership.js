@@ -1,13 +1,14 @@
-// AeroSkys Membership: plan choice, live GST breakdown, the test-mode checkout and the Member ID register.
+// AeroSkys Membership: plan choice, live GST breakdown, the test-mode checkout and the Member ID card.
 // A port of the client's design-handoff logic (logic.js) to plain DOM code; the page itself uses the Careers
-// shell (header, phone menu, reveals). The register, the ID serials and the invoice numbers live in this
-// browser's localStorage under the same keys as the earlier Member ID page, whose IDs are migrated to the
-// current series on load. In production the counters, invoices and register must live server-side, and
-// payment is handed to a licensed gateway.
+// shell (header, phone menu, reveals). Personal data is never stored (client, 14 Oct 2026, GDPR): the Member
+// IDs issued during a visit are held in memory only, and the register of issued IDs that earlier versions kept
+// in localStorage is no longer shown and is deleted on load. Only the ID serials and invoice numbers, which
+// hold no personal data, stay in localStorage. In production the register, counters and invoices live
+// server-side, behind the back office's login, and payment is handed to a licensed gateway.
 import '../careers/js/shell.js';
 import { scrollToEl } from '../careers/js/ui.js';
 
-const KEY = 'aeroskys-member-register';
+const OLD_REGISTER_KEY = 'aeroskys-member-register';   // earlier versions' register: removed on load
 const INVOICE_KEY = 'aeroskys-invoice-seq';
 const seqKey = plan => 'aeroskys-member-seq-' + plan;
 const SALT = 'AEROSKYS-MEMBER-V1';
@@ -50,14 +51,6 @@ function bump(key) {
   try { localStorage.setItem(key, String(n)); } catch { /* storage blocked */ }
   return n;
 }
-function save(register) {
-  try { localStorage.setItem(KEY, JSON.stringify(register)); } catch { /* storage full or blocked: the register lasts for this visit */ }
-}
-function loadRegister() {
-  let reg = [];
-  try { reg = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { reg = []; }
-  return Array.isArray(reg) ? reg.filter(x => x && typeof x === 'object') : [];
-}
 
 /* ------------------------------------------------------------------ helpers (as in the handoff) */
 const norm = p => String(p || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -90,7 +83,6 @@ function fmtId(id) {
   return 'ASK-G' + d[0] + '-' + d.slice(1, 4) + '-' + d.slice(4, 8) + '-' + d.slice(8);
 }
 function tierDigit(id) { const y = /^ASKG(\d)/.exec(compact(id)); return y ? y[1] : ''; }
-function tierYears(id) { const t = tierDigit(id); return t ? t + (t === '1' ? ' Year' : ' Years') : ''; }
 function toId(plan) {
   const T = PLANS[plan] ? String(PLANS[plan].years) : '1';
   const M = BigInt(10000000000), a = BigInt(387420489), b = BigInt(TIER_OFFSET[T] || 0);
@@ -140,35 +132,6 @@ function validate(f) {
   return e;
 }
 
-// IDs issued in earlier formats (e.g. ASK-XXXX-XXXX-C from the first Member ID page) move to the current
-// ASK-GY-XXX-XXXX-XXXX series, oldest first so the sequence follows issue order; the old ID is kept as legacyId.
-function migrate(reg) {
-  let changed = false;
-  reg.slice().sort((a, b) => String(a.issued || '').localeCompare(String(b.issued || ''))).forEach(x => {
-    if (/^ASKG\d{12}$/.test(compact(x.id))) {
-      if (x.id !== fmtId(x.id)) { x.id = fmtId(x.id); changed = true; }
-      return;
-    }
-    x.legacyId = x.id;
-    x.id = toId(PLANS[x.plan] ? x.plan : '1y');
-    changed = true;
-  });
-  reg.forEach(x => {
-    const t = tierDigit(x.id);
-    if (!t || !x.issued) return;
-    const plan = t + 'y';
-    const issued = new Date(x.issued);
-    if (!PLANS[plan] || Number.isNaN(issued.getTime())) return;
-    if (x.plan !== plan && !x.renewals) { x.plan = plan; changed = true; }
-    if (!x.renewals) {
-      const v = termEnd(issued, PLANS[plan].years).toISOString();
-      if (x.validUntil !== v) { x.validUntil = v; changed = true; }
-    }
-  });
-  if (changed) save(reg);
-  return reg;
-}
-
 /* ------------------------------------------------------------------ DOM helpers */
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -199,11 +162,6 @@ const sample = $('[data-sample]');
 const sampleTag = $('[data-sample-tag]');
 const resultBox = $('[data-result]');
 const copyBtn = $('[data-copy]');
-const search = $('[data-search]');
-const rowsEl = $('[data-rows]');
-const countEl = $('[data-count]');
-const emptyEl = $('[data-empty]');
-const tableWrap = $('[data-table-wrap]');
 const status = $('[data-status]');
 const dialog = $('[data-dialog]');
 const payForm = $('[data-pay-form]');
@@ -218,7 +176,8 @@ const methodRadios = $$('input[name="pay-method"]', payForm);
 const panels = $$('[data-panel]', payForm);
 
 /* ------------------------------------------------------------------ state */
-const S = { f: { ...EMPTY }, e: {}, result: null, register: [], query: '', busy: false, copied: false, pay: { ...PAY0 } };
+// register: the Member IDs issued during this visit, so a passport is not issued twice; memory only, never saved
+const S = { f: { ...EMPTY }, e: {}, result: null, register: [], busy: false, copied: false, pay: { ...PAY0 } };
 let pending = null;     // { bytes, hash, existing, p } between "Proceed to pay" and a successful payment
 let opener = null;      // element focused before the checkout opened
 
@@ -328,33 +287,6 @@ function renderCard() {
     $('[data-r="notice"]', resultBox).hidden = !v.notice;
   }
   copyBtn.textContent = S.copied ? 'Copied' : 'Copy ID';
-}
-
-function renderRegister() {
-  const q = S.query.trim().toUpperCase();
-  const qc = q.replace(/[-\s]/g, '');
-  const rows = S.register.filter(x => !q
-    || (qc && compact(x.id).toUpperCase().includes(qc))
-    || String(x.name || '').toUpperCase().includes(q)
-    || String(x.last4 || '').includes(q));
-  rowsEl.replaceChildren(...rows.map(x => {
-    const id = String(fmtId(x.id) || '');
-    const nation = COUNTRIES[x.country] ? el('abbr', { title: COUNTRIES[x.country] }, x.country) : String(x.country || '');
-    return el('tr', {},
-      el('th', { scope: 'row' }, id),
-      el('td', {}, String(x.name || '')),
-      el('td', {}, tierYears(x.id) || planName(x.plan)),
-      el('td', {}, x.issued ? fmt(x.issued) : '—'),
-      el('td', {}, fmt(x.validUntil)),
-      el('td', { class: 'is-pass' }, String(x.masked || '')),
-      el('td', {}, nation),
-      el('td', {}, isActive(x) ? 'Active' : 'Expired'),
-      el('td', {}, el('button', { class: 'ms-revoke', type: 'button', 'data-revoke': S.register.indexOf(x), 'aria-label': 'Revoke Member ID ' + id }, 'Revoke')));
-  }));
-  countEl.textContent = S.register.length === 1 ? '1 Member ID issued' : S.register.length + ' Member IDs issued';
-  emptyEl.hidden = rows.length > 0;
-  emptyEl.textContent = S.register.length ? 'No Member IDs match that search.' : 'No Member IDs issued yet.';
-  return rows.length;
 }
 
 /* ------------------------------------------------------------------ form */
@@ -550,7 +482,6 @@ function issue(payment) {
     mode = 'new';
   }
   S.register = [rec].concat(S.register.filter(x => x.hash !== hash));
-  save(S.register);
   pending = null;
   S.copied = false;
   S.pay = { ...PAY0, method: S.pay.method };
@@ -558,7 +489,6 @@ function issue(payment) {
   opener = null;   // focus goes to the new card, not back to "Proceed to pay" (the close event fires later)
   if (dialog.open) dialog.close();
   renderCard();
-  renderRegister();
   showResult();
 }
 
@@ -631,49 +561,6 @@ dialog.addEventListener('close', () => {
   if (back && back.isConnected) back.focus();
 });
 
-/* ------------------------------------------------------------------ events: register */
-let searchTimer;
-search.addEventListener('input', () => {
-  S.query = search.value;
-  const n = renderRegister();
-  clearTimeout(searchTimer);
-  if (S.query.trim()) searchTimer = setTimeout(() => announce(n === 1 ? '1 Member ID matches.' : n + ' Member IDs match.'), 700);
-});
-
-rowsEl.addEventListener('click', e => {
-  const btn = e.target.closest('[data-revoke]');
-  if (!btn) return;
-  const x = S.register[Number(btn.dataset.revoke)];
-  if (!x) return;
-  const id = fmtId(x.id);
-  if (!window.confirm('Revoke Member ID ' + id + '? The passport can then be registered again.')) return;
-  S.register = S.register.filter(y => y !== x && !(x.hash && y.hash === x.hash));
-  save(S.register);
-  if (S.result && S.result.hash === x.hash) { S.result = null; S.copied = false; renderCard(); }
-  renderRegister();
-  tableWrap.focus({ preventScroll: true });
-  announce('Member ID ' + id + ' revoked. The passport can be registered again.');
-});
-
-$('[data-export]').addEventListener('click', () => {
-  const head = ['member_id', 'name', 'nationality', 'passport_last4', 'plan', 'taxable_value_inr', 'cgst_inr', 'sgst_inr', 'igst_inr', 'total_paid_inr', 'billing_state', 'gstin', 'tax_invoice', 'payment_reference', 'payment_method', 'paid_at', 'passport_expiry', 'first_issued', 'valid_until', 'renewals', 'status'];
-  // Every value is quoted; a leading = + - @ is prefixed with ' so spreadsheets never run it as a formula.
-  const esc = v => '"' + String(v == null ? '' : v).replace(/^[=+\-@\t\r]/, "'$&").replace(/"/g, '""') + '"';
-  const lines = [head.join(',')].concat(S.register.map(x => [
-    fmtId(x.id), x.name, x.country, x.last4, (tierYears(x.id) || planName(x.plan)),
-    x.base ?? x.price ?? '', x.cgst ?? '', x.sgst ?? '', x.igst ?? '', x.total ?? '',
-    x.billState || '', x.gstin || '', x.invoice || '', x.payRef || x.pay || '', x.method || '', x.paidAt || '',
-    x.expiry, x.issued, x.validUntil || 'lifetime', x.renewals || 0, isActive(x) ? 'active' : 'expired'
-  ].map(esc).join(',')));
-  const url = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' }));
-  const a = el('a', { href: url, download: 'aeroskys-member-ids.csv', hidden: true });
-  document.body.append(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  announce((S.register.length === 1 ? '1 Member ID' : S.register.length + ' Member IDs') + ' exported to aeroskys-member-ids.csv.');
-});
-
 /* ------------------------------------------------------------------ header: highlight the section in view */
 const spyLinks = $$('[data-nav]');
 const spyIo = new IntersectionObserver(entries => {
@@ -683,12 +570,11 @@ const spyIo = new IntersectionObserver(entries => {
     spyLinks.forEach(l => l.classList.toggle('is-active', l.dataset.nav === key));
   }
 }, { rootMargin: '-45% 0px -50% 0px' });
-['top', 'plans', 'benefits', 'status', 'join', 'register'].forEach(id => { const s = document.getElementById(id); if (s) spyIo.observe(s); });
+['top', 'plans', 'benefits', 'status', 'join'].forEach(id => { const s = document.getElementById(id); if (s) spyIo.observe(s); });
 
 /* ------------------------------------------------------------------ start */
-S.register = migrate(loadRegister());
+try { localStorage.removeItem(OLD_REGISTER_KEY); } catch { /* storage blocked: nothing was saved */ }
 syncForm();
 renderErrors();
 renderSummary();
 renderCard();
-renderRegister();

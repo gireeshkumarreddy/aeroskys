@@ -142,18 +142,18 @@ data/careers/              applications/<ref>.json, cv/<ref>.<ext>, index.json (
 ## Membership page
 A separate static page like Careers, served at `/membership` (`/member-id`, the address of the earlier Member ID generator, redirects there). It is built on the Careers design system: it loads `careers/careers.css` and imports `careers/js/shell.js` (header, phone menu, reveals, footer year), and uses the same components (`cr-header`, `cr-btn`, `cr-field`, `cr-astep-head`, `cr-dialog`, `cr-footer` …). Membership-only pieces are prefixed `ms-` and add the coral / crimson accent. The content and logic are the client's *Membership – Developer Handoff* file, rewritten as plain DOM code.
 ```
-public/membership.html             the page: header, landing, plans, benefits, status, join, register, footer,
+public/membership.html             the page: header, landing, plans, benefits, status, join, footer,
                                    test-mode checkout <dialog>
 public/membership/membership.css   membership-only styles on top of careers.css; coral / crimson tokens; prefix ms-
-public/membership/membership.js    plans, GST breakdown, validation, fingerprint, Member IDs, checkout, register, CSV,
+public/membership/membership.js    plans, GST breakdown, validation, fingerprint, Member IDs, checkout,
                                    header highlight of the section in view
 public/membership/img/plane.webp   the airliner from the client's design reference (careers/img/dir-plane.webp),
                                    with the flight-path mark trimmed off its top edge
 ```
 - **Colour.** `--crimson #c8102e` (5.9:1 on white) is the accent for text; `--coral #f0525a` (3.5:1) is for decoration and large figures only; on navy, text uses `--coral-on-dark #ff9ea2` (8.4:1). Blue stays the action colour (buttons, selected plan, focus).
-- **Member ID.** `SHA-256('AEROSKYS-MEMBER-V1|' + nationality + '|' + passport)` identifies the passport, so one passport holds one ID; only the fingerprint and the last four characters are stored. IDs are `ASK-G<years>-XXX-XXXX-XXXX`: a per-plan serial scrambled by a fixed bijection mod 10¹⁰ plus a Luhn check digit (`aeroskys-member-seq-<plan>` in `localStorage`). An active passport gets its existing card back; an expired one renews under the same ID.
+- **Member ID.** `SHA-256('AEROSKYS-MEMBER-V1|' + nationality + '|' + passport)` identifies the passport, so one passport holds one ID; only the fingerprint and the last four characters are kept, in memory for the visit. IDs are `ASK-G<years>-XXX-XXXX-XXXX`: a per-plan serial scrambled by a fixed bijection mod 10¹⁰ plus a Luhn check digit (`aeroskys-member-seq-<plan>` in `localStorage`). An active passport gets its existing card back; an expired one renews under the same ID.
 - **GST.** 18% on top of the plan price; billing state Delhi (the supplier state) splits it CGST 9% + SGST 9%, any other state or "Outside India" is IGST 18%. The rate, supplier state and inclusive pricing are the `data-gst-rate`, `data-supplier-state` and `data-gst-inclusive` attributes on `#join`. Invoices are numbered `ASK/<FY>/000001` (`aeroskys-invoice-seq`).
-- **Register.** `localStorage` key `aeroskys-member-register` (the same key as the earlier page, whose IDs are migrated to the current series on load). In production the register, the serials and invoices belong on a server and payment goes to a licensed gateway; the checkout here is test mode.
+- **No register on the page (client, 14 Oct 2026, GDPR).** The public page neither shows nor stores issued Member IDs: no table, search, revoke or CSV export. IDs issued during a visit are kept in memory only, so a passport is not issued twice in that visit, and the register earlier versions kept in `localStorage` (`aeroskys-member-register`) is deleted on load. Only the serial and invoice counters, which hold no personal data, stay in `localStorage`. In production the register, serials and invoices belong on a server, behind the back office's login, and payment goes to a licensed gateway; the checkout here is test mode.
 
 ## CSS conventions
 - Tokens in `css/base.css` (`--navy`, `--blue`, `--ink`, `--muted`, `--line`, `--wash`, `--r`, `--r-lg`, `--shadow-*`, `--serif`, `--ease`).
