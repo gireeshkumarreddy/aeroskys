@@ -1,6 +1,9 @@
 // AeroSkys Membership: plan choice, live GST breakdown, the test-mode checkout and the Member ID card.
 // A port of the client's design-handoff logic (logic.js) to plain DOM code; the page itself uses the Careers
-// shell (header, phone menu, reveals). Personal data is never stored (client, 14 Oct 2026, GDPR): the Member
+// shell (header, phone menu, reveals).
+// Join has two modes, set by data-checkout on #join. "interest" (until the client's team connects a payment
+// gateway, 22 Oct 2026): name, email and mobile only, sent to AeroSkys as a pre-filled email; nothing is charged
+// and no passport is asked for. "pay": the passport-verified Member ID and the test-mode checkout below. Personal data is never stored (client, 14 Oct 2026, GDPR): the Member
 // IDs issued during a visit are held in memory only, and the register of issued IDs that earlier versions kept
 // in localStorage is no longer shown and is deleted on load. Only the ID serials and invoice numbers, which
 // hold no personal data, stay in localStorage. In production the register, counters and invoices live
@@ -16,23 +19,25 @@ const ALPHA = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 const ID_PREFIX = 'ASKG';
 const TIER_OFFSET = { 1: 1047290173, 2: 5298704119, 3: 7613008937 };
 const PLANS = {
-  '1y': { name: '1 Year', years: 1, price: 499, perYear: '₹499 / year' },
-  '2y': { name: '2 Years', years: 2, price: 699, perYear: '₹349.50 / year' },
-  '3y': { name: '3 Years', years: 3, price: 999, perYear: '₹333 / year' }
+  '1y': { name: '1 Year', tier: 'Explorer', years: 1, price: 499, perYear: '₹499 / year' },
+  '2y': { name: '2 Years', tier: 'Voyager', years: 2, price: 699, perYear: '₹349.50 / year' },
+  '3y': { name: '3 Years', tier: 'Summit', years: 3, price: 999, perYear: '₹333 / year' }
 };
+const EMAIL = 'customercare@aeroskys.com';   // where "Register interest" sends the visitor's details
 const COUNTRIES = { IND: 'India', ARE: 'United Arab Emirates', GBR: 'United Kingdom', USA: 'United States', SGP: 'Singapore', SAU: 'Saudi Arabia', QAT: 'Qatar', OMN: 'Oman', KWT: 'Kuwait', BHR: 'Bahrain', NPL: 'Nepal', LKA: 'Sri Lanka', BGD: 'Bangladesh', MYS: 'Malaysia', THA: 'Thailand', AUS: 'Australia', CAN: 'Canada', DEU: 'Germany', FRA: 'France', OTH: 'Other' };
-const EMPTY = Object.freeze({ name: '', country: 'IND', passport: '', expiry: '', plan: '3y', billState: '', gstin: '' });
+const EMPTY = Object.freeze({ name: '', email: '', mobile: '', country: 'IND', passport: '', expiry: '', plan: '3y', billState: '', gstin: '' });
 const PAY0 = Object.freeze({ method: 'upi', upi: '', card: '', exp: '', cvv: '', bank: '', err: '', errField: null, busy: false });
 const NOTICES = {
   duplicate: 'This passport already holds an active membership. No new ID was issued — the existing card is shown.',
   renewed: 'Membership renewed under the same Member ID, with a new validity period.',
   new: 'Payment received and GST tax invoice generated. Welcome to AeroSkys.'
 };
-const ERROR_ORDER = ['name', 'passport', 'expiry', 'billState', 'gstin'];
 const PROCESSING_MS = 1500;
 
 // GST settings (the handoff's component props) come from the #join section's data attributes.
 const joinSection = document.getElementById('join');
+const INTEREST = joinSection?.dataset.checkout !== 'pay';
+const ERROR_ORDER = INTEREST ? ['name', 'email', 'mobile'] : ['name', 'passport', 'expiry', 'billState', 'gstin'];
 const rateAttr = Number(joinSection?.dataset.gstRate);
 const CONFIG = {
   gstRate: Number.isFinite(rateAttr) && joinSection?.dataset.gstRate !== '' ? rateAttr : 18,
@@ -118,7 +123,17 @@ function tax(price, billState) {
   return Object.assign({ rate, inclusive, supplier, base, gst, total, intra }, split);
 }
 
+function validateInterest(f) {
+  const e = {};
+  const digits = f.mobile.replace(/\D/g, '');
+  if (f.name.trim().length < 3) e.name = 'Enter your full name.';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.trim())) e.email = 'Enter a valid email address, e.g. name@example.com.';
+  if (!/^\+?[\d\s()-]+$/.test(f.mobile.trim()) || digits.length < 10 || digits.length > 15) e.mobile = 'Enter a mobile number with at least 10 digits, e.g. +91 98765 43210.';
+  return e;
+}
+
 function validate(f) {
+  if (INTEREST) return validateInterest(f);
   const e = {};
   const p = norm(f.passport);
   if (f.name.trim().length < 3) e.name = 'Enter the full name exactly as printed on the passport.';
@@ -149,8 +164,8 @@ const setFlag = (node, attr, on) => (on ? node.setAttribute(attr, 'true') : node
 const form = $('[data-form]');
 const generateBtn = $('[data-generate]');
 const formError = $('[data-form-error]');
-const inputs = { name: $('#m-name'), country: $('#m-country'), passport: $('#m-passport'), expiry: $('#m-expiry'), billState: $('#m-state'), gstin: $('#m-gstin') };
-const errorEls = { name: $('#e-name'), passport: $('#e-passport'), expiry: $('#e-expiry'), billState: $('#e-billState'), gstin: $('#e-gstin') };
+const inputs = { name: $('#m-name'), email: $('#m-email'), mobile: $('#m-mobile'), country: $('#m-country'), passport: $('#m-passport'), expiry: $('#m-expiry'), billState: $('#m-state'), gstin: $('#m-gstin') };
+const errorEls = { name: $('#e-name'), email: $('#e-email'), mobile: $('#e-mobile'), passport: $('#e-passport'), expiry: $('#e-expiry'), billState: $('#e-billState'), gstin: $('#e-gstin') };
 const planRadios = $$('input[name="plan"]', form);
 const sumList = $('[data-sum-list]');
 const sumNote = $('[data-sum-note]');
@@ -162,6 +177,8 @@ const sample = $('[data-sample]');
 const sampleTag = $('[data-sample-tag]');
 const resultBox = $('[data-result]');
 const copyBtn = $('[data-copy]');
+const thanks = $('[data-thanks]');
+const thanksText = { title: $('[data-thanks-title]'), name: $('[data-thanks-name]'), plan: $('[data-thanks-plan]'), mail: $('[data-thanks-mail]') };
 const status = $('[data-status]');
 const dialog = $('[data-dialog]');
 const payForm = $('[data-pay-form]');
@@ -216,9 +233,11 @@ function renderRows(dl, rows) {
 
 function renderSummary() {
   const v = taxView();
-  renderRows(sumList, [[v.planName + ' membership', v.base], ...v.lines, ['Total payable', v.total, true]]);
-  if (sumNote.textContent !== v.note) sumNote.textContent = v.note;
-  generateBtn.textContent = S.busy ? 'Checking…' : 'Proceed to pay ' + v.total;
+  const plan = PLANS[S.f.plan] || PLANS['3y'];
+  renderRows(sumList, [[(INTEREST ? plan.tier + ' · ' : '') + v.planName + ' membership', v.base], ...v.lines, ['Total payable', v.total, true]]);
+  const note = INTEREST ? 'Payable when your membership is completed. Nothing is charged today.' : v.note;
+  if (sumNote.textContent !== note) sumNote.textContent = note;
+  generateBtn.textContent = INTEREST ? 'Register interest' : S.busy ? 'Checking…' : 'Proceed to pay ' + v.total;
   setFlag(generateBtn, 'aria-disabled', S.busy);
 }
 
@@ -298,6 +317,7 @@ function onField(k, value) {
     if (S.e.passport) { S.e.passport = ''; renderError('passport'); }   // its message depended on the nationality
   }
   if (S.result || S.copied) { S.result = null; S.copied = false; renderCard(); }
+  thanks.hidden = true;   // the details changed: the thank-you note no longer matches them
   if (k === 'billState') renderSummary();
 }
 
@@ -305,6 +325,7 @@ function pickPlan(k) {
   if (!PLANS[k]) return;
   S.f.plan = k;
   S.result = null;
+  thanks.hidden = true;
   S.copied = false;
   for (const r of planRadios) r.checked = r.value === k;
   renderSummary();
@@ -316,6 +337,7 @@ function reset() {
   S.e = {};
   S.result = null;
   S.copied = false;
+  thanks.hidden = true;
   setFormError('');
   syncForm();
   renderErrors();
@@ -336,6 +358,39 @@ function showResult() {
     : NOTICES[r.mode] + ' Member ID ' + id + ', valid until ' + fmt(r.validUntil) + '.');
 }
 
+// "Register interest": the plan and contact details go to AeroSkys as an email the visitor sends from their own
+// email app. Nothing is stored or sent by the page itself.
+function interestMail() {
+  const f = S.f;
+  const plan = PLANS[f.plan] || PLANS['3y'];
+  const t = tax(plan.price, '');
+  const subject = 'Membership interest: ' + plan.tier + ' (' + plan.name + ')';
+  const body = [
+    'Hello AeroSkys,', '',
+    'I would like to join AeroSkys Membership.', '',
+    'Plan: ' + plan.tier + ' · ' + plan.name + ' · ₹' + plan.price + ' + GST (' + inr(t.total) + ' in total)',
+    'Name: ' + f.name.trim().replace(/\s+/g, ' '),
+    'Email: ' + f.email.trim(),
+    'Mobile: ' + f.mobile.trim(), '',
+    'Sent from the AeroSkys Membership page.'
+  ].join('\r\n');
+  return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+}
+
+function registerInterest() {
+  const plan = PLANS[S.f.plan] || PLANS['3y'];
+  const href = interestMail();
+  thanksText.name.textContent = S.f.name.trim().split(/\s+/)[0];
+  thanksText.plan.textContent = plan.tier + ' (' + plan.name + ')';
+  thanksText.mail.href = href;
+  thanks.hidden = false;
+  window.location.href = href;
+  const box = cardCol.getBoundingClientRect();
+  if (box.top < HEADER_CLEAR || box.top > window.innerHeight * 0.5) scrollToEl(cardCol, 6);
+  thanksText.title.focus({ preventScroll: true });
+  announce('Your email app is opening with your ' + plan.tier + ' plan and contact details. Press Send to register your interest.');
+}
+
 async function proceed() {
   if (S.busy) return;
   const e = validate(S.f);
@@ -347,6 +402,7 @@ async function proceed() {
     announce(bad.length === 1 ? '1 field needs attention.' : bad.length + ' fields need attention.');
     return;
   }
+  if (INTEREST) { registerInterest(); return; }
   if (!window.isSecureContext || !window.crypto || !crypto.subtle) {
     setFormError('Member IDs can only be issued on a secure (https) page. Open this page over https and try again.');
     return;
@@ -532,6 +588,7 @@ copyBtn.addEventListener('click', async () => {
   }
 });
 $('[data-new]').addEventListener('click', () => { reset(); inputs.name.focus(); });
+$('[data-thanks-new]').addEventListener('click', () => { reset(); inputs.name.focus(); });
 
 /* ------------------------------------------------------------------ events: checkout */
 payForm.addEventListener('change', e => {

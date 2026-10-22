@@ -146,7 +146,7 @@ html:not(.js) .ms-js { display: none !important; }
 .ms-join-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 24px; margin-top: clamp(32px, 4vw, 48px); align-items: start; }
 .ms-panel, .ms-cardcol { min-width: 0; padding: clamp(20px, 2.6vw, 34px); border-radius: 22px; background: #fff; border: 1px solid var(--line-2); box-shadow: var(--shadow); }
 /* side by side, the sample card stays in view while the form is filled in (not once the result is shown) */
-@media (min-width: 1024px) { .ms-cardcol:has(.ms-result[hidden]) { position: sticky; top: calc(var(--header-h) + 40px); } }
+@media (min-width: 1024px) { .ms-cardcol:not(:has(.ms-result:not([hidden]))) { position: sticky; top: calc(var(--header-h) + 40px); } }
 .ms-plan-field { min-width: 0; margin: 0; padding: 0; border: 0; }
 .ms-legend { margin-bottom: 10px; padding: 0; font-size: 14px; font-weight: 600; color: var(--ink-2); }
 .ms-opts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
@@ -196,6 +196,11 @@ html:not(.js) .ms-js { display: none !important; }
 .ms-card-valid { text-align: right; }
 .ms-sample { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 16px; font-size: 13.5px; line-height: 1.5; color: var(--text); }
 .ms-result { margin-top: 18px; }
+/* Join's two modes (data-checkout on #join): "interest" until a payment gateway is connected, then "pay" */
+.ms-join-sec[data-checkout="interest"] [data-pay-only], .ms-join-sec:not([data-checkout="interest"]) [data-interest-only] { display: none !important; }
+.ms-thanks-title { margin-top: 14px; font-size: 22px; font-weight: 700; letter-spacing: -.02em; color: var(--ink); outline: none; }
+.ms-thanks > p { margin-top: 10px; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+.ms-thanks .ms-notice a { font-weight: 600; color: var(--blue); }
 .ms-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .ms-details { margin-top: 12px; }
 .ms-details > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line-2); font-size: 14px; }

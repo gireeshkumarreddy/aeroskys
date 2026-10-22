@@ -221,21 +221,24 @@
   </div>
 </section>
 
-<!-- Join: issue a Member ID -->
-<section class="cr-section ms-join-sec" id="join" aria-labelledby="join-title" data-gst-rate="18" data-supplier-state="Delhi" data-gst-inclusive="false">
+<!-- Join. data-checkout="interest": no payment yet, the visitor's plan and contact details go to AeroSkys by email
+     (until a payment gateway is connected). data-checkout="pay": the passport-verified Member ID and the checkout.
+     Elements marked data-interest-only / data-pay-only show in that mode only. -->
+<section class="cr-section ms-join-sec" id="join" aria-labelledby="join-title" data-checkout="interest" data-gst-rate="18" data-supplier-state="Delhi" data-gst-inclusive="false">
   <img class="cr-apply-art" src="careers/img/app-wing.webp?v=4" width="463" height="215" alt="" loading="lazy">
   <div class="cr-wrap">
     <div class="ms-join-head">
       <p class="cr-eyebrow is-crimson" data-reveal>Join</p>
-      <h2 id="join-title" class="cr-h1" data-reveal style="--d:.05s">Issue a <span class="is-blue">Member ID</span></h2>
-      <p class="cr-lead" data-reveal style="--d:.1s">One Member ID per passport. The same passport and nationality always return the same ID; an expired membership is renewed under it. Passport numbers are never stored — only a one-way fingerprint and the last four characters.</p>
+      <h2 id="join-title" class="cr-h1" data-reveal style="--d:.05s"><span data-interest-only>Register your <span class="is-blue">interest</span></span><span data-pay-only>Issue a <span class="is-blue">Member ID</span></span></h2>
+      <p class="cr-lead" data-reveal style="--d:.1s" data-interest-only>Membership opens shortly. Choose your plan and leave your details, and our team will contact you to complete your membership and issue your Member ID. Nothing is charged today.</p>
+      <p class="cr-lead" data-reveal style="--d:.1s" data-pay-only>One Member ID per passport. The same passport and nationality always return the same ID; an expired membership is renewed under it. Passport numbers are never stored — only a one-way fingerprint and the last four characters.</p>
     </div>
 
-    <noscript><p class="cr-form-alert">Issuing a Member ID needs JavaScript: the GST breakdown, the test checkout and your membership card all run in the browser. Please turn JavaScript on and reload this page, or call us on +91&nbsp;79703&nbsp;36785.</p></noscript>
+    <noscript><p class="cr-form-alert">This form needs JavaScript. Please turn JavaScript on and reload this page, or email us at customercare@aeroskys.com or call +91&nbsp;79703&nbsp;36785.</p></noscript>
 
     <div class="ms-join-grid ms-js">
       <form class="ms-panel" novalidate aria-labelledby="form-title" data-form>
-        <header class="cr-astep-head"><span class="cr-astep-n" aria-hidden="true">01</span><div class="cr-astep-hgroup"><h3 class="cr-astep-title" id="form-title">Plan &amp; traveller</h3><p class="cr-astep-sub">Choose a plan and enter the traveller’s passport details.</p></div></header>
+        <header class="cr-astep-head"><span class="cr-astep-n" aria-hidden="true">01</span><div class="cr-astep-hgroup"><h3 class="cr-astep-title" id="form-title"><span data-interest-only>Plan &amp; contact</span><span data-pay-only>Plan &amp; traveller</span></h3><p class="cr-astep-sub"><span data-interest-only>Choose a plan and tell us how to reach you.</span><span data-pay-only>Choose a plan and enter the traveller’s passport details.</span></p></div></header>
 
         <fieldset class="ms-plan-field">
           <legend class="ms-legend">Membership plan</legend>
@@ -248,34 +251,44 @@
 
         <div class="cr-fields ms-fields">
           <div class="cr-field is-full">
-            <label for="m-name">Full name (as on passport)<span class="cr-req" aria-hidden="true">*</span></label>
+            <label for="m-name">Full name<span data-pay-only> (as on passport)</span><span class="cr-req" aria-hidden="true">*</span></label>
             <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-user"/></svg><input class="cr-input" id="m-name" type="text" autocomplete="off" placeholder="Given names and surname" aria-required="true" aria-describedby="e-name" data-key="name"></div>
             <p class="cr-error" id="e-name" hidden></p>
           </div>
-          <div class="cr-field is-half">
+          <div class="cr-field is-half" data-interest-only>
+            <label for="m-email">Email<span class="cr-req" aria-hidden="true">*</span></label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-mail"/></svg><input class="cr-input" id="m-email" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="name@example.com" aria-required="true" aria-describedby="e-email" data-key="email"></div>
+            <p class="cr-error" id="e-email" hidden></p>
+          </div>
+          <div class="cr-field is-half" data-interest-only>
+            <label for="m-mobile">Mobile number<span class="cr-req" aria-hidden="true">*</span></label>
+            <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-phone"/></svg><input class="cr-input" id="m-mobile" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210" aria-required="true" aria-describedby="e-mobile" data-key="mobile"></div>
+            <p class="cr-error" id="e-mobile" hidden></p>
+          </div>
+          <div class="cr-field is-half" data-pay-only>
             <label for="m-country">Passport nationality</label>
             <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-globe"/></svg><select class="cr-select" id="m-country" data-key="country">
               <option value="IND" selected>India</option><option value="ARE">United Arab Emirates</option><option value="GBR">United Kingdom</option><option value="USA">United States</option><option value="SGP">Singapore</option><option value="SAU">Saudi Arabia</option><option value="QAT">Qatar</option><option value="OMN">Oman</option><option value="KWT">Kuwait</option><option value="BHR">Bahrain</option><option value="NPL">Nepal</option><option value="LKA">Sri Lanka</option><option value="BGD">Bangladesh</option><option value="MYS">Malaysia</option><option value="THA">Thailand</option><option value="AUS">Australia</option><option value="CAN">Canada</option><option value="DEU">Germany</option><option value="FRA">France</option><option value="OTH">Other</option>
             </select></div>
           </div>
-          <div class="cr-field is-half">
+          <div class="cr-field is-half" data-pay-only>
             <label for="m-passport">Passport number<span class="cr-req" aria-hidden="true">*</span></label>
             <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-id-card"/></svg><input class="cr-input ms-upper" id="m-passport" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. A1234567" aria-required="true" aria-describedby="e-passport" data-key="passport"></div>
             <p class="cr-error" id="e-passport" hidden></p>
           </div>
-          <div class="cr-field is-half">
+          <div class="cr-field is-half" data-pay-only>
             <label for="m-expiry">Passport expiry date<span class="cr-req" aria-hidden="true">*</span></label>
             <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-calendar"/></svg><input class="cr-input" id="m-expiry" type="date" aria-required="true" aria-describedby="e-expiry" data-key="expiry"></div>
             <p class="cr-error" id="e-expiry" hidden></p>
           </div>
-          <div class="cr-field is-half">
+          <div class="cr-field is-half" data-pay-only>
             <label for="m-state">Billing state (for GST)<span class="cr-req" aria-hidden="true">*</span></label>
             <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-pin"/></svg><select class="cr-select" id="m-state" aria-required="true" aria-describedby="e-billState" data-key="billState">
               <option value="" selected>Select state</option><option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chandigarh">Chandigarh</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option><option value="Delhi">Delhi</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jammu and Kashmir">Jammu and Kashmir</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Ladakh">Ladakh</option><option value="Lakshadweep">Lakshadweep</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Puducherry">Puducherry</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option><option value="Outside India">Outside India</option>
             </select></div>
             <p class="cr-error" id="e-billState" hidden></p>
           </div>
-          <div class="cr-field is-half">
+          <div class="cr-field is-half" data-pay-only>
             <label for="m-gstin">GSTIN <span class="cr-hint">(optional, for business invoices)</span></label>
             <div class="cr-control"><svg class="i" aria-hidden="true"><use href="careers/icons.svg?v=5#i-file-text"/></svg><input class="cr-input ms-upper" id="m-gstin" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="15-character GSTIN" aria-describedby="e-gstin" data-key="gstin"></div>
             <p class="cr-error" id="e-gstin" hidden></p>
@@ -288,21 +301,22 @@
             <div class="ms-sum-row"><dt>GST 18%</dt><dd>₹179.82</dd></div>
             <div class="ms-sum-row is-total"><dt>Total payable</dt><dd>₹1,178.82</dd></div>
           </dl>
-          <p class="ms-sum-note" data-sum-note>Select a billing state to see the CGST/SGST or IGST split.</p>
+          <p class="ms-sum-note" data-sum-note>Payable when your membership is completed. Nothing is charged today.</p>
         </div>
 
         <div class="ms-form-foot">
           <div class="cr-form-alert ms-alert" role="alert" data-form-error></div>
-          <p class="cr-hint">The Member ID is issued the moment payment succeeds, with a GST tax invoice.</p>
+          <p class="cr-hint" data-interest-only>Your details open in an email to customercare@aeroskys.com, ready to send. Nothing is charged today.</p>
+          <p class="cr-hint" data-pay-only>The Member ID is issued the moment payment succeeds, with a GST tax invoice.</p>
           <div class="cr-cta-row ms-actions">
             <button class="cr-btn cr-btn-outline" type="button" data-reset>Clear</button>
-            <button class="cr-btn cr-btn-primary" type="submit" data-generate>Proceed to pay ₹1,178.82</button>
+            <button class="cr-btn cr-btn-primary" type="submit" data-generate>Register interest</button>
           </div>
         </div>
       </form>
 
       <div class="ms-cardcol" data-cardcol>
-        <header class="cr-astep-head"><span class="cr-astep-n" aria-hidden="true">02</span><div class="cr-astep-hgroup"><h3 class="cr-astep-title" id="card-title" tabindex="-1">Membership card</h3><p class="cr-astep-sub">Your card appears here once payment succeeds.</p></div></header>
+        <header class="cr-astep-head"><span class="cr-astep-n" aria-hidden="true">02</span><div class="cr-astep-hgroup"><h3 class="cr-astep-title" id="card-title" tabindex="-1">Membership card</h3><p class="cr-astep-sub"><span data-interest-only>A preview of your card. Yours is issued when your membership is completed.</span><span data-pay-only>Your card appears here once payment succeeds.</span></p></div></header>
 
         <figure class="ms-card-fig">
           <div class="ms-card ms-card--3" data-card>
@@ -332,6 +346,17 @@
             <span>Choose a plan to preview its card. Your own card is issued after payment.</span>
           </figcaption>
         </figure>
+
+        <div class="ms-result ms-thanks" data-thanks hidden>
+          <span class="ms-tag is-ok">One step left</span>
+          <h4 class="ms-thanks-title" tabindex="-1" data-thanks-title>Thank you, <span data-thanks-name></span>.</h4>
+          <p>Your email app has opened with your <span data-thanks-plan></span> plan and contact details. Press <b>Send</b>, and our membership team will contact you to complete your membership.</p>
+          <p class="ms-notice">If your email app did not open, email <a href="mailto:customercare@aeroskys.com">customercare@aeroskys.com</a> or call <a href="tel:+917970336785">+91&nbsp;79703&nbsp;36785</a>.</p>
+          <div class="cr-cta-row">
+            <a class="cr-btn cr-btn-primary" href="mailto:customercare@aeroskys.com" data-thanks-mail>Open the email again</a>
+            <button class="cr-btn cr-btn-outline" type="button" data-thanks-new>Start again</button>
+          </div>
+        </div>
 
         <div class="ms-result" data-result hidden>
           <div class="ms-tags">
